@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import PhaseForm from './components/CreateGame/PhaseForm/PhaseForm'
+import PhaseForm from './components/CreateGame/PhaseForm/PhaseForm';
 const GameContext = React.createContext();
 
 class App extends Component {
   render() {
-    console.log('GAME CONTEXT', GameContext);
     return (
       <GameContext.Provider>
         <div className="App">
