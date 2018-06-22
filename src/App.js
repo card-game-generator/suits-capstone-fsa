@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import './components/PhaseForm/PhaseForm.js';
-import PhaseForm from './components/PhaseForm/PhaseForm.js';
+import PhaseForm from './components/CreateGame/PhaseForm/PhaseForm'
 const GameContext = React.createContext();
 
 class App extends Component {
