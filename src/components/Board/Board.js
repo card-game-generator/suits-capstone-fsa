@@ -25,25 +25,39 @@ export default class Board extends Component {
     };
   }
 
+  //Handles deck click
   handleClick(event) {
     console.log(event.target.name)
   }
 
   render() {
     return (
+        //Use BoardContext Provider to pass state to children
         <BoardContext.Provider value={{state: this.state}}>
+
+        {/* Create game board */}
         <div className="game-board">
+
+            {/* Create player container */}
             <div className="player-container">
+
+                {/* Map all players */}
                 {this.state.players.map(player => {
                     return (
+
+                        //Player component
                         <Player key={player.name} player={player}/>
+
                         )
                 })}
                 
             </div>
+
+            {/* This is rendering the deck to click */}
             <button onClick={(event) => this.handleClick(event)} name={this.state.deck} className="game-deck">
                 THIS IS THE DECK
             </button>
+
         </div>
         </BoardContext.Provider>
     );

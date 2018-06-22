@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import BoardContext from './BoardContext';
 
+//This component renders out our card and receives props from the player
 export default class Card extends Component {
   constructor(props) {
     super(props)
@@ -24,10 +25,6 @@ export default class Card extends Component {
                 </div>
                 )
             }
-            // <div className={`card-${this.props.card.suit}${this.props.card.value}`}>
-            //     <div className={`card-${this.props.card.suit}`}>{this.props.card.suit}</div>
-            //     <div className={`card-${this.props.card.value}`}>{this.props.card.value}</div>
-            //  </div>
         }
         </BoardContext.Consumer>
     )
