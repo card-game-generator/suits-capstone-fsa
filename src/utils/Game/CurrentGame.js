@@ -15,6 +15,15 @@ export function createGame(numPlayers, numCardsPerPlayer) {
   return { players, currentDeck };
 }
 
+//expects to check if move/click is valid based on the target value
+export function validator(event) {
+  //check if context.target is equal to event.target.name
+  if(context.target === event.target.name) {
+    context.source[context.sourceAction](event.target.value)
+    context.target[context.targetAction](event.target.value)
+  }
+}
+
 /*
  phaseForm {source:..., target:....., action: []}
 function functionCreator (phase) {
