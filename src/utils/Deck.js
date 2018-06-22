@@ -3,21 +3,7 @@ import Card from './Card';
 class Deck {
   constructor() {
     this.suits = ['Hearts', 'Spades', 'Clubs', 'Diamonds'];
-    this.values = [
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      '10',
-      'J',
-      'K',
-      'Q',
-      'A'
-    ];
+    this.values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'K', 'Q', 'A'];
     this.deck = [];
     this.size = 52;
   }
@@ -51,7 +37,7 @@ class Deck {
     if (this.size < numCards) {
       throw new Error('there is not enough card');
     }
-    let temp = [...this._deck];
+    let temp = [...this.deck];
     cards = temp.splice(0, numCards);
     this.deck = temp;
     return cards;

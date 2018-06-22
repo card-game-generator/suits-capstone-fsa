@@ -1,8 +1,19 @@
 import Deck from '../Deck';
+import Player from '../Player';
 
-const Deck1 = new Deck();
+export function createGame(numPlayers, numCardsPerPlayer) {
+  const currentDeck = new Deck();
+  currentDeck.create();
+  currentDeck.shuffle();
+  const players = [];
 
-export default Deck1;
+  for (let i = 1; i <= numPlayers; i++) {
+    let player = new Player(`player ${i}`);
+    player.createHand(numCardsPerPlayer, currentDeck);
+    players.push(player);
+  }
+  return { players, currentDeck };
+}
 
 //expects to check if move/click is valid based on the target value
 export function validator(event) {
