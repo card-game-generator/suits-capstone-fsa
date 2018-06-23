@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Player from '../../utils/Player';
 import Deck from '../../utils/Deck';
+import PlayerComp from './Player';
 import { validator } from '../../utils/Game/CurrentGame';
 
 import BoardContext from './BoardContext';
@@ -36,27 +37,26 @@ export default class Board extends Component {
     console.log(target);
     // console.log(event.target.name);
     // console.log('turn', this.state.turn[0]);
-    validator(event, this.state.turn[0], target, this.state.players[this.state.currentPlayerIdx]);
+    // validator(event, this.state.turn[0], target, this.state.players[this.state.currentPlayerIdx]);
     // invokes validator with the clicked component
     // console.log(target);
     // validator(target);
   }
 
   render() {
-    // console.log(validator);
     return (
       //Use BoardContext Provider to pass state to children
       <BoardContext.Provider value={{ state: this.state }}>
         {/* Create game board */}
         <div className="game-board">
-          {/* Create player container */}
           <div className="player-container">
             {/* Map all players */}
             {this.state.players.map(player => {
+              console.log(player);
               return (
                 //Player component
                 <div onClick={event => this.handleClick(player, event)} key={player.name}>
-                  {/* <Player player={player} /> */}
+                  <PlayerComp player={player} />
                 </div>
               );
             })}
