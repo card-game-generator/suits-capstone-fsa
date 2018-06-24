@@ -46,6 +46,7 @@ export default class Board extends Component {
 
   render() {
     console.log(this.state.deck);
+    const deck = this.state.deck;
     return (
       //Use BoardContext Provider to pass state to children
       <BoardContext.Provider value={{ state: this.state }}>
@@ -63,8 +64,13 @@ export default class Board extends Component {
               );
             })}
           </div>
-
-          <DeckComp deck={this.state.deck} />
+          <div
+            onClick={event => {
+              this.handleClick(deck, event);
+            }}
+          >
+            <DeckComp deck={this.state.deck} />
+          </div>
         </div>
       </BoardContext.Provider>
     );
