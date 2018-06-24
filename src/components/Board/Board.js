@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Player from '../../utils/Player';
 import Deck from '../../utils/Deck';
 import PlayerComp from './Player';
-import { validator } from '../../utils/Game/CurrentGame';
+import DeckComp from './Deck';
+import { validator, createGame } from '../../utils/Game/CurrentGame';
 
 import BoardContext from './BoardContext';
 
@@ -16,7 +17,7 @@ export default class Board extends Component {
     newPlayer.createHand(5, deck);
     console.log(deck, newPlayer);
     this.state = {
-      deck: 24,
+      deck: deck,
       field: 0,
       players: [newPlayer],
       currentPlayerIdx: 0,
@@ -44,6 +45,7 @@ export default class Board extends Component {
   }
 
   render() {
+    console.log(this.state.deck);
     return (
       //Use BoardContext Provider to pass state to children
       <BoardContext.Provider value={{ state: this.state }}>
@@ -62,14 +64,7 @@ export default class Board extends Component {
             })}
           </div>
 
-          {/* This is rendering the deck to click */}
-          <button
-            onClick={event => this.handleClick(event)}
-            name={this.state.deck}
-            className="game-deck"
-          >
-            THIS IS THE DECK
-          </button>
+          <DeckComp deck={this.state.deck} />
         </div>
       </BoardContext.Provider>
     );

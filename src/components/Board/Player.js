@@ -18,7 +18,6 @@ export default class Player extends Component {
     console.log(player);
     return (
       <div className={`player-${player.name}`}>
-        This is rendering the player to click
         <button type="button" name="player" className="player-name">
           Name: {player.name}
         </button>
