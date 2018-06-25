@@ -45,7 +45,6 @@ export default class StartRules extends Component {
     let playerIdx = 0;
     let cardIdx = 0;
 
-    console.log('STATE:', this.state);
     return (
       <div>
         <div>
