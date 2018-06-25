@@ -7,7 +7,6 @@ export default class Card extends Component {
 
   render() {
     let deck = this.props.deck;
-    console.log(deck);
     return (
       <div>
         Hi I'm the deck, I have <p>{deck.size} cards</p>

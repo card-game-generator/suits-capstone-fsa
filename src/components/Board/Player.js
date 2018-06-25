@@ -15,7 +15,6 @@ export default class Player extends Component {
 
   render() {
     let player = this.props.player;
-    console.log(player);
     return (
       <div className={`player-${player.name}`}>
         <button type="button" name="player" className="player-name">
