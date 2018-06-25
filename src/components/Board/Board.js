@@ -1,51 +1,45 @@
 import React, { Component } from 'react';
-import Player from '../../utils/Player';
-import Deck from '../../utils/Deck';
 import PlayerComp from './Player';
 import DeckComp from './Deck';
 import { validator, createGame } from '../../utils/Game/CurrentGame';
 
 import BoardContext from './BoardContext';
 
+//Import createGame to populate Board state for validator testing
+let currentGame = createGame(4, 7);
+let players = currentGame.players;
+let deck = currentGame.currentDeck;
+
 export default class Board extends Component {
   constructor() {
     super();
-    //deck assumes that we have 4 players with 7 cards, hence 52-28 = 24 cards.
-    const deck = new Deck();
-    deck.create();
-    const newPlayer = new Player('player 1');
-    newPlayer.createHand(5, deck);
-    console.log(deck, newPlayer);
     this.state = {
-      deck: deck,
+      deck,
       field: 0,
-      players: [newPlayer],
+      players,
       currentPlayerIdx: 0,
       turn: [
         {
-          source: this.currentPlayerIdx,
-          sourceAction: 'addCard',
           target: 'player',
           targetAction: 'giveCard',
+          source: 'player',
+          sourceAction: 'addCard',
         },
       ],
       currentPhaseIdx: 0,
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   //Handles deck click
-  handleClick(target, event) {
-    console.log(target);
-    // console.log(event.target.name);
-    // console.log('turn', this.state.turn[0]);
-    // validator(event, this.state.turn[0], target, this.state.players[this.state.currentPlayerIdx]);
-    // invokes validator with the clicked component
-    // console.log(target);
-    // validator(target);
+  handleClick(target, reqCard, event) {
+    event.preventDefault();
+    let phase1 = this.state.turn[0];
+
+    validator(phase1, target, reqCard, this.state.players[this.state.currentPlayerIdx]);
   }
 
   render() {
-    console.log(this.state.deck);
     const deck = this.state.deck;
     return (
       //Use BoardContext Provider to pass state to children
@@ -55,12 +49,11 @@ export default class Board extends Component {
           <div className="player-container">
             {/* Map all players */}
             {this.state.players.map(player => {
-              console.log(player);
               return (
                 //Player component
-                <div onClick={event => this.handleClick(player, event)} key={player.name}>
-                  <PlayerComp player={player} />
-                </div>
+                <button key={player.name}>
+                  <PlayerComp submitHandler={this.handleClick} player={player} />
+                </button>
               );
             })}
           </div>

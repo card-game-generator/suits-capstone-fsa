@@ -4,10 +4,18 @@ class Player {
     this.hand = []; //array of Cards
     this.isCurrentPlayer = false;
     this.score = 0;
+    this.type = 'player';
   }
 
   createHand(numCards, currDeck) {
-    this.hand = currDeck.deal(numCards);
+    let dealtCards = [];
+    if (currDeck.size < numCards) {
+      throw new Error('Not enough cards');
+    }
+    let temp = [...currDeck.cards];
+    dealtCards = temp.splice(0, numCards);
+    currDeck.cards = temp;
+    this.hand = dealtCards;
   }
 
   changeScore(num) {
@@ -15,10 +23,10 @@ class Player {
   }
 
   // this func is expecting reqCard to be a VALUE (without SUIT)
-  giveCard(reqCard, target) {
-    let cardFound = target.hand.find(card => Number(card.value) === reqCard);
+  giveCard(reqCard) {
+    let cardFound = this.hand.find(card => Number(card.value) === Number(reqCard));
     if (cardFound) {
-      target.hand.splice(target.hand.indexOf(cardFound), 1);
+      this.hand.splice(this.hand.indexOf(cardFound), 1);
       return cardFound;
     }
     return null;
