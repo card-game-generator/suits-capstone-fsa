@@ -28,16 +28,15 @@ export default class Board extends Component {
       ],
       currentPhaseIdx: 0,
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   //Handles deck click
-  handleClick(target) {
+  handleClick(target, reqCard, event) {
+    event.preventDefault();
     let phase1 = this.state.turn[0]
 
-    validator(phase1, target, this.state.players[this.state.currentPlayerIdx]);
-    // // invokes validator with the clicked component
-    // console.log(target);
-    // validator(target);
+    validator(phase1, target, reqCard, this.state.players[this.state.currentPlayerIdx]);
   }
 
   render() {
@@ -52,8 +51,8 @@ export default class Board extends Component {
             {this.state.players.map(player => {
               return (
                 //Player component
-                <button onClick={() => this.handleClick(player)} key={player.name}>
-                  <PlayerComp player={player} />
+                <button key={player.name}>
+                  <PlayerComp submitHandler={this.handleClick} player={player} />
                 </button>
               );
             })}
