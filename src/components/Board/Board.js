@@ -23,9 +23,9 @@ export default class Board extends Component {
       currentPlayerIdx: 0,
       turn: [
         {
-          target: 'deck',
+          target: 'player',
           targetAction: 'giveCard',
-          source: this.currentPlayerIdx,
+          source: 'player',
           sourceAction: 'addCard'
         },
       ],

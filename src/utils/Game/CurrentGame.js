@@ -21,10 +21,12 @@ export function validator(context, target) {
   if (context.target === target.type) {
     console.log('clickable');
     // were expecting context.source to be an instance of a player
-
-    // source[context.sourceAction](event.target.value);
-    // target[context.targetAction](event.target.value);
-    return true;
+    // context.source
+    const found = target[context.targetAction]("2", target);
+    console.log(found)
+    // context.source[context.sourceAction](found);
+    console.log('after funcs run: ', context, target);
+    // return true;
   } else {
     console.log('unclickable')
   }
