@@ -23,10 +23,10 @@ export default class Board extends Component {
       currentPlayerIdx: 0,
       turn: [
         {
-          source: this.currentPlayerIdx,
-          sourceAction: 'addCard',
-          target: 'player',
+          target: 'deck',
           targetAction: 'giveCard',
+          source: this.currentPlayerIdx,
+          sourceAction: 'addCard'
         },
       ],
       currentPhaseIdx: 0,
@@ -34,12 +34,14 @@ export default class Board extends Component {
   }
 
   //Handles deck click
-  handleClick(target, event) {
-    console.log(target);
-    // console.log(event.target.name);
-    // console.log('turn', this.state.turn[0]);
-    // validator(event, this.state.turn[0], target, this.state.players[this.state.currentPlayerIdx]);
-    // invokes validator with the clicked component
+  handleClick(target) {
+    console.log(target); //player
+    console.log('turn', this.state.turn[0]);
+    let phase1 = this.state.turn[0]
+    console.log(phase1)
+
+    validator(phase1, target);
+    // // invokes validator with the clicked component
     // console.log(target);
     // validator(target);
   }
@@ -58,9 +60,9 @@ export default class Board extends Component {
               console.log(player);
               return (
                 //Player component
-                <div onClick={event => this.handleClick(player, event)} key={player.name}>
+                <button onClick={() => this.handleClick(player)} key={player.name}>
                   <PlayerComp player={player} />
-                </div>
+                </button>
               );
             })}
           </div>

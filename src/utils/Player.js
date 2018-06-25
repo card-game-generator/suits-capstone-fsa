@@ -4,6 +4,7 @@ class Player {
     this.hand = []; //array of Cards
     this.isCurrentPlayer = false;
     this.score = 0;
+    this.type = 'player';
   }
 
   createHand(numCards, currDeck) {
