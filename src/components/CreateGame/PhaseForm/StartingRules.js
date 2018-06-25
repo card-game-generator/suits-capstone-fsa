@@ -9,43 +9,50 @@ export default class StartRules extends Component {
     };
     this.incrementPlayers = this.incrementPlayers.bind(this);
     this.incrementCards = this.incrementCards.bind(this);
-
     this.decrementPlayers = this.decrementPlayers.bind(this);
     this.decrementCards = this.decrementCards.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  incrementPlayers(event) {
+  incrementPlayers() {
+    let players = this.state.players + 1;
     this.state.players < 4
       ? this.setState({
-          name: this.state[event.target.name]++,
+          players,
         })
       : alert('No more than 4 players allowed!');
   }
 
-  incrementCards(event) {
+  incrementCards() {
+    let cards = this.state.cards + 1;
     this.state.cards < 53
       ? this.setState({
-          name: this.state[event.target.name]++,
+          cards,
         })
       : alert('No more than 52 cards allowed!');
   }
 
-  decrementPlayers(event) {
-    this.state.players >= 1 ? this.setState({ name: this.state[event.target.name]-- }) : '';
+  decrementPlayers() {
+    let players = this.state.players - 1;
+    this.state.players >= 1 ? this.setState({ players }) : '';
   }
 
-  decrementCards(event) {
-    this.state.cards > 0 ? this.setState({ name: this.state[event.target.name]-- }) : '';
+  decrementCards() {
+    let cards = this.state.cards - 1;
+    this.state.cards > 0 ? this.setState({ cards }) : '';
   }
-
+  // handleSubmit() {
+  //   let { players, cards } = this.state;
+  //   console.log(this.props.handleSubmit, 'hey', this.setState);
+  //   this.props.handleSubmit();
+  // }
   render() {
+    const handleSubmit = this.props.handleSubmit;
     let playerArr = new Array(this.state.players).fill('player');
     let cardArr = [];
     this.state.cards > 0 ? (cardArr = new Array(this.state.cards).fill('card')) : [];
     let playerIdx = 0;
     let cardIdx = 0;
-
-    console.log('STATE:', this.state);
     return (
       <div>
         <div>
@@ -82,6 +89,9 @@ export default class StartRules extends Component {
             return <div key={cardIdx}>{card}</div>;
           })}
         </div>
+        <button type="button" onClick={() => handleSubmit({ ...this.state })}>
+          Set initial rules
+        </button>
       </div>
     );
   }
