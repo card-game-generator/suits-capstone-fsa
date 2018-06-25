@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import Board from './components/Board/Board';
+import Board from './components/Board/Board';
 import StartingRules from './components/CreateGame/PhaseForm/StartingRules';
 // import logo from './logo.svg';
 import './App.css';
@@ -18,7 +18,7 @@ class App extends Component {
       //     <PhaseForm />
       //   </div>
       // </GameContext.Provider>
-      <StartingRules />
+      <Board />
     );
   }
 }
