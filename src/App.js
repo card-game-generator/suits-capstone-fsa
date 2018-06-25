@@ -22,11 +22,7 @@ class App extends Component {
       //     <PhaseForm />
       //   </div>
       // </GameContext.Provider>
-      // <StartingRules />
-      <div>
-        <WinConditions />
-        <ParentForm />
-      </div>
+      <WinConditions />
     );
   }
 }

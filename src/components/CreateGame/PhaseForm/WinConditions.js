@@ -4,37 +4,29 @@ export default class WinConditions extends Component {
   constructor() {
     super();
     this.state = {
-      whenToCheck: '',
       whatToCheck: '',
+      whenToCheck: '',
     };
     this.handleToggle = this.handleToggle.bind(this);
   }
 
+  //sets the state upon selection of whenToCheck & whatToCheck options
   handleToggle(event) {
     event.preventDefault();
     this.setState({
       [event.target.name]: event.target.value,
     });
-    console.log(event.target.name);
   }
 
   render() {
+    console.log('STATE', this.state);
     return (
       <div>
         <form>
           <label>
-            When do you check?
-            <select name="whenToCheck" onChange={this.handleToggle}>
-              <option>End of each turn</option>
-              <option>When Deck is empty</option>
-            </select>
-          </label>
-
-          <div>When: {this.state.whenToCheck}</div>
-
-          <label>
             How do you win?
             <select name="whatToCheck" onChange={this.handleToggle}>
+              <option>Please Select</option>
               <option>Player with highest score</option>
               {/* <option>Player with most cards</option>
               <option>Player with least cards</option>
@@ -42,7 +34,23 @@ export default class WinConditions extends Component {
             </select>
           </label>
 
-          <div>How: {this.state.whatToCheck}</div>
+          <div>
+            <strong>How:</strong> {this.state.whatToCheck}
+          </div>
+
+          <label>
+            When do you check?
+            <select name="whenToCheck" onChange={this.handleToggle}>
+              <option>Please Select</option>
+              <option>End of each turn</option>
+              <option>End of each phase</option>
+              <option>When Deck is empty</option>
+            </select>
+          </label>
+
+          <div>
+            <strong>When:</strong> {this.state.whenToCheck}
+          </div>
         </form>
       </div>
     );
