@@ -20,7 +20,7 @@ export default class PhaseForm extends Component {
   //adds selected action to array
   handleSubmitAction() {
     this.setState(prevState => ({
-      Action: [...prevState.Action, this.action]
+      Action: [...prevState.Action, this.action],
     }));
   }
   handleToggleAction(event) {

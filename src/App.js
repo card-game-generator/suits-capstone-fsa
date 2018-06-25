@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // import Board from './components/Board/Board';
-import StartingRules from './components/CreateGame/PhaseForm/StartingRules';
-// import logo from './logo.svg';
+import ParentForm from './components/CreateGame/PhaseForm/ParentForm';
 import './App.css';
 // import PhaseForm from './components/CreateGame/PhaseForm/PhaseForm';
 // const GameContext = React.createContext();
@@ -18,7 +17,7 @@ class App extends Component {
       //     <PhaseForm />
       //   </div>
       // </GameContext.Provider>
-      <StartingRules />
+      <ParentForm />
     );
   }
 }
