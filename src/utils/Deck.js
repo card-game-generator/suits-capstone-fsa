@@ -6,16 +6,12 @@ class Deck {
     this.values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'K', 'Q', 'A'];
     this.size = 52;
     this.type = 'deck';
-    this.cards =  this.values.forEach(value => {
-      this.suits.forEach(suit => {
-        let card = new Card(suit, value);
-        this.deck.push(card);
-      });
-    });
+    this.cards = [];
+    this.create();
   }
 
-  shuffleHelper(deck) {
-    let currentIndex = deck.length,
+  shuffleHelper(cards) {
+    let currentIndex = cards.length,
       temporaryValue,
       randomIndex;
 
@@ -26,31 +22,29 @@ class Deck {
       currentIndex -= 1;
 
       // And swap it with the current element.
-      temporaryValue = deck[currentIndex];
-      deck[currentIndex] = deck[randomIndex];
-      deck[randomIndex] = temporaryValue;
+      temporaryValue = cards[currentIndex];
+      cards[currentIndex] = cards[randomIndex];
+      cards[randomIndex] = temporaryValue;
     }
 
-    return deck;
-  }
-
-  shuffle() {
-    this.deck = this.shuffleHelper(this.deck);
-  }
-
-  deal(numCards) {
-    let cards = [];
-    if (this.size < numCards) {
-      throw new Error('there is not enough card');
-    }
-    let temp = [...this.deck];
-    cards = temp.splice(0, numCards);
-    this.deck = temp;
     return cards;
   }
 
+  shuffle() {
+    this.cards = this.shuffleHelper(this.cards);
+  }
+
+  create() {
+    this.values.forEach(value => {
+      this.suits.forEach(suit => {
+        let card = new Card(suit, value);
+        this.cards.push(card);
+      });
+    });
+  }
+
   show() {
-    return this.deck;
+    return this.cards;
   }
 
   size() {

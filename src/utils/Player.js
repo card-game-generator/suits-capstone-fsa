@@ -8,7 +8,14 @@ class Player {
   }
 
   createHand(numCards, currDeck) {
-    this.hand = currDeck.deal(numCards);
+    let dealtCards = [];
+    if (currDeck.size < numCards) {
+      throw new Error('Not enough cards');
+    }
+    let temp = [...currDeck.cards];
+    dealtCards = temp.splice(0, numCards);
+    currDeck.cards = temp;
+    this.hand = dealtCards;
   }
 
   changeScore(num) {
