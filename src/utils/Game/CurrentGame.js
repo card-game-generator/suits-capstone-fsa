@@ -16,16 +16,16 @@ export function createGame(numPlayers, numCardsPerPlayer) {
 }
 
 //expects to check if move/click is valid based on the target value
-export function validator(event, context, target, source) {
-  console.log('event name:', event.target.name, 'context:', context.target);
-  // check if context.target is equal to event.target.name
-  if (context.target === event.target.name) {
-    console.log('stuff', source, context.sourceAction);
-    // were expecting context.source to be an instance of a player
-
-    source[context.sourceAction](event.target.value);
-    target[context.targetAction](event.target.value);
-    return true;
+export function validator(currPhase, target, req, source) {
+  // check if currPhase.target is equal to event.target.name
+  if (currPhase.target === target.type) {
+    // were expecting currPhase.source to be an instance of a player
+    // currPhase.source
+    const found = target[currPhase.targetAction](req);
+    //We are assuming that the source is the current player
+    if(found) {
+      source[currPhase.sourceAction](found);
+    }
   }
 }
 
