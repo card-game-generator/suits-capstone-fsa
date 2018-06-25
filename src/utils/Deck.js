@@ -4,9 +4,14 @@ class Deck {
   constructor() {
     this.suits = ['Hearts', 'Spades', 'Clubs', 'Diamonds'];
     this.values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'K', 'Q', 'A'];
-    this.deck = [];
     this.size = 52;
     this.type = 'deck';
+    this.cards =  this.values.forEach(value => {
+      this.suits.forEach(suit => {
+        let card = new Card(suit, value);
+        this.deck.push(card);
+      });
+    });
   }
 
   shuffleHelper(deck) {
@@ -42,15 +47,6 @@ class Deck {
     cards = temp.splice(0, numCards);
     this.deck = temp;
     return cards;
-  }
-
-  create() {
-    this.values.forEach(value => {
-      this.suits.forEach(suit => {
-        let card = new Card(suit, value);
-        this.deck.push(card);
-      });
-    });
   }
 
   show() {
