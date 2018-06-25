@@ -23,7 +23,7 @@ export default class Board extends Component {
           target: 'player',
           targetAction: 'giveCard',
           source: 'player',
-          sourceAction: 'addCard'
+          sourceAction: 'addCard',
         },
       ],
       currentPhaseIdx: 0,
@@ -34,7 +34,7 @@ export default class Board extends Component {
   //Handles deck click
   handleClick(target, reqCard, event) {
     event.preventDefault();
-    let phase1 = this.state.turn[0]
+    let phase1 = this.state.turn[0];
 
     validator(phase1, target, reqCard, this.state.players[this.state.currentPlayerIdx]);
   }

@@ -3,7 +3,6 @@ import Player from '../Player';
 
 export function createGame(numPlayers, numCardsPerPlayer) {
   const currentDeck = new Deck();
-  currentDeck.create();
   currentDeck.shuffle();
   const players = [];
 
@@ -23,7 +22,7 @@ export function validator(currPhase, target, req, source) {
     // currPhase.source
     const found = target[currPhase.targetAction](req);
     //We are assuming that the source is the current player
-    if(found) {
+    if (found) {
       source[currPhase.sourceAction](found);
     }
   }
