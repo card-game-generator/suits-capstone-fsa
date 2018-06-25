@@ -14,13 +14,11 @@ export default class FormContainer extends Component {
   }
 
   handleState(stateChanges) {
-    console.log(stateChanges);
     let formIdx = this.state.formIdx + 1;
     this.setState({ ...stateChanges, formIdx });
   }
 
   render() {
-    console.log(this.state, 'this');
     let idx = this.state.formIdx;
     return (
       <div>
