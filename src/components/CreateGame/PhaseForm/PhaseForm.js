@@ -28,7 +28,6 @@ export default class PhaseForm extends Component {
   }
 
   render() {
-    console.log(this.state);
     const turn = this.state.turn;
     const handleSubmit = this.props.handleSubmit;
     return (
