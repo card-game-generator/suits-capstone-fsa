@@ -32,18 +32,11 @@ export default class PhaseForm extends Component {
     let dependentObj = null;
 
     if (this.state.childFormShow) {
-      let {
-        dependentSource,
-        dependentSourceAction,
-        dependentTarget,
-        dependentTargetAction,
-      } = this.state;
-
       dependentObj = {
-        dependentSource,
-        dependentSourceAction,
-        dependentTarget,
-        dependentTargetAction,
+        source: this.state.dependentSource,
+        sourceAction: this.state.dependentSourceAction,
+        target: this.state.dependentTarget,
+        targetAction: this.state.dependentTargetAction,
       };
     }
 
