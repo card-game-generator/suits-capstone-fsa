@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-// import Board from './components/Board/Board';
+import Board from './components/Board/Board';
 import ParentForm from './components/CreateGame/PhaseForm/ParentForm';
 
 import './App.css';
@@ -19,7 +19,8 @@ class App extends Component {
       //     <PhaseForm />
       //   </div>
       // </GameContext.Provider>
-      <ParentForm />
+      // <ParentForm />
+      <Board />
     );
   }
 }

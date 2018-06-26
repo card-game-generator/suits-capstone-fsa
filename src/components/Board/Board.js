@@ -43,7 +43,7 @@ export default class Board extends Component {
     event.preventDefault();
     let phase1 = this.state.turn[0];
 
-    validator(phase1, target, reqCard, this.state.players[this.state.currentPlayerIdx]);
+    validator(phase1, this.state.players[this.state.currentPlayerIdx], target, reqCard);
   }
 
   render() {
