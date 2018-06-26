@@ -27,7 +27,7 @@ export default class PhaseForm extends Component {
   handleToggle(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
-  //adds selected action to array
+  //adds selected action to depdendentObj inside of turnObj
   handleSubmitPhase() {
     let dependentObj = null;
 
@@ -66,7 +66,6 @@ export default class PhaseForm extends Component {
   render() {
     const turn = this.state.turn;
     const handleSubmit = this.props.handleSubmit;
-    console.log('turn', this.state.turn);
     return (
       <div className="turn-form">
         <div className="turn-form-title">Phase Form: </div>
