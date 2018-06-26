@@ -20,7 +20,6 @@ export default class FormContainer extends Component {
   }
 
   render() {
-    console.log(this.state);
     let idx = this.state.formIdx;
     return (
       <div>
