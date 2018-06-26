@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import Board from './components/Board/Board';
+import Board from './components/Board/Board';
 import StartingRules from './components/CreateGame/PhaseForm/StartingRules';
 import WinConditions from './components/CreateGame/PhaseForm/WinConditions';
 // import logo from './logo.svg';
@@ -21,7 +21,8 @@ class App extends Component {
       //   </div>
       // </GameContext.Provider>
       // <WinConditions />
-      <ParentForm />
+      // <ParentForm />
+      <Board />
     );
   }
 }
