@@ -24,7 +24,7 @@ class Player {
 
   // this func is expecting reqCard to be a VALUE (without SUIT)
   giveCard(reqCard) {
-    let cardFound = this.hand.find(card => Number(card.value) === Number(reqCard));
+    let cardFound = this.hand.find(card => card.value === String(reqCard));
     if (cardFound) {
       this.hand.splice(this.hand.indexOf(cardFound), 1);
       return cardFound;
