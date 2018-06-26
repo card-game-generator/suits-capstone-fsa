@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-// target: 'player',
-//           targetAction: 'giveCard',
-//           source: 'player',
-//           sourceAction: 'addCard',
 export default class PhaseForm extends Component {
   constructor() {
     super();
