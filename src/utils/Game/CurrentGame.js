@@ -17,6 +17,7 @@ export function createGame(numPlayers, numCardsPerPlayer) {
 //expects to check if move/click is valid based on the target value
 export function validator(currPhase, target, req, source) {
   // check if currPhase.target is equal to event.target.name
+  console.log('source', source, 'target', target);
   if (currPhase.target === target.type) {
     // were expecting currPhase.source to be an instance of a player
     // currPhase.source
