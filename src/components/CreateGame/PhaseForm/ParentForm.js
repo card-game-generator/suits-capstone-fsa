@@ -22,15 +22,15 @@ export default class FormContainer extends Component {
   render() {
     let idx = this.state.formIdx;
     return (
-      <div>
+      <div className="parent-form">
         {idx === 1 ? <StartingRules handleSubmit={this.handleState} /> : null}
         {idx === 2 ? <PhaseForm handleSubmit={this.handleState} /> : null}
 
-        <div>players and cards populate here, maybe another subComponent</div>
+        {/* <div>players and cards populate here, maybe another subComponent</div>
         <div>
           just here to show local state of parent Number of players {this.state.players} Number of
           cards for each player {this.state.cards}
-        </div>
+        </div> */}
         {this.state.turn.map(phase => {
           return (
             <div key={phase}>
