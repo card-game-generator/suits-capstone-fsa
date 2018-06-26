@@ -24,6 +24,13 @@ export default class Board extends Component {
           targetAction: 'giveCard',
           source: 'player',
           sourceAction: 'addCard',
+          // if there's a nested phase:
+          dependentPhase: {
+            target: 'player',
+            targetAction: 'giveCard',
+            source: 'player',
+            sourceAction: 'addCard',
+          },
         },
       ],
       currentPhaseIdx: 0,
