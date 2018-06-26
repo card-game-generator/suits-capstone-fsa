@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-
 export default class PhaseForm extends Component {
   constructor() {
     super();
-    this.state = { source: 'self', target: '', Action: [] };
+    this.state = { turn: [], source: 'self', sourceAction: '', target: '', targetAction: '' };
     this.handleToggle = this.handleToggle.bind(this);
-    this.handleSubmitAction = this.handleSubmitAction.bind(this);
-    this.handleClear = this.handleClear.bind(this);
-    this.handleToggleAction = this.handleToggleAction.bind(this);
+    this.handleSubmitPhase = this.handleSubmitPhase.bind(this);
+    this.handleClear = this.handleClear.bind(this); //we need to have a pop for turn
   }
   //Clears the array of actions for the phase
   handleClear() {
@@ -18,20 +16,16 @@ export default class PhaseForm extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
   //adds selected action to array
-  handleSubmitAction() {
+  handleSubmitPhase() {
+    let { source, sourceAction, target, targetAction } = this.state;
     this.setState(prevState => ({
-      Action: [...prevState.Action, this.action],
+      turn: [...prevState.turn, { source, sourceAction, target, targetAction }],
     }));
   }
-  handleToggleAction(event) {
-    event.preventDefault();
-    this.action = event.target.value;
-  }
-  // handleSubmit(){
-
-  // }
 
   render() {
+    const turn = this.state.turn;
+    const handleSubmit = this.props.handleSubmit;
     return (
       <div>
         <form>
@@ -44,34 +38,39 @@ export default class PhaseForm extends Component {
           </label>
 
           <label>
-            Target
-            <select name="target" onChange={this.handleToggle}>
+            Source Action
+            <select name="sourceAction" onChange={this.handleToggle}>
               <option>null</option>
               <option>Chosen Player</option>
-              <option>Player 1</option>
-              <option>Player 2</option>
-              <option>Player 3</option>
-              <option>Player 4</option>
-              <option>All Player</option>
+              <option>All Players</option>
               <option>Deck</option>
             </select>
           </label>
 
           <label>
-            Action
-            <select name="action" onChange={this.handleToggleAction}>
+            Target
+            <select name="target" onChange={this.handleToggle}>
+              <option>null</option>
+              <option>Chosen Player</option>
+              <option>All Players</option>
+              <option>Deck</option>
+            </select>
+          </label>
+
+          <label>
+            Target Action
+            <select name="targetAction" onChange={this.handleToggle}>
               <option>Take Card</option>
               <option>Take Card</option>
             </select>
-            <button type="button" onClick={this.handleSubmitAction}>
-              Add Action
-            </button>
-            <button type="button" onClick={this.handleClear}>
-              clear action
-            </button>
           </label>
         </form>
-        {/* <button type="button" onClick={}>Submit Phase</button> */}
+        <button type="button" onClick={this.handleSubmitPhase}>
+          Submit Phase
+        </button>
+        <button type="button" onClick={() => handleSubmit({ turn })}>
+          Submit Turn
+        </button>
       </div>
     );
   }
