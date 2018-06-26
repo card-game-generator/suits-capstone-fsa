@@ -28,6 +28,7 @@ export function validator(currPhase, source, target, request) {
     }
 
     // if theres a dependent action, then run the validator again
+    // THIS IS EXPECTING TARGET AND SOURCE TO BE UNCHANGED
     if (currPhase.dependentPhase) {
       validator(currPhase.dependentPhase, source, target, request);
     }
