@@ -24,6 +24,13 @@ export default class Board extends Component {
           targetAction: 'giveCard',
           source: 'player',
           sourceAction: 'addCard',
+          // if there's a nested phase:
+          dependentPhase: {
+            target: 'player',
+            targetAction: 'giveCard',
+            source: 'player',
+            sourceAction: 'addCard',
+          },
         },
       ],
       currentPhaseIdx: 0,
@@ -36,7 +43,7 @@ export default class Board extends Component {
     event.preventDefault();
     let phase1 = this.state.turn[0];
 
-    validator(phase1, target, reqCard, this.state.players[this.state.currentPlayerIdx]);
+    validator(phase1, this.state.players[this.state.currentPlayerIdx], target, reqCard);
   }
 
   render() {
