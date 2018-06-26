@@ -21,16 +21,16 @@ export default class Board extends Component {
       turn: [
         {
           target: 'player',
-          targetAction: 'giveCard',
-          source: 'player',
-          sourceAction: 'addCard',
+          targetAction: 'has4OfAKind',
+          source: 'null',
+          sourceAction: 'null',
           // if there's a nested phase:
-          dependentPhase: {
-            target: 'player',
-            targetAction: 'giveCard',
-            source: 'player',
-            sourceAction: 'addCard',
-          },
+          // dependentPhase: {
+          //   target: 'player',
+          //   targetAction: 'giveCard',
+          //   source: 'player',
+          //   sourceAction: 'addCard',
+          // },
         },
       ],
       currentPhaseIdx: 0,

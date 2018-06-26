@@ -40,7 +40,7 @@ class Player {
   has4OfAKind() {
     const cardCount = {};
     this.hand.forEach(card => (cardCount[card] = ++cardCount[card] || 1));
-    return cardCount.values.filter(value => value === 4).length >= 1;
+    return Object.values(cardCount).filter(value => value === 4).length >= 1;
   }
 }
 

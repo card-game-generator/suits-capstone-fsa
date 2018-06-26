@@ -21,6 +21,7 @@ export function validator(currPhase, source, target, request) {
     // were expecting currPhase.source to be an instance of a player
     // currPhase.source
     const found = target[currPhase.targetAction](request);
+    console.log('found? t or f?', found);
     //We are assuming that the source is the current player
     if (found) {
       source[currPhase.sourceAction](found);
