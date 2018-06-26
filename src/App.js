@@ -17,11 +17,11 @@ class App extends Component {
       //       <img src={logo} className="App-logo" alt="logo" />
       //       <h1 className="App-title">Suits</h1>
       //     </header>
-      <PhaseForm />
+      // <PhaseForm />
       //   </div>
       // </GameContext.Provider>
       // <WinConditions />
-      // <ParentForm />
+      <ParentForm />
     );
   }
 }

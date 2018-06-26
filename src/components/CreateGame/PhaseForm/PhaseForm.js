@@ -14,7 +14,6 @@ export default class PhaseForm extends Component {
       dependentTargetAction: '',
       childFormShow: false,
     };
-    // this.childFormShow = false
     this.handleToggle = this.handleToggle.bind(this);
     this.handleSubmitPhase = this.handleSubmitPhase.bind(this);
     this.handleClear = this.handleClear.bind(this); //we need to have a pop for turn
@@ -30,31 +29,30 @@ export default class PhaseForm extends Component {
   }
   //adds selected action to array
   handleSubmitPhase() {
-    let { source, sourceAction, target, targetAction, childFormShow } = this.state;
+    let dependentObj = null;
+
+    if (this.state.childFormShow) {
+      dependentObj = {};
+      dependentObj.source = this.state.dependentSource;
+      dependentObj.sourceAction = this.state.dependentSourceAction;
+      dependentObj.target = this.state.dependentTarget;
+      dependentObj.targetAction = this.state.dependentTargetAction;
+    }
+
+    let phaseObj = {
+      source: this.state.source,
+      sourceAction: this.state.sourceAction,
+      target: this.state.target,
+      targetAction: this.state.targetAction,
+      dependentPhase: dependentObj,
+    };
+
+    //If childFormShow is true, then add dependent actions to object keys
+
     this.setState(prevState => ({
-      turn: [...prevState.turn, { source, sourceAction, target, targetAction }],
+      turn: [...prevState.turn, phaseObj],
       childFormShow: false,
     }));
-    if (childFormShow) {
-      let {
-        dependentSource,
-        dependentSourceAction,
-        dependentTarget,
-        dependentTargetAction,
-      } = this.state;
-      this.setState(prevState => ({
-        turn: [
-          ...prevState.turn,
-          {
-            dependentSource,
-            dependentSourceAction,
-            dependentTarget,
-            dependentTargetAction,
-          },
-        ],
-        childFormShow: false,
-      }));
-    }
   }
 
   handleSubmitDependentPhase() {
@@ -67,6 +65,7 @@ export default class PhaseForm extends Component {
     console.log('turn', this.state.turn);
     return (
       <div className="turn-form">
+        <div className="turn-form-title">Phase Form: </div>
         <form>
           <label>
             Source
@@ -107,9 +106,11 @@ export default class PhaseForm extends Component {
           {/* These are the dependent action select options, refactor later */}
           {this.state.childFormShow && (
             <div className="turn-form-dependent">
+              <hr />
+              <div className="turn-form-dependent-title">Dependent Form: </div>
               <label>
                 Source
-                <select name="source" onChange={this.handleToggle}>
+                <select name="dependentSource" onChange={this.handleToggle}>
                   <option>null</option>
                   <option>self</option>
                 </select>
@@ -117,7 +118,7 @@ export default class PhaseForm extends Component {
 
               <label>
                 Source Action
-                <select name="sourceAction" onChange={this.handleToggle}>
+                <select name="dependentSourceAction" onChange={this.handleToggle}>
                   <option>null</option>
                   <option>Chosen Player</option>
                   <option>All Players</option>
@@ -127,7 +128,7 @@ export default class PhaseForm extends Component {
 
               <label>
                 Target
-                <select name="target" onChange={this.handleToggle}>
+                <select name="dependentTarget" onChange={this.handleToggle}>
                   <option>null</option>
                   <option>Chosen Player</option>
                   <option>All Players</option>
@@ -137,7 +138,7 @@ export default class PhaseForm extends Component {
 
               <label>
                 Target Action
-                <select name="targetAction" onChange={this.handleToggle}>
+                <select name="dependentTargetAction" onChange={this.handleToggle}>
                   <option>Take Card</option>
                   <option>Take Card</option>
                 </select>
