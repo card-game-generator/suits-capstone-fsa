@@ -2,37 +2,34 @@ import React, { Component } from 'react';
 import Board from './components/Board/Board';
 import StartingRules from './components/CreateGame/PhaseForm/StartingRules';
 import WinConditions from './components/CreateGame/PhaseForm/WinConditions';
-
+import { createGame } from './utils/Game/CurrentGame';
 import ParentForm from './components/CreateGame/PhaseForm/ParentForm';
 import './App.css';
 import Test from './components/Board/test';
-
-//  getGameObj(obj) {
-//   console.log(obj);
-//   currentGame = createGame(obj.players, obj.cards);
-//   turn = obj.turn;
-//   whatToCheck = obj.whatToCheck;
-//   whenToCheck = obj.whenToCheck;
-//   console.log(currentGame, turn, whatToCheck, whenToCheck, 'my defined states eventually');
-// }
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       show: true,
+      boardSetup: {},
     };
+    this.getGameObj = this.getGameObj.bind(this);
   }
   getGameObj(obj) {
-    // console.log(obj);
-    // currentGame = createGame(obj.players, obj.cards);
-    // turn = obj.turn;
-    // whatToCheck = obj.whatToCheck;
-    // whenToCheck = obj.whenToCheck;
-    // console.log(currentGame, turn, whatToCheck, whenToCheck, 'my defined states eventually');
+    const currentGame = createGame(obj.players, obj.cards);
+    const { players, deck } = currentGame;
+    const { whatToCheck, whenToCheck, turn } = obj;
+    const boardSetup = { players, deck, turn, whatToCheck, whenToCheck };
+    this.setState({ boardSetup });
   }
   render() {
-    return <div>{this.state.show ? <ParentForm /> : <Board />}</div>;
+    return (
+      <div>
+        {this.state.show ? <ParentForm captureRules={this.getGameObj} /> : <Board />}
+        {this.state.boardSetup.whatToCheck}
+      </div>
+    );
   }
 }
 

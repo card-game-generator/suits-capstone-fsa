@@ -26,7 +26,8 @@ export default class FormContainer extends Component {
 
   render() {
     let idx = this.state.formIdx;
-    console.log(this.state);
+    const captureRules = this.props.captureRules;
+
     return (
       <div>
         {idx === 1 ? <StartingRules handleSubmit={this.handleState} /> : null}
@@ -52,7 +53,7 @@ export default class FormContainer extends Component {
         {idx === 4 ? (
           <button
             onClick={() => {
-              getGameObj(this.state);
+              captureRules(this.state);
             }}
           >
             Play Game!

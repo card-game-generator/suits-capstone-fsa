@@ -12,9 +12,9 @@ export default class Card extends Component {
     let player = this.props.player;
 
     return (
-      <BoardContext.Consumer>
-        {({ state }) => {
-          let card = player.isCurrentPlayer
+      <div>
+        {/*  TODO rewrite file once consumer is implemented
+        {  player.isCurrentPlayer
             ? this.props.card
             : new Array(this.props.card.length).fill({ suit: 'hidden', value: 'card' });
           return (
@@ -24,9 +24,9 @@ export default class Card extends Component {
                 {card.value}
               </div>
             </div>
-          );
-        }}
-      </BoardContext.Consumer>
+          );} */}
+        hi
+      </div>
     );
   }
 }

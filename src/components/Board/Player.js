@@ -11,7 +11,7 @@ export default class Player extends Component {
     this.handleChange = this.handleChange.bind(this);
     // this.handleClick = this.handleClick.bind(this);
   }
-
+  //TODO
   //Handles player click
   // handleClick(event) {
   //   console.log(event.target.name);
