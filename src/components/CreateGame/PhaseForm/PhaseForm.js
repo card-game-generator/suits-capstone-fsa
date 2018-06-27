@@ -8,21 +8,15 @@ export default class PhaseForm extends Component {
       sourceAction: '',
       target: '',
       targetAction: '',
-      dependentSource: 'self',
       dependentSourceAction: '',
-      dependentTarget: '',
       dependentTargetAction: '',
       childFormShow: false,
     };
     this.handleToggle = this.handleToggle.bind(this);
     this.handleSubmitPhase = this.handleSubmitPhase.bind(this);
-    this.handleClear = this.handleClear.bind(this); //we need to have a pop for turn
     this.handleSubmitDependentPhase = this.handleSubmitDependentPhase.bind(this);
   }
-  //Clears the array of actions for the phase
-  handleClear() {
-    this.setState({ Action: [] });
-  }
+
   //sets source, and target
   handleToggle(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -33,9 +27,9 @@ export default class PhaseForm extends Component {
 
     if (this.state.childFormShow) {
       dependentObj = {
-        source: this.state.dependentSource,
+        source: this.state.source,
         sourceAction: this.state.dependentSourceAction,
-        target: this.state.dependentTarget,
+        target: this.state.target,
         targetAction: this.state.dependentTargetAction,
       };
     }
@@ -55,6 +49,7 @@ export default class PhaseForm extends Component {
   handleSubmitDependentPhase() {
     this.setState({ childFormShow: !this.state.childFormShow });
   }
+  //TODO we might want to implement a button to remove a phase from the turn Array
 
   render() {
     const turn = this.state.turn;
@@ -66,7 +61,7 @@ export default class PhaseForm extends Component {
           <label>
             Source
             <select name="source" onChange={this.handleToggle}>
-              <option defaultValue>null</option>
+              <option>null</option>
               <option>self</option>
             </select>
           </label>
@@ -75,9 +70,9 @@ export default class PhaseForm extends Component {
             Source Action
             <select name="sourceAction" onChange={this.handleToggle}>
               <option>null</option>
-              <option>Chosen Player</option>
-              <option>All Players</option>
-              <option>Deck</option>
+              <option>Give Card</option>
+              <option>Add Card</option>
+              <option>Has Four Of A Kind</option>
             </select>
           </label>
 
@@ -94,8 +89,10 @@ export default class PhaseForm extends Component {
           <label>
             Target Action
             <select name="targetAction" onChange={this.handleToggle}>
-              <option>Take Card</option>
-              <option>Take Card</option>
+              <option>null</option>
+              <option>Give Card</option>
+              <option>Add Card</option>
+              <option>Has Four Of A Kind</option>
             </select>
           </label>
 
@@ -104,39 +101,25 @@ export default class PhaseForm extends Component {
             <div className="turn-form-dependent">
               <hr />
               <div className="turn-form-dependent-title">Dependent Form: </div>
-              <label>
-                Source
-                <select name="dependentSource" onChange={this.handleToggle}>
-                  <option>null</option>
-                  <option>self</option>
-                </select>
-              </label>
 
               <label>
                 Source Action
                 <select name="dependentSourceAction" onChange={this.handleToggle}>
                   <option>null</option>
-                  <option>Chosen Player</option>
-                  <option>All Players</option>
-                  <option>Deck</option>
-                </select>
-              </label>
+                  <option>Give Card</option>
+                  <option>Add Card</option>
 
-              <label>
-                Target
-                <select name="dependentTarget" onChange={this.handleToggle}>
-                  <option>null</option>
-                  <option>Chosen Player</option>
-                  <option>All Players</option>
-                  <option>Deck</option>
+                  <option>Has Four Of A Kind</option>
                 </select>
               </label>
 
               <label>
                 Target Action
                 <select name="dependentTargetAction" onChange={this.handleToggle}>
-                  <option>Take Card</option>
-                  <option>Take Card</option>
+                  <option>null</option>
+                  <option>Give Card</option>
+                  <option>Add Card</option>
+                  <option>Has Four Of A Kind</option>
                 </select>
               </label>
             </div>

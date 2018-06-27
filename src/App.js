@@ -2,28 +2,37 @@ import React, { Component } from 'react';
 import Board from './components/Board/Board';
 import StartingRules from './components/CreateGame/PhaseForm/StartingRules';
 import WinConditions from './components/CreateGame/PhaseForm/WinConditions';
-// import logo from './logo.svg';
+
 import ParentForm from './components/CreateGame/PhaseForm/ParentForm';
 import './App.css';
-import PhaseForm from './components/CreateGame/PhaseForm/PhaseForm';
-// const GameContext = React.createContext();
+import Test from './components/Board/test';
+
+//  getGameObj(obj) {
+//   console.log(obj);
+//   currentGame = createGame(obj.players, obj.cards);
+//   turn = obj.turn;
+//   whatToCheck = obj.whatToCheck;
+//   whenToCheck = obj.whenToCheck;
+//   console.log(currentGame, turn, whatToCheck, whenToCheck, 'my defined states eventually');
+// }
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      show: true,
+    };
+  }
+  getGameObj(obj) {
+    // console.log(obj);
+    // currentGame = createGame(obj.players, obj.cards);
+    // turn = obj.turn;
+    // whatToCheck = obj.whatToCheck;
+    // whenToCheck = obj.whenToCheck;
+    // console.log(currentGame, turn, whatToCheck, whenToCheck, 'my defined states eventually');
+  }
   render() {
-    return (
-      // <GameContext.Provider>
-      //   <div className="App">
-      //     <header className="App-header">
-      //       <img src={logo} className="App-logo" alt="logo" />
-      //       <h1 className="App-title">Suits</h1>
-      //     </header>
-      // <PhaseForm />
-      //   </div>
-      // </GameContext.Provider>
-      // <WinConditions />
-      // <ParentForm />
-      <Board />
-    );
+    return <div>{this.state.show ? <ParentForm /> : <Board />}</div>;
   }
 }
 

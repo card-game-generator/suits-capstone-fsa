@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import PlayerComp from './Player';
 import DeckComp from './Deck';
 import { validator, createGame } from '../../utils/Game/CurrentGame';
-
-import BoardContext from './BoardContext';
+// import BoardContext, {
+//   currentGame,
+//   turn,
+//   whatToCheck,
+//   whenToCheck,
+// } from './components/Board/BoardContext';
 
 //Import createGame to populate Board state for validator testing
 let currentGame = createGame(4, 7);
@@ -50,7 +54,8 @@ export default class Board extends Component {
     const deck = this.state.deck;
     return (
       //Use BoardContext Provider to pass state to children
-      <BoardContext.Provider value={{ state: this.state }}>
+
+      <div>
         {/* Create game board */}
         <div className="game-board">
           <div className="player-container">
@@ -72,7 +77,7 @@ export default class Board extends Component {
             <DeckComp deck={this.state.deck} />
           </div>
         </div>
-      </BoardContext.Provider>
+      </div>
     );
   }
 }
