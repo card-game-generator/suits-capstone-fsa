@@ -53,7 +53,7 @@ export function winCheck(currPhase, state) {
           winningPlayer = player;
         }
       });
-      if (!winningPlayer) winningPlayer = 'No one wins!';
+      if (!winningPlayer) winningPlayer.name = 'No one wins!';
       return winningPlayer;
     },
   };
