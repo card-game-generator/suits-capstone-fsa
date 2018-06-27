@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { createGame } from '../../utils/Game/CurrentGame';
+// import React, { Component } from 'react';
+// import { createGame } from '../../utils/Game/CurrentGame';
 
-let currentGame;
-let turn;
-let whatToCheck;
-let whenToCheck;
+// let currentGame;
+// let turn;
+// let whatToCheck;
+// let whenToCheck;
 
 // export { currentGame, turn, whatToCheck, whenToCheck };
 
-const Context = React.createContext();
+// const Context = React.createContext();
 
 // class BoardContext extends Component {
 //   state = {

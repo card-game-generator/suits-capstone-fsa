@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PlayerComp from './Player';
 import DeckComp from './Deck';
-import { validator, createGame } from '../../utils/Game/CurrentGame';
+import { validator } from '../../utils/Game/CurrentGame';
 // import BoardContext, {
 //   currentGame,
 //   turn,
@@ -28,11 +28,8 @@ export default class Board extends Component {
       whenToCheck: '',
     };
     this.handleClick = this.handleClick.bind(this);
-<<<<<<< HEAD
-    this.handleWinCondition = this.handleWinCondition.bind(this);
-=======
+    this.checkWinCondition = this.handleWinCondition.bind(this);
     this.endTurn = this.endTurn.bind(this);
->>>>>>> master
   }
 
   componentDidMount() {
@@ -70,7 +67,7 @@ export default class Board extends Component {
   }
 
   //handles moving the 'what to check' into the appropriate 'when to check' for win conditions
-  handleWinCondition(event) {
+  checkWinCondition() {
     if (this.state.whenToCheck === 'End of each turn') {
       this.setState({
         turn: [...this.state.turn, { whatToCheck: this.state.whatToCheck }],
@@ -122,7 +119,7 @@ export default class Board extends Component {
           >
             <DeckComp deck={this.state.deck} />
           </div>
-          <button type="button" onClick={this.handleWinCondition}>
+          <button type="button" onClick={this.checkWinCondition}>
             Win Condition Check
           </button>
         </div>

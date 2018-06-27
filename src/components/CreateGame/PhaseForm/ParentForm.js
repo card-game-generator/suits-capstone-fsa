@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import StartingRules from './StartingRules';
 import PhaseForm from './PhaseForm';
 import WinForm from './WinConditions';
-import { getGameObj } from '../../Board/BoardContext';
+// import { getGameObj } from '../../Board/BoardContext';
 
 export default class FormContainer extends Component {
   constructor() {
