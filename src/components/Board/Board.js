@@ -34,6 +34,8 @@ export default class Board extends Component {
         },
       ],
       currentPhaseIdx: 0,
+      whatToCheck: 'Player with highest score',
+      whenToCheck: 'End of each turn' 
     };
     this.handleClick = this.handleClick.bind(this);
   }

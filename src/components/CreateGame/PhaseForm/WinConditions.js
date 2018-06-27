@@ -32,7 +32,7 @@ export default class WinConditions extends Component {
           <label>
             How do you win?
             <select name="whatToCheck" onChange={this.handleToggle}>
-              <option defaultValue>Player with highest score</option>
+              <option>Player with highest score</option>
               <option>Player with most cards</option>
               <option>Player with least cards</option>
               <option>First with 4 of a kind</option>
@@ -46,7 +46,7 @@ export default class WinConditions extends Component {
           <label>
             When do you check?
             <select name="whenToCheck" onChange={this.handleToggle}>
-              <option defaultValue>End of each turn</option>
+              <option>End of each turn</option>
               <option>End of each phase</option>
               <option>When Deck is empty</option>
             </select>
