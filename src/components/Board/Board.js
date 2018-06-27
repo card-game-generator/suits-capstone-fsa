@@ -22,7 +22,6 @@ export default class Board extends Component {
       field: 0,
       players: [],
       currentPlayerIdx: 0,
-<<<<<<< HEAD
       turn: [
         {
           target: 'player',
@@ -51,9 +50,7 @@ export default class Board extends Component {
           // },
         },
       ],
-=======
-      turn: [],
->>>>>>> master
+      // turn: [],
       currentPhaseIdx: 0,
       whatToCheck: 'Player with highest score',
       whenToCheck: 'End of each phase',
@@ -83,17 +80,11 @@ export default class Board extends Component {
     }
 
     if (this.state.whenToCheck === 'End of each phase') {
-      this.state.turn.map(phase => {
-        this.setState(prevState => ({
-          turn: [...prevState.turn, { whatToCheck: this.state.whatToCheck }],
-        }));
+      let newTurn = this.state.turn.map(phase => {
+        phase = { ...phase, whatToCheck: this.state.whatToCheck };
+        return phase;
       });
-      // this.state.turn.map(phase => {
-      //   console.log(phase);
-      //   this.setState({
-      //     turn: [{ ...phase, whatToCheck: this.state.whatToCheck }],
-      //   });
-      // });
+      this.setState({ turn: newTurn });
     }
 
     if (this.state.whenToCheck === 'When deck is empty') {
@@ -105,7 +96,6 @@ export default class Board extends Component {
 
   render() {
     const deck = this.state.deck;
-    console.log('STATE', this.state);
 
     return (
       //Use BoardContext Provider to pass state to children

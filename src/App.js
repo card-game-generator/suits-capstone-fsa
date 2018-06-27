@@ -1,21 +1,11 @@
 import React, { Component } from 'react';
 import Board from './components/Board/Board';
-<<<<<<< HEAD
-// import StartingRules from './components/CreateGame/PhaseForm/StartingRules';
-// import WinConditions from './components/CreateGame/PhaseForm/WinConditions';
-// import logo from './logo.svg';
-// import ParentForm from './components/CreateGame/PhaseForm/ParentForm';
-import './App.css';
-// import PhaseForm from './components/CreateGame/PhaseForm/PhaseForm';
-// const GameContext = React.createContext();
-=======
 import StartingRules from './components/CreateGame/PhaseForm/StartingRules';
 import WinConditions from './components/CreateGame/PhaseForm/WinConditions';
 import { createGame } from './utils/Game/CurrentGame';
 import ParentForm from './components/CreateGame/PhaseForm/ParentForm';
 import './App.css';
 import Test from './components/Board/test';
->>>>>>> master
 
 class App extends Component {
   constructor() {
@@ -36,11 +26,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        {this.state.show ? (
+        {/* {this.state.show ? (
           <ParentForm captureRules={this.getGameObj} />
-        ) : (
-          <Board boardSetup={this.state.boardSetup} />
-        )}
+        ) : ( */}
+        <Board boardSetup={this.state.boardSetup} />
+        {/* )} */}
         {this.state.boardSetup.whatToCheck}
       </div>
     );
