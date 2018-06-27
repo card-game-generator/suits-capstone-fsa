@@ -22,38 +22,10 @@ export default class Board extends Component {
       field: 0,
       players: [],
       currentPlayerIdx: 0,
-      turn: [
-        {
-          target: 'player',
-          targetAction: 'incrementScore',
-          source: 'null',
-          sourceAction: 'null',
-          // if there's a nested phase:
-          // dependentPhase: {
-          //   target: 'player',
-          //   targetAction: 'giveCard',
-          //   source: 'player',
-          //   sourceAction: 'addCard',
-          // },
-        },
-        {
-          target: 'player',
-          targetAction: 'incrementScore',
-          source: 'null',
-          sourceAction: 'null',
-          // if there's a nested phase:
-          // dependentPhase: {
-          //   target: 'player',
-          //   targetAction: 'giveCard',
-          //   source: 'player',
-          //   sourceAction: 'addCard',
-          // },
-        },
-      ],
-      // turn: [],
+      turn: [],
       currentPhaseIdx: 0,
-      whatToCheck: 'Player with highest score',
-      whenToCheck: 'End of each phase',
+      whatToCheck: '',
+      whenToCheck: '',
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleWinCondition = this.handleWinCondition.bind(this);

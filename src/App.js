@@ -26,11 +26,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        {/* {this.state.show ? (
+        {this.state.show ? (
           <ParentForm captureRules={this.getGameObj} />
-        ) : ( */}
-        <Board boardSetup={this.state.boardSetup} />
-        {/* )} */}
+        ) : (
+          <Board boardSetup={this.state.boardSetup} />
+        )}
         {this.state.boardSetup.whatToCheck}
       </div>
     );
