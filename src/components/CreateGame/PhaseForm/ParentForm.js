@@ -29,27 +29,39 @@ export default class FormContainer extends Component {
     const captureRules = this.props.captureRules;
 
     return (
+      <div className="parent-form">
+        {/* <div className="parent-form-menu">
+          <div className="parent-form-menu-players">Players: {this.state.players}</div>
+          <div className="parent-form-menu-cards">Cards: {this.state.players}</div>
+        </div> */}
+        <div className="parent-form-main">
+          <div className="parent-form-right-title">Suits</div>
+          {idx === 1 ? <StartingRules handleSubmit={this.handleState} /> : null}
+          {idx === 2 ? <PhaseForm handleSubmit={this.handleState} /> : null}
+
+          {/* <div>players and cards populate here, maybe another subComponent</div>
       <div>
         {idx === 1 ? <StartingRules handleSubmit={this.handleState} /> : null}
         {idx === 2 ? <PhaseForm handleSubmit={this.handleState} /> : null}
-        {idx === 3 ? <WinForm handleSubmit={this.handleState} /> : null}
+        {idx === 3 ? <WinForm handleSubmit={this.handleState} /><div>
+          win rules what to check = {this.state.whatToCheck} when to check ={' '}
+          {this.state.whenToCheck}
+        </div> : null}
         <div>players and cards populate here, maybe another subComponent</div>
         <div>
           just here to show local state of parent Number of players {this.state.players} Number of
           cards for each player {this.state.cards}
+        </div> */}
+          {this.state.turn.map(phase => {
+            return (
+              <div key={phase}>
+                just a div showing phase {phase.source} {phase.sourceAction} {phase.target}
+                {phase.targetAction}
+              </div>
+            );
+          })}
         </div>
-        {this.state.turn.map(phase => {
-          return (
-            <div key={phase}>
-              just a div showing phase {phase.source} {phase.sourceAction} {phase.target}
-              {phase.targetAction}
-            </div>
-          );
-        })}
-        <div>
-          win rules what to check = {this.state.whatToCheck} when to check ={' '}
-          {this.state.whenToCheck}
-        </div>
+        {/* <div className="parent-form-next"><i className="fas fa-chevron-right"></i></div> */}
         {idx === 4 ? (
           <button
             onClick={() => {
