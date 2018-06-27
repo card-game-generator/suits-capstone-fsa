@@ -75,17 +75,13 @@ export default class StartRules extends Component {
         </div>
         <div>
           {playerArr.map(player => {
-            {
-              playerIdx++;
-            }
+            playerIdx++;
             return <div key={playerIdx}>{player}</div>;
           })}
         </div>
         <div>
           {cardArr.map(card => {
-            {
-              cardIdx++;
-            }
+            cardIdx++;
             return <div key={cardIdx}>{card}</div>;
           })}
         </div>
