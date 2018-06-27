@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PlayerComp from './Player';
 import DeckComp from './Deck';
-import { validator } from '../../utils/Game/CurrentGame';
+import { validator, winCheck } from '../../utils/Game/CurrentGame';
 // import BoardContext, {
 //   currentGame,
 //   turn,
@@ -28,7 +28,7 @@ export default class Board extends Component {
       whenToCheck: '',
     };
     this.handleClick = this.handleClick.bind(this);
-    this.checkWinCondition = this.handleWinCondition.bind(this);
+    this.checkWinCondition = this.checkWinCondition.bind(this);
     this.endTurn = this.endTurn.bind(this);
   }
 
@@ -47,6 +47,7 @@ export default class Board extends Component {
     // next player's turn
     let currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
     this.setState({ currentPlayerIdx });
+    winCheck(this.state.turn[this.state.currentPhaseIdx], this.state);
   }
 
   //Handles deck click
@@ -63,6 +64,7 @@ export default class Board extends Component {
         currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
       }
       this.setState({ currentPhaseIdx, currentPlayerIdx });
+      winCheck(currPhase, this.state);
     }
   }
 
@@ -84,13 +86,12 @@ export default class Board extends Component {
 
     if (this.state.whenToCheck === 'When deck is empty') {
       if (this.state.deck === 0) {
-        console.log('idk what to do here');
+        // console.log('idk what to do here');
       }
     }
   }
 
   render() {
-    console.log(this.state);
     const deck = this.state.deck;
 
     return (
