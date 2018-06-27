@@ -27,7 +27,7 @@ export default class FormContainer extends Component {
   render() {
     let idx = this.state.formIdx;
     const captureRules = this.props.captureRules;
-
+    console.log(idx);
     return (
       <div className="parent-form">
         {/* <div className="parent-form-menu">
@@ -38,6 +38,13 @@ export default class FormContainer extends Component {
           <div className="parent-form-right-title">Suits</div>
           {idx === 1 ? <StartingRules handleSubmit={this.handleState} /> : null}
           {idx === 2 ? <PhaseForm handleSubmit={this.handleState} /> : null}
+          {idx === 3 ? (
+            <div>
+              <WinForm handleSubmit={this.handleState} />
+              win rules what to check = {this.state.whatToCheck} when to check ={' '}
+              {this.state.whenToCheck}
+            </div>
+          ) : null}
 
           {/* <div>players and cards populate here, maybe another subComponent</div>
       <div>
