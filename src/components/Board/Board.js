@@ -28,19 +28,45 @@ export default class Board extends Component {
       whenToCheck: '',
     };
     this.handleClick = this.handleClick.bind(this);
+<<<<<<< HEAD
     this.handleWinCondition = this.handleWinCondition.bind(this);
+=======
+    this.endTurn = this.endTurn.bind(this);
+>>>>>>> master
   }
 
   componentDidMount() {
     this.setState({ ...this.props.boardSetup });
   }
 
+  // endTurn will run thru the remaining phases that arent dependent on
+  // click events
+  endTurn() {
+    for (let i = this.state.currentPhaseIdx; i < this.state.turn.length; i++) {
+      if (!validator(this.state.turn[i], this.state.players[this.state.currentPlayerIdx])) {
+        alert(`You can't do that`);
+      }
+    }
+    // next player's turn
+    let currentPlayerIdx = ++this.state.currentPlayerIdx % this.state.players.length;
+    this.setState({ currentPlayerIdx });
+  }
+
   //Handles deck click
   handleClick(target, reqCard, event) {
     event.preventDefault();
-    let phase1 = this.state.turn[0];
-
-    validator(phase1, this.state.players[this.state.currentPlayerIdx], target, reqCard);
+    let currPhase = this.state.turn[this.state.currentPhaseIdx];
+    // if the action is valid, increment currPhaseIdx
+    if (validator(currPhase, this.state.players[this.state.currentPlayerIdx], target, reqCard)) {
+      let currentPhaseIdx = this.state.currentPhaseIdx + 1;
+      let currentPlayerIdx = this.state.currentPlayerIdx;
+      // if the turn is over, update the currentPlayerIndex as well
+      if (currentPhaseIdx >= this.state.turn.length) {
+        currentPhaseIdx = 0;
+        currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
+      }
+      this.setState({ currentPhaseIdx, currentPlayerIdx });
+    }
   }
 
   //handles moving the 'what to check' into the appropriate 'when to check' for win conditions
@@ -85,6 +111,9 @@ export default class Board extends Component {
                 </button>
               );
             })}
+            <button type="button" onClick={this.endTurn}>
+              End Turn
+            </button>
           </div>
           <div
             onClick={event => {
