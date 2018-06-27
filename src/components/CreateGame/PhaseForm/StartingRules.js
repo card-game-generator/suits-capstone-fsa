@@ -25,11 +25,12 @@ export default class StartRules extends Component {
 
   incrementCards() {
     let cards = this.state.cards + 1;
-    this.state.cards < 53
+    let dealtCards = this.state.players * this.state.cards
+    dealtCards < 53
       ? this.setState({
         cards,
       })
-      : alert('No more than 52 cards allowed!');
+      : alert('Bro...we only have 52 cards in the deck.');
   }
 
   decrementPlayers() {
@@ -54,43 +55,44 @@ export default class StartRules extends Component {
     return (
       <div className="starting-rules">
         <div className="starting-rules-form">
-          <div>
-            Players: {this.state.players}
-            <button name="players" onClick={this.incrementPlayers}>
-              +
-          </button>
-            <button name="players" onClick={this.decrementPlayers}>
-              -
-          </button>
+          <div className="starting-rules-options-container">
+            <div className="starting-rules-players">
+              <div className="starting-rules-players-title">Players</div>
+              <div className="starting-rules-players-count">{this.state.players}</div>
+              <div className="starting-rules-players-buttons">
+                <button name="players" onClick={this.incrementPlayers}>+</button>
+                <button name="players" onClick={this.decrementPlayers}>-</button>
+              </div>
+            </div>
+            <div className="starting-rules-cards">
+              <div className="starting-rules-cards-title">Cards</div>
+              <div className="starting-rules-cards-count">{this.state.cards}</div>
+              <div className="starting-rules-cards-buttons">
+                <button name="cards" onClick={this.incrementCards}>+</button>
+                <button name="cards" onClick={this.decrementCards}>-</button>
+              </div>
+            </div>
           </div>
-          <div>
-            Cards: {this.state.cards}
-            <button name="cards" onClick={this.incrementCards}>
-              +
-          </button>
-            <button name="cards" onClick={this.decrementCards}>
-              -
-          </button>
-          </div>
-          <button type="button" onClick={() => handleSubmit({ ...this.state })}>
-            Set initial rules
-        </button>
+
         </div>
 
-        <div className="starting-rules-icons-container">
+        <div className="starting-rules-bottom-container">
           {playerArr.map((player, index) => {
             return (
-              <div key={`${player}${index + 1}`} className="starting-rules-icons">
-                <div className={`starting-rules-${player}${index + 1}`}>{player}{index + 1}</div>
-                {cardArr.map((card, index) => {
-                  return (
-                    <div key={`${card}${index}`} className="starting-rules-card">Card</div>
-                  )
-                })
-                }
+              <div key={`${player}${index + 1}`} className="starting-rules-bottom-icons">
+                <div className={`starting-rules-bottom-icons-${player}${index + 1}`}><i className="fas fa-user-circle med-icon"></i></div>
+                <div className="starting-rules-bottom-icons-cards">
+                  {cardArr.map((card, index) => {
+                    return (
+                      <div key={`${card}${index}`} className="starting-rules-bottom-icons-card"><div className="playing-card med-icon"></div></div>
+                    )
+                  })
+                  }
+                </div>
               </div>
             )
           })}
+          <button className="starting-rules-bottom-button" type="button" onClick={() => handleSubmit({ ...this.state })}>Next</button>
         </div>
       </div>
     );

@@ -23,22 +23,28 @@ export default class FormContainer extends Component {
     let idx = this.state.formIdx;
     return (
       <div className="parent-form">
-        {idx === 1 ? <StartingRules handleSubmit={this.handleState} /> : null}
-        {idx === 2 ? <PhaseForm handleSubmit={this.handleState} /> : null}
+        <div className="parent-form-menu">
+        </div>
+        <div className="parent-form-main">
+          <div className="parent-form-right-title">Suits</div>
+          {idx === 1 ? <StartingRules handleSubmit={this.handleState} /> : null}
+          {idx === 2 ? <PhaseForm handleSubmit={this.handleState} /> : null}
 
-        {/* <div>players and cards populate here, maybe another subComponent</div>
+          {/* <div>players and cards populate here, maybe another subComponent</div>
         <div>
           just here to show local state of parent Number of players {this.state.players} Number of
           cards for each player {this.state.cards}
         </div> */}
-        {this.state.turn.map(phase => {
-          return (
-            <div key={phase}>
-              just a div showing phase {phase.source} {phase.sourceAction} {phase.target}
-              {phase.targetAction}
-            </div>
-          );
-        })}
+          {this.state.turn.map(phase => {
+            return (
+              <div key={phase}>
+                just a div showing phase {phase.source} {phase.sourceAction} {phase.target}
+                {phase.targetAction}
+              </div>
+            );
+          })}
+        </div>
+        <div className="parent-form-next"><i className="fas fa-chevron-right"></i></div>
       </div>
     );
   }

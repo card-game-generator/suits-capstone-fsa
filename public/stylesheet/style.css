@@ -1,0 +1,196 @@
+/* ---------- Font Import ------------ */
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+
+
+/* ---------- Icons ------------ */
+.med-icon {
+    font-size: 5em;
+}
+
+.playing-card {
+    background: #c76262;
+    border-radius: 2px;
+    width: 10px;
+    height: 20px;
+}
+
+/* ---------- Global ------------ */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins';
+}
+
+div#root {
+  height: 100vh;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* ---------- Parent Form ------------ */
+.parent-form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 100vh;
+}
+
+.parent-form-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+.parent-form-next {
+    display: flex;
+    align-items: center;
+    font-size: 10vh;
+    background: #5ece98;
+    border-left: #258e5b 5px solid;
+    color: #fff;
+    padding: 20px;
+}
+
+.parent-form-right-title {
+  font-size: 7em;
+  color: #51cd98;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.starting-rules {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex: auto;
+}
+
+.starting-rules-form {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border-bottom: solid 5px #9bce5e;
+    margin-top: 30px;
+}
+
+.starting-rules-players-title,
+.starting-rules-cards-title {
+  font-size: 2em;
+  font-weight: 200;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+}
+
+.starting-rules-players-count,
+.starting-rules-cards-count {
+  font-size: 4em;
+}
+
+.starting-rules-players-buttons,
+.starting-rules-cards-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    align-items: center;
+}
+
+.starting-rules-players-buttons button,
+.starting-rules-cards-buttons button {
+    border-radius: 50%;
+    font-size: 1em;
+}
+
+.starting-rules-options-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.starting-rules-players,
+.starting-rules-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.starting-rules-icons-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+
+.starting-rules-icons-cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.starting-rules-bottom-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    height: 20vh;
+    background: #294c67;
+    align-items: flex-end;
+}
+
+.starting-rules-bottom-icons {
+    position: relative;
+    bottom: 41%;
+    margin-left: 10vw;
+}
+
+.starting-rules-bottom-icons-card {
+    display: inline-flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-left: 5px;
+}
+
+.starting-rules-bottom-icons-cards {
+    max-width: 95px;
+    margin-top: 20px;
+}
+
+[class^="starting-rules-bottom-icons-player"] {
+    background: #e6e6e6;
+    padding: 9px;
+    border-radius: 50%;
+}
+
+.starting-rules-bottom-button {
+    cursor: pointer;
+    border: 0;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: .7px;
+    font-weight: 800;
+    background: #5ece98;
+    color: #fff;
+    margin-left: auto;
+}
+
+
+/* ---------- Board ------------ */
+
+/* ---------- Card ------------ */
+
+/* ---------- Deck ------------ */
+
+/* ---------- Player ------------ */
+
