@@ -64,6 +64,7 @@ export default class Board extends Component {
   }
 
   render() {
+    console.log(this.state);
     const deck = this.state.deck;
     return (
       //Use BoardContext Provider to pass state to children

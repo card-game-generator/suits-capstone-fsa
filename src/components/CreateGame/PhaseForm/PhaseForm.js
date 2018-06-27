@@ -42,6 +42,7 @@ export default class PhaseForm extends Component {
         { source, sourceAction, target, targetAction, dependency, dependentPhase: dependentObj },
       ],
       childFormShow: false,
+      dependency: true,
     }));
   }
   // Toggles the view for the dependent phase
