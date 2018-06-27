@@ -18,8 +18,8 @@ class Player {
     this.hand = dealtCards;
   }
 
-  changeScore(num) {
-    this.score += num;
+  incrementScore() {
+    this.score++;
   }
 
   // this func is expecting reqCard to be a VALUE (without SUIT)

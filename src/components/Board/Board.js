@@ -21,7 +21,7 @@ export default class Board extends Component {
       turn: [
         {
           target: 'player',
-          targetAction: 'has4OfAKind',
+          targetAction: 'incrementScore',
           source: 'null',
           sourceAction: 'null',
           // if there's a nested phase:
