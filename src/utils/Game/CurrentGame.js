@@ -43,11 +43,26 @@ export function validator(currPhase, source, target, request) {
 }
 
 export function winCheck(currPhase, state) {
+  let winningConditions = {
+    playerHighestScore: () => {
+      let highestScore = 0;
+      let winningPlayer;
+      players.forEach(player => {
+        if (player.score > highestScore) {
+          highestScore = player.score;
+          winningPlayer = player;
+        }
+      });
+      if (!winningPlayer) winningPlayer = 'No one wins!';
+      return winningPlayer;
+    },
+  };
   let { deck, players, currentPlayerIdx, whatToCheck, whenToCheck } = state;
   if (whenToCheck === 'When deck is empty') {
-    if (deck.isEmpty()) {
+    if (deck.size === 0) {
       // run whatToCheck
-      [whatToCheck]();
+      let winner = winningConditions[whatToCheck]();
+      alert('This is the winner: ' + winner.name);
       // then run an endGame function
     }
   }

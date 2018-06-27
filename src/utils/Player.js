@@ -15,6 +15,7 @@ class Player {
     let temp = [...currDeck.cards];
     dealtCards = temp.splice(0, numCards);
     currDeck.cards = temp;
+    currDeck.size -= dealtCards.length;
     this.hand = dealtCards;
   }
 
