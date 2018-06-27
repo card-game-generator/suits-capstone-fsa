@@ -2,40 +2,34 @@ import React, { Component } from 'react';
 import PlayerComp from './Player';
 import DeckComp from './Deck';
 import { validator, createGame } from '../../utils/Game/CurrentGame';
-
-import BoardContext from './BoardContext';
+// import BoardContext, {
+//   currentGame,
+//   turn,
+//   whatToCheck,
+//   whenToCheck,
+// } from './components/Board/BoardContext';
 
 //Import createGame to populate Board state for validator testing
-let currentGame = createGame(4, 7);
-let players = currentGame.players;
-let deck = currentGame.currentDeck;
+// let currentGame = createGame(4, 7);
+// let players = currentGame.players;
+// let deck = currentGame.currentDeck;
 
 export default class Board extends Component {
   constructor() {
     super();
     this.state = {
-      deck,
+      deck: [],
       field: 0,
-      players,
+      players: [],
       currentPlayerIdx: 0,
-      turn: [
-        {
-          target: 'player',
-          targetAction: 'incrementScore',
-          source: 'null',
-          sourceAction: 'null',
-          // if there's a nested phase:
-          // dependentPhase: {
-          //   target: 'player',
-          //   targetAction: 'giveCard',
-          //   source: 'player',
-          //   sourceAction: 'addCard',
-          // },
-        },
-      ],
+      turn: [],
       currentPhaseIdx: 0,
     };
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ ...this.props.boardSetup });
   }
 
   //Handles deck click
@@ -50,7 +44,8 @@ export default class Board extends Component {
     const deck = this.state.deck;
     return (
       //Use BoardContext Provider to pass state to children
-      <BoardContext.Provider value={{ state: this.state }}>
+
+      <div>
         {/* Create game board */}
         <div className="game-board">
           <div className="player-container">
@@ -72,7 +67,7 @@ export default class Board extends Component {
             <DeckComp deck={this.state.deck} />
           </div>
         </div>
-      </BoardContext.Provider>
+      </div>
     );
   }
 }
