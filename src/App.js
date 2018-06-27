@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Board from './components/Board/Board';
-import StartingRules from './components/CreateGame/PhaseForm/StartingRules';
-import WinConditions from './components/CreateGame/PhaseForm/WinConditions';
+// import StartingRules from './components/CreateGame/PhaseForm/StartingRules';
+// import WinConditions from './components/CreateGame/PhaseForm/WinConditions';
 // import logo from './logo.svg';
-import ParentForm from './components/CreateGame/PhaseForm/ParentForm';
+// import ParentForm from './components/CreateGame/PhaseForm/ParentForm';
 import './App.css';
-import PhaseForm from './components/CreateGame/PhaseForm/PhaseForm';
+// import PhaseForm from './components/CreateGame/PhaseForm/PhaseForm';
 // const GameContext = React.createContext();
 
 class App extends Component {

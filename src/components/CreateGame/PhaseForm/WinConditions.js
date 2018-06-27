@@ -48,7 +48,7 @@ export default class WinConditions extends Component {
             <select name="whenToCheck" onChange={this.handleToggle}>
               <option>End of each turn</option>
               <option>End of each phase</option>
-              <option>When Deck is empty</option>
+              <option>When deck is empty</option>
             </select>
           </label>
 

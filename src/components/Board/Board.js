@@ -32,12 +32,26 @@ export default class Board extends Component {
           //   sourceAction: 'addCard',
           // },
         },
+        {
+          target: 'player',
+          targetAction: 'incrementScore',
+          source: 'null',
+          sourceAction: 'null',
+          // if there's a nested phase:
+          // dependentPhase: {
+          //   target: 'player',
+          //   targetAction: 'giveCard',
+          //   source: 'player',
+          //   sourceAction: 'addCard',
+          // },
+        },
       ],
       currentPhaseIdx: 0,
       whatToCheck: 'Player with highest score',
-      whenToCheck: 'End of each turn' 
+      whenToCheck: 'End of each phase',
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleWinCondition = this.handleWinCondition.bind(this);
   }
 
   //Handles deck click
@@ -48,8 +62,39 @@ export default class Board extends Component {
     validator(phase1, this.state.players[this.state.currentPlayerIdx], target, reqCard);
   }
 
+  //handles moving the 'what to check' into the appropriate 'when to check' for win conditions
+  handleWinCondition(event) {
+    if (this.state.whenToCheck === 'End of each turn') {
+      this.setState({
+        turn: [...this.state.turn, { whatToCheck: this.state.whatToCheck }],
+      });
+    }
+
+    if (this.state.whenToCheck === 'End of each phase') {
+      this.state.turn.map(phase => {
+        this.setState(prevState => ({
+          turn: [...prevState.turn, { whatToCheck: this.state.whatToCheck }],
+        }));
+      });
+      // this.state.turn.map(phase => {
+      //   console.log(phase);
+      //   this.setState({
+      //     turn: [{ ...phase, whatToCheck: this.state.whatToCheck }],
+      //   });
+      // });
+    }
+
+    if (this.state.whenToCheck === 'When deck is empty') {
+      if (this.state.deck === 0) {
+        console.log('idk what to do here');
+      }
+    }
+  }
+
   render() {
     const deck = this.state.deck;
+    console.log('STATE', this.state);
+
     return (
       //Use BoardContext Provider to pass state to children
       <BoardContext.Provider value={{ state: this.state }}>
@@ -73,6 +118,9 @@ export default class Board extends Component {
           >
             <DeckComp deck={this.state.deck} />
           </div>
+          <button type="button" onClick={this.handleWinCondition}>
+            Win Condition Check
+          </button>
         </div>
       </BoardContext.Provider>
     );
