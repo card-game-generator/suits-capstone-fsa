@@ -4,9 +4,9 @@ class Deck {
   constructor() {
     this.suits = ['Hearts', 'Spades', 'Clubs', 'Diamonds'];
     this.values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'K', 'Q', 'A'];
-    this.size = 52;
     this.type = 'deck';
     this.cards = [];
+    this.size = 52;
     this.create();
   }
 
