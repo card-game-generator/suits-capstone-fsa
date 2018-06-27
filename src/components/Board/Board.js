@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PlayerComp from './Player';
 import DeckComp from './Deck';
-import { validator, createGame } from '../../utils/Game/CurrentGame';
+import { validator } from '../../utils/Game/CurrentGame';
 // import BoardContext, {
 //   currentGame,
 //   turn,
@@ -24,8 +24,11 @@ export default class Board extends Component {
       currentPlayerIdx: 0,
       turn: [],
       currentPhaseIdx: 0,
+      whatToCheck: '',
+      whenToCheck: '',
     };
     this.handleClick = this.handleClick.bind(this);
+    this.checkWinCondition = this.handleWinCondition.bind(this);
     this.endTurn = this.endTurn.bind(this);
   }
 
@@ -63,9 +66,33 @@ export default class Board extends Component {
     }
   }
 
+  //handles moving the 'what to check' into the appropriate 'when to check' for win conditions
+  checkWinCondition() {
+    if (this.state.whenToCheck === 'End of each turn') {
+      this.setState({
+        turn: [...this.state.turn, { whatToCheck: this.state.whatToCheck }],
+      });
+    }
+
+    if (this.state.whenToCheck === 'End of each phase') {
+      let newTurn = this.state.turn.map(phase => {
+        phase = { ...phase, whatToCheck: this.state.whatToCheck };
+        return phase;
+      });
+      this.setState({ turn: newTurn });
+    }
+
+    if (this.state.whenToCheck === 'When deck is empty') {
+      if (this.state.deck === 0) {
+        console.log('idk what to do here');
+      }
+    }
+  }
+
   render() {
     console.log(this.state);
     const deck = this.state.deck;
+
     return (
       //Use BoardContext Provider to pass state to children
 
@@ -93,6 +120,9 @@ export default class Board extends Component {
           >
             <DeckComp deck={this.state.deck} />
           </div>
+          <button type="button" onClick={this.checkWinCondition}>
+            Win Condition Check
+          </button>
         </div>
       </div>
     );
