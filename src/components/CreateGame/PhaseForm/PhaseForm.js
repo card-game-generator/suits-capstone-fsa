@@ -8,6 +8,7 @@ export default class PhaseForm extends Component {
       sourceAction: '',
       target: '',
       targetAction: '',
+      dependency: true,
       dependentSourceAction: '',
       dependentTargetAction: '',
       childFormShow: false,
@@ -33,19 +34,18 @@ export default class PhaseForm extends Component {
         targetAction: this.state.dependentTargetAction,
       };
     }
-
     //If childFormShow is true, then add dependent actions to object keys
-    let { source, sourceAction, target, targetAction } = this.state;
-    // turn: [...prevState.turn, { source, sourceAction, target, targetAction }],
+    let { source, sourceAction, target, targetAction, dependency } = this.state;
     this.setState(prevState => ({
       turn: [
         ...prevState.turn,
-        { source, sourceAction, target, targetAction, dependentPhase: dependentObj },
+        { source, sourceAction, target, targetAction, dependency, dependentPhase: dependentObj },
       ],
       childFormShow: false,
+      dependency: true,
     }));
   }
-
+  // Toggles the view for the dependent phase
   handleSubmitDependentPhase() {
     this.setState({ childFormShow: !this.state.childFormShow });
   }
@@ -99,11 +99,24 @@ export default class PhaseForm extends Component {
           </label>
 
           {/* These are the dependent action select options, refactor later */}
+
           {this.state.childFormShow && (
             <div className="turn-form-dependent">
               <hr />
               <div className="turn-form-dependent-title">Dependent Form: </div>
-
+              <label>
+                Toggle Dependency
+                <select
+                  onChange={() =>
+                    this.setState({
+                      dependency: !this.state.dependency,
+                    })
+                  }
+                >
+                  <option>true</option>
+                  <option>false</option>
+                </select>
+              </label>
               <label>
                 Source Action
                 <select name="dependentSourceAction" onChange={this.handleToggle}>

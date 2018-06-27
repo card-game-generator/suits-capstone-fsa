@@ -45,7 +45,7 @@ export default class Board extends Component {
       }
     }
     // next player's turn
-    let currentPlayerIdx = ++this.state.currentPlayerIdx % this.state.players.length;
+    let currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
     this.setState({ currentPlayerIdx });
   }
 
@@ -90,6 +90,7 @@ export default class Board extends Component {
   }
 
   render() {
+    console.log(this.state);
     const deck = this.state.deck;
 
     return (
