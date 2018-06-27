@@ -70,9 +70,10 @@ export default class PhaseForm extends Component {
             Source Action
             <select name="sourceAction" onChange={this.handleToggle}>
               <option>null</option>
-              <option>Give Card</option>
-              <option>Add Card</option>
-              <option>Has Four Of A Kind</option>
+              <option>giveCard</option>
+              <option>addCard</option>
+              <option>has4OfAKind</option>
+              <option>incrementScore</option>
             </select>
           </label>
 
@@ -80,7 +81,7 @@ export default class PhaseForm extends Component {
             Target
             <select name="target" onChange={this.handleToggle}>
               <option>null</option>
-              <option>Chosen Player</option>
+              <option>player</option>
               <option>All Players</option>
               <option>Deck</option>
             </select>
@@ -90,9 +91,10 @@ export default class PhaseForm extends Component {
             Target Action
             <select name="targetAction" onChange={this.handleToggle}>
               <option>null</option>
-              <option>Give Card</option>
-              <option>Add Card</option>
-              <option>Has Four Of A Kind</option>
+              <option>giveCard</option>
+              <option>addCard</option>
+              <option>has4OfAKind</option>
+              <option>incrementScore</option>
             </select>
           </label>
 
@@ -106,10 +108,10 @@ export default class PhaseForm extends Component {
                 Source Action
                 <select name="dependentSourceAction" onChange={this.handleToggle}>
                   <option>null</option>
-                  <option>Give Card</option>
-                  <option>Add Card</option>
-
-                  <option>Has Four Of A Kind</option>
+                  <option>giveCard</option>
+                  <option>addCard</option>
+                  <option>has4OfAKind</option>
+                  <option>incrementScore</option>
                 </select>
               </label>
 
@@ -117,9 +119,10 @@ export default class PhaseForm extends Component {
                 Target Action
                 <select name="dependentTargetAction" onChange={this.handleToggle}>
                   <option>null</option>
-                  <option>Give Card</option>
-                  <option>Add Card</option>
-                  <option>Has Four Of A Kind</option>
+                  <option>giveCard</option>
+                  <option>addCard</option>
+                  <option>has4OfAKind</option>
+                  <option>incrementScore</option>
                 </select>
               </label>
             </div>

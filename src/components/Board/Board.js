@@ -26,19 +26,31 @@ export default class Board extends Component {
       currentPhaseIdx: 0,
     };
     this.handleClick = this.handleClick.bind(this);
+    this.endTurn = this.endTurn.bind(this);
   }
 
   componentDidMount() {
     this.setState({ ...this.props.boardSetup });
   }
 
+  // endTurn will run thru the remaining phases that arent dependent on
+  // click events
+  endTurn() {
+    for (let i = this.state.currentPhaseIdx; i < this.state.turn.length; i++) {
+      if (!validator(this.state.turn[i], this.state.players[this.state.currentPlayerIdx])) {
+        alert(`You can't do that`);
+      }
+    }
+  }
+
   //Handles deck click
   handleClick(target, reqCard, event) {
     event.preventDefault();
-    let phase1 = this.state.turn[0];
-
-    if (validator(phase1, this.state.players[this.state.currentPlayerIdx], target, reqCard)) {
-      let currPhase = ++this.state.currentPhaseIdx % this.state.turn.length;
+    let currPhase = this.state.turn[this.state.currentPhaseIdx];
+    // if the action is valid, increment currPhaseIdx
+    if (validator(currPhase, this.state.players[this.state.currentPlayerIdx], target, reqCard)) {
+      let currentPhaseIdx = ++this.state.currentPhaseIdx % this.state.turn.length;
+      this.setState({ currentPhaseIdx });
     }
   }
 
@@ -60,6 +72,9 @@ export default class Board extends Component {
                 </button>
               );
             })}
+            <button type="button" onClick={this.endTurn}>
+              End Turn
+            </button>
           </div>
           <div
             onClick={event => {
