@@ -10,36 +10,26 @@ import { validator, createGame } from '../../utils/Game/CurrentGame';
 // } from './components/Board/BoardContext';
 
 //Import createGame to populate Board state for validator testing
-let currentGame = createGame(4, 7);
-let players = currentGame.players;
-let deck = currentGame.currentDeck;
+// let currentGame = createGame(4, 7);
+// let players = currentGame.players;
+// let deck = currentGame.currentDeck;
 
 export default class Board extends Component {
   constructor() {
     super();
     this.state = {
-      deck,
+      deck: [],
       field: 0,
-      players,
+      players: [],
       currentPlayerIdx: 0,
-      turn: [
-        {
-          target: 'player',
-          targetAction: 'incrementScore',
-          source: 'null',
-          sourceAction: 'null',
-          // if there's a nested phase:
-          // dependentPhase: {
-          //   target: 'player',
-          //   targetAction: 'giveCard',
-          //   source: 'player',
-          //   sourceAction: 'addCard',
-          // },
-        },
-      ],
+      turn: [],
       currentPhaseIdx: 0,
     };
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ ...this.props.boardSetup });
   }
 
   //Handles deck click

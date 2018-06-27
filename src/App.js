@@ -21,7 +21,7 @@ class App extends Component {
     const { players, deck } = currentGame;
     const { whatToCheck, whenToCheck, turn } = obj;
     const boardSetup = { players, deck, turn, whatToCheck, whenToCheck };
-    this.setState({ boardSetup });
+    this.setState({ boardSetup, show: false });
   }
   render() {
     return (
