@@ -29,12 +29,24 @@ button {
     cursor: pointer;
 }
 
+button:focus {
+    outline: none;
+}
+
+
 /* ---------- Parent Form ------------ */
 .parent-form {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     height: 100vh;
+}
+
+.parent-form-main {
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .parent-form-right {
@@ -57,19 +69,28 @@ button {
 }
 
 .parent-form-right-title {
-  font-size: 7em;
-  color: #51cd98;
-  font-weight: 700;
-  text-transform: uppercase;
+    font-size: 7em;
+    color: #51cd98;
+    font-weight: 700;
+    text-transform: uppercase;
+    width: 100%;
+    text-align: center;
+}
+
+.starting-container {
+    flex: auto;
+    display: flex;
+    width: 100%;
 }
 
 .starting-rules {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  flex: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex: auto;
+    width: 100%;
 }
 
 .starting-rules-form {
@@ -79,6 +100,7 @@ button {
     flex-wrap: wrap;
     border-bottom: solid 5px #9bce5e;
     margin-top: 30px;
+    width: 100%;
 }
 
 .starting-rules-players-title,
@@ -87,6 +109,14 @@ button {
   font-weight: 200;
   letter-spacing: .4px;
   text-transform: uppercase;
+}
+
+.starting-rules-players-count-container,
+.starting-rules-cards-count-container
+ {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
 }
 
 .starting-rules-players-count,
@@ -98,15 +128,23 @@ button {
 .starting-rules-cards-buttons {
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
-    flex-direction: row;
+    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    margin-left: 10px;
 }
 
-.starting-rules-players-buttons button,
+.starting-rules-players-buttons button, 
 .starting-rules-cards-buttons button {
-    border-radius: 50%;
-    font-size: 1em;
+    border: none;
+    font-size: 17px;
+    color: #41905f;
+    transition: .1s ease-in-out;
+}
+
+.starting-rules-players-buttons button:hover, 
+.starting-rules-cards-buttons button:hover {
+    font-size: 34px;
 }
 
 .starting-rules-options-container {
@@ -144,14 +182,13 @@ button {
     flex-wrap: wrap;
     justify-content: space-evenly;
     height: 20vh;
-    background: #294c67;
+    background: #1c2227;
     align-items: flex-end;
+    width: 100%;
 }
 
 .starting-rules-bottom-icons {
     position: relative;
-    bottom: 41%;
-    margin-left: 10vw;
 }
 
 .starting-rules-bottom-icons-card {
@@ -177,12 +214,28 @@ button {
     border: 0;
     padding: 10px 20px;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 3em;
     letter-spacing: .7px;
     font-weight: 800;
     background: #5ece98;
     color: #fff;
     margin-left: auto;
+    height: 100%;
+    border-left: 5px solid #2a905f;
+    width: 10vw;
+    transition: .1s ease-in-out;
+}
+
+.starting-rules-bottom-button:hover {
+    font-size: 5em;
+    background: #8dffc8;
+}
+
+.starting-button-next {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
 }
 
 

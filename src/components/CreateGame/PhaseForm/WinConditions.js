@@ -8,7 +8,6 @@ export default class WinConditions extends Component {
       whenToCheck: '',
     };
     this.handleToggle = this.handleToggle.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   //sets the state upon selection of whenToCheck & whatToCheck options
@@ -19,20 +18,16 @@ export default class WinConditions extends Component {
     });
   }
 
-  //TODO: this should be redirecting to a page that reviews all the rules for your game
-  handleSubmit() {
-    console.log('ON SUBMIT', this.state);
-  }
-
   render() {
-    console.log('STATE', this.state);
+    const handleSubmit = this.props.handleSubmit;
+    const { whatToCheck, whenToCheck } = this.state;
     return (
       <div>
         <form>
           <label>
             How do you win?
             <select name="whatToCheck" onChange={this.handleToggle}>
-              <option defaultValue>Player with highest score</option>
+              <option>Player with highest score</option>
               <option>Player with most cards</option>
               <option>Player with least cards</option>
               <option>First with 4 of a kind</option>
@@ -46,9 +41,9 @@ export default class WinConditions extends Component {
           <label>
             When do you check?
             <select name="whenToCheck" onChange={this.handleToggle}>
-              <option defaultValue>End of each turn</option>
+              <option>End of each turn</option>
               <option>End of each phase</option>
-              <option>When Deck is empty</option>
+              <option>When deck is empty</option>
             </select>
           </label>
 
@@ -56,7 +51,12 @@ export default class WinConditions extends Component {
             <strong>When:</strong> {this.state.whenToCheck}
           </div>
         </form>
-        <button type="button" onClick={this.handleSubmit}>
+        <button
+          type="button"
+          onClick={() => {
+            handleSubmit({ whatToCheck, whenToCheck });
+          }}
+        >
           Review your Game
         </button>
       </div>

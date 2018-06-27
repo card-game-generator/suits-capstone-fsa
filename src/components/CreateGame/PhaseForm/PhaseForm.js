@@ -8,21 +8,16 @@ export default class PhaseForm extends Component {
       sourceAction: '',
       target: '',
       targetAction: '',
-      dependentSource: 'self',
+      dependency: true,
       dependentSourceAction: '',
-      dependentTarget: '',
       dependentTargetAction: '',
       childFormShow: false,
     };
     this.handleToggle = this.handleToggle.bind(this);
     this.handleSubmitPhase = this.handleSubmitPhase.bind(this);
-    this.handleClear = this.handleClear.bind(this); //we need to have a pop for turn
     this.handleSubmitDependentPhase = this.handleSubmitDependentPhase.bind(this);
   }
-  //Clears the array of actions for the phase
-  handleClear() {
-    this.setState({ Action: [] });
-  }
+
   //sets source, and target
   handleToggle(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -33,28 +28,28 @@ export default class PhaseForm extends Component {
 
     if (this.state.childFormShow) {
       dependentObj = {
-        source: this.state.dependentSource,
+        source: this.state.source,
         sourceAction: this.state.dependentSourceAction,
-        target: this.state.dependentTarget,
+        target: this.state.target,
         targetAction: this.state.dependentTargetAction,
       };
     }
-
     //If childFormShow is true, then add dependent actions to object keys
-    let { source, sourceAction, target, targetAction } = this.state;
-    // turn: [...prevState.turn, { source, sourceAction, target, targetAction }],
+    let { source, sourceAction, target, targetAction, dependency } = this.state;
     this.setState(prevState => ({
       turn: [
         ...prevState.turn,
-        { source, sourceAction, target, targetAction, dependentPhase: dependentObj },
+        { source, sourceAction, target, targetAction, dependency, dependentPhase: dependentObj },
       ],
       childFormShow: false,
+      dependency: true,
     }));
   }
-
+  // Toggles the view for the dependent phase
   handleSubmitDependentPhase() {
     this.setState({ childFormShow: !this.state.childFormShow });
   }
+  //TODO we might want to implement a button to remove a phase from the turn Array
 
   render() {
     const turn = this.state.turn;
@@ -66,7 +61,7 @@ export default class PhaseForm extends Component {
           <label>
             Source
             <select name="source" onChange={this.handleToggle}>
-              <option defaultValue>null</option>
+              <option>null</option>
               <option>self</option>
             </select>
           </label>
@@ -75,9 +70,10 @@ export default class PhaseForm extends Component {
             Source Action
             <select name="sourceAction" onChange={this.handleToggle}>
               <option>null</option>
-              <option>Chosen Player</option>
-              <option>All Players</option>
-              <option>Deck</option>
+              <option>giveCard</option>
+              <option>addCard</option>
+              <option>has4OfAKind</option>
+              <option>incrementScore</option>
             </select>
           </label>
 
@@ -85,7 +81,7 @@ export default class PhaseForm extends Component {
             Target
             <select name="target" onChange={this.handleToggle}>
               <option>null</option>
-              <option>Chosen Player</option>
+              <option>player</option>
               <option>All Players</option>
               <option>Deck</option>
             </select>
@@ -94,49 +90,52 @@ export default class PhaseForm extends Component {
           <label>
             Target Action
             <select name="targetAction" onChange={this.handleToggle}>
-              <option>Take Card</option>
-              <option>Take Card</option>
+              <option>null</option>
+              <option>giveCard</option>
+              <option>addCard</option>
+              <option>has4OfAKind</option>
+              <option>incrementScore</option>
             </select>
           </label>
 
           {/* These are the dependent action select options, refactor later */}
+
           {this.state.childFormShow && (
             <div className="turn-form-dependent">
               <hr />
               <div className="turn-form-dependent-title">Dependent Form: </div>
               <label>
-                Source
-                <select name="dependentSource" onChange={this.handleToggle}>
-                  <option>null</option>
-                  <option>self</option>
+                Toggle Dependency
+                <select
+                  onChange={() =>
+                    this.setState({
+                      dependency: !this.state.dependency,
+                    })
+                  }
+                >
+                  <option>true</option>
+                  <option>false</option>
                 </select>
               </label>
-
               <label>
                 Source Action
                 <select name="dependentSourceAction" onChange={this.handleToggle}>
                   <option>null</option>
-                  <option>Chosen Player</option>
-                  <option>All Players</option>
-                  <option>Deck</option>
-                </select>
-              </label>
-
-              <label>
-                Target
-                <select name="dependentTarget" onChange={this.handleToggle}>
-                  <option>null</option>
-                  <option>Chosen Player</option>
-                  <option>All Players</option>
-                  <option>Deck</option>
+                  <option>giveCard</option>
+                  <option>addCard</option>
+                  <option>has4OfAKind</option>
+                  <option>incrementScore</option>
                 </select>
               </label>
 
               <label>
                 Target Action
                 <select name="dependentTargetAction" onChange={this.handleToggle}>
-                  <option>Take Card</option>
-                  <option>Take Card</option>
+                  <option>null</option>
+                  <option>giveCard</option>
+                  <option>addCard</option>
+                  <option>has4OfAKind</option>
+                  <option>incrementScore</option>
                 </select>
               </label>
             </div>

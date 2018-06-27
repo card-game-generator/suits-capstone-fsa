@@ -18,13 +18,13 @@ class Player {
     this.hand = dealtCards;
   }
 
-  changeScore(num) {
-    this.score += num;
+  incrementScore() {
+    this.score++;
   }
 
   // this func is expecting reqCard to be a VALUE (without SUIT)
   giveCard(reqCard) {
-    let cardFound = this.hand.find(card => Number(card.value) === Number(reqCard));
+    let cardFound = this.hand.find(card => card.value === String(reqCard));
     if (cardFound) {
       this.hand.splice(this.hand.indexOf(cardFound), 1);
       return cardFound;
@@ -34,6 +34,13 @@ class Player {
 
   addCard(card) {
     this.hand.push(card);
+  }
+
+  // returns true if a player has any card 4x, false otherwise
+  has4OfAKind() {
+    const cardCount = {};
+    this.hand.forEach(card => (cardCount[card] = ++cardCount[card] || 1));
+    return Object.values(cardCount).filter(value => value === 4).length >= 1;
   }
 }
 

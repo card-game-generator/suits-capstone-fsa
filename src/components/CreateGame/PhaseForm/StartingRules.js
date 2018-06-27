@@ -53,47 +53,61 @@ export default class StartRules extends Component {
     let cardArr = [];
     this.state.cards > 0 ? (cardArr = new Array(this.state.cards).fill('card')) : [];
     return (
-      <div className="starting-rules">
-        <div className="starting-rules-form">
-          <div className="starting-rules-options-container">
-            <div className="starting-rules-players">
-              <div className="starting-rules-players-title">Players</div>
-              <div className="starting-rules-players-count">{this.state.players}</div>
-              <div className="starting-rules-players-buttons">
-                <button name="players" onClick={this.incrementPlayers}>+</button>
-                <button name="players" onClick={this.decrementPlayers}>-</button>
-              </div>
-            </div>
-            <div className="starting-rules-cards">
-              <div className="starting-rules-cards-title">Cards</div>
-              <div className="starting-rules-cards-count">{this.state.cards}</div>
-              <div className="starting-rules-cards-buttons">
-                <button name="cards" onClick={this.incrementCards}>+</button>
-                <button name="cards" onClick={this.decrementCards}>-</button>
-              </div>
-            </div>
-          </div>
+      <div className="starting-container">
+        <div className="starting-rules">
+          <div className="starting-rules-form">
+            <div className="starting-rules-options-container">
+              <div className="starting-rules-players">
+                <div className="starting-rules-players-title">Players</div>
+                <div className="starting-rules-players-count-container">
+                  <div className="starting-rules-players-count">{this.state.players}</div>
+                  <div className="starting-rules-players-buttons">
+                    <button name="players" onClick={this.incrementPlayers}><i className="fas fa-sort-up"></i>
 
-        </div>
+</button>
+                    <button name="players" onClick={this.decrementPlayers}><i className="fas fa-sort-down"></i>
 
-        <div className="starting-rules-bottom-container">
-          {playerArr.map((player, index) => {
-            return (
-              <div key={`${player}${index + 1}`} className="starting-rules-bottom-icons">
-                <div className={`starting-rules-bottom-icons-${player}${index + 1}`}><i className="fas fa-user-circle med-icon"></i></div>
-                <div className="starting-rules-bottom-icons-cards">
-                  {cardArr.map((card, index) => {
-                    return (
-                      <div key={`${card}${index}`} className="starting-rules-bottom-icons-card"><div className="playing-card med-icon"></div></div>
-                    )
-                  })
-                  }
+</button>
+                  </div>
                 </div>
               </div>
-            )
-          })}
-          <button className="starting-rules-bottom-button" type="button" onClick={() => handleSubmit({ ...this.state })}>Next</button>
+              <div className="starting-rules-cards">
+                <div className="starting-rules-cards-title">Cards</div>
+                <div className="starting-rules-cards-count-container">
+                  <div className="starting-rules-cards-count">{this.state.cards}</div>
+                  <div className="starting-rules-cards-buttons">
+                    <button name="cards" onClick={this.incrementCards}><i className="fas fa-sort-up"></i>
+
+</button>
+                    <button name="cards" onClick={this.decrementCards}><i className="fas fa-sort-down"></i>
+
+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div className="starting-rules-bottom-container">
+            {playerArr.map((player, index) => {
+              return (
+                <div key={`${player}${index + 1}`} className="starting-rules-bottom-icons">
+                  <div className={`starting-rules-bottom-icons-${player}${index + 1}`}><i className="fas fa-user-circle med-icon"></i></div>
+                  <div className="starting-rules-bottom-icons-cards">
+                    {cardArr.map((card, index) => {
+                      return (
+                        <div key={`${card}${index}`} className="starting-rules-bottom-icons-card"><div className="playing-card med-icon"></div></div>
+                      )
+                    })
+                    }
+                  </div>
+                </div>
+              )
+            })}
+          </div>
         </div>
+        <div className="starting-button-next"><button className="starting-rules-bottom-button fas fa-chevron-right" type="button" onClick={() => handleSubmit({ ...this.state })}></button></div>
       </div>
     );
   }

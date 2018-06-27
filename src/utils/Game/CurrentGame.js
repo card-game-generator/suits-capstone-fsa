@@ -2,37 +2,44 @@ import Deck from '../Deck';
 import Player from '../Player';
 
 export function createGame(numPlayers, numCardsPerPlayer) {
-  const currentDeck = new Deck();
-  currentDeck.shuffle();
+  const deck = new Deck();
+  deck.shuffle();
   const players = [];
 
   for (let i = 1; i <= numPlayers; i++) {
     let player = new Player(`player ${i}`);
-    player.createHand(numCardsPerPlayer, currentDeck);
+    player.createHand(numCardsPerPlayer, deck);
     players.push(player);
   }
-  return { players, currentDeck };
+  return { players, deck };
 }
 
 //expects to check if move/click is valid based on the target value
 export function validator(currPhase, source, target, request) {
-  // check if currPhase.target is equal to event.target.name
+  // SOURCE IS ALWAYS CURRENT PLAYER...
 
-  if (currPhase.target === target.type) {
-    // were expecting currPhase.source to be an instance of a player
-    // currPhase.source
+  let incrementPhase = false;
+  // if theres no target, run the source action by default
+  if (!target) {
+    source[currPhase.sourceAction]();
+    incrementPhase = true;
+    // else make sure that the target is valid
+  } else if (currPhase.target === target.type) {
     const found = target[currPhase.targetAction](request);
-    //We are assuming that the source is the current player
     if (found) {
       source[currPhase.sourceAction](found);
-    }
-
-    // if theres a dependent action, then run the validator again
-    // THIS IS EXPECTING TARGET AND SOURCE TO BE UNCHANGED
-    if (currPhase.dependentPhase) {
-      validator(currPhase.dependentPhase, source, target, request);
+      incrementPhase = true;
     }
   }
+  // if theres a dependent action, then run the validator again
+  // THIS IS EXPECTING TARGET AND SOURCE TO BE UNCHANGED
+  if (currPhase.dependentPhase) {
+    validator(currPhase.dependentPhase, source, target, request);
+    incrementPhase = true;
+  }
+  // the return value of the validator will determine if currPhaseIndex
+  // should be incremented
+  return incrementPhase;
 }
 
 /*
