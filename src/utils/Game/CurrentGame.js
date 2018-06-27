@@ -42,6 +42,17 @@ export function validator(currPhase, source, target, request) {
   return incrementPhase;
 }
 
+export function winCheck(currPhase, state) {
+  let { deck, players, currentPlayerIdx, whatToCheck, whenToCheck } = state;
+  if (whenToCheck === 'When deck is empty') {
+    if (deck.isEmpty()) {
+      // run whatToCheck
+      [whatToCheck]();
+      // then run an endGame function
+    }
+  }
+}
+
 /*
  phaseForm {source:..., target:....., action: []}
 function functionCreator (phase) {
