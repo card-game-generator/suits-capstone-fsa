@@ -41,6 +41,9 @@ export default class Board extends Component {
         alert(`You can't do that`);
       }
     }
+    // next player's turn
+    let currentPlayerIdx = ++this.state.currentPlayerIdx % this.state.players.length;
+    this.setState({ currentPlayerIdx });
   }
 
   //Handles deck click
@@ -49,8 +52,14 @@ export default class Board extends Component {
     let currPhase = this.state.turn[this.state.currentPhaseIdx];
     // if the action is valid, increment currPhaseIdx
     if (validator(currPhase, this.state.players[this.state.currentPlayerIdx], target, reqCard)) {
-      let currentPhaseIdx = ++this.state.currentPhaseIdx % this.state.turn.length;
-      this.setState({ currentPhaseIdx });
+      let currentPhaseIdx = this.state.currentPhaseIdx + 1;
+      let currentPlayerIdx = this.state.currentPlayerIdx;
+      // if the turn is over, update the currentPlayerIndex as well
+      if (currentPhaseIdx >= this.state.turn.length) {
+        currentPhaseIdx = 0;
+        currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
+      }
+      this.setState({ currentPhaseIdx, currentPlayerIdx });
     }
   }
 
