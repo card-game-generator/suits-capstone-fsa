@@ -117,7 +117,6 @@ export default class Board extends Component {
 
   render() {
     const deck = this.state.deck;
-
     return (
       //Use BoardContext Provider to pass state to children
 
@@ -138,12 +137,8 @@ export default class Board extends Component {
               End Turn
             </button>
           </div>
-          <div
-            onClick={event => {
-              this.handleClick(deck, event);
-            }}
-          >
-            <DeckComp deck={this.state.deck} />
+          <div className={'deck'}>
+            <DeckComp deck={deck} submitHandler={this.handleClick} />
           </div>
           <button type="button" onClick={this.checkWinCondition}>
             Win Condition Check

@@ -9,7 +9,6 @@ export default class Player extends Component {
       reqCard: 0,
     };
     this.handleChange = this.handleChange.bind(this);
-    // this.handleClick = this.handleClick.bind(this);
   }
   //TODO
   //Handles player click

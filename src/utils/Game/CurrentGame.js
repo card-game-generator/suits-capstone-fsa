@@ -1,8 +1,10 @@
 import Deck from '../Deck';
 import Player from '../Player';
+import Field from '../Field';
 
 export function createGame(numPlayers, numCardsPerPlayer) {
   const deck = new Deck();
+  const field = new Field();
   deck.shuffle();
   const players = [];
 
@@ -11,7 +13,7 @@ export function createGame(numPlayers, numCardsPerPlayer) {
     player.createHand(numCardsPerPlayer, deck);
     players.push(player);
   }
-  return { players, deck };
+  return { players, deck, field };
 }
 
 //expects to check if move/click is valid based on the target value
