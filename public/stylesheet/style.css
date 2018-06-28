@@ -42,6 +42,120 @@ button:focus {
     height: 100vh;
 }
 
+.parent-form-menu > [class^="parent-form-"] {
+    border-bottom: 2px solid #464646;
+}
+
+.parent-form-title-container {
+    display: flex;
+    align-items: center;
+}
+
+.parent-form-title-container .parent-form-menu-icon {
+    color: #5ece98;
+    font-size: 29px;
+}
+
+.parent-form-menu-section-title-container {
+    display: flex;
+    align-items: center;
+    color: #ababab;
+}
+
+.parent-form-menu-title {
+    margin-left: 10px;
+    padding: 20px 20px 20px 0px;
+}
+
+.parent-form-menu-section-title-container .parent-form-menu-icon {
+    color: #b3b3b3;
+}
+
+.parent-form-menu-section-title-container .parent-form-menu-icon {
+    font-size: 20px;
+}
+
+.parent-form .parent-form-menu-section-title {
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.parent-form-menu-icon {
+    width: 40px;
+    text-align: center;
+}
+
+.parent-form-menu-title {
+    margin-left: 10px;
+}
+
+.parent-form-game-title {
+    font-size: 29px;
+    color: #51cd98;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-left: 18px;
+}
+
+.parent-form-game-title {
+    font-size: 2em;
+    color: #51cd98;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-left: 10px;
+}
+
+.menu-box.bottom-border {
+    border-bottom: 2px solid #464646;
+}
+
+.menu-box {
+    padding: 20px;
+}
+
+.parent-form-menu-phases, 
+.parent-form-menu-options {
+    font-size: 13px;
+    letter-spacing: .5px;
+    font-weight: 200;
+}
+
+.parent-form-menu-phase-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.source-title {
+    color: #2fe48d;
+}
+
+.parent-form-menu-phase-icon {
+    width: 40px;
+    text-align: center;
+    font-size: 19px;
+    color: #b3b3b3;
+    font-weight: 900;
+}
+
+.parent-form .parent-form-menu-section-container {
+    background: #1c2228;
+}
+
+.parent-form-menu-options.phase-container:not(:first-child) {
+    margin-top: 40px;
+}
+
+.parent-form-menu {
+    position: absolute;
+    background: #2d2d2d;
+    color: #ababab;
+    top: 0;
+    bottom: 0;
+}
+
 .parent-form-main {
     width: 90vw;
     display: flex;
