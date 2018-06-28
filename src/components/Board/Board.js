@@ -2,17 +2,6 @@ import React, { Component } from 'react';
 import PlayerComp from './Player';
 import DeckComp from './Deck';
 import { validator, winCheck } from '../../utils/Game/CurrentGame';
-// import BoardContext, {
-//   currentGame,
-//   turn,
-//   whatToCheck,
-//   whenToCheck,
-// } from './components/Board/BoardContext';
-
-//Import createGame to populate Board state for validator testing
-// let currentGame = createGame(4, 7);
-// let players = currentGame.players;
-// let deck = currentGame.currentDeck;
 
 export default class Board extends Component {
   constructor() {
@@ -65,9 +54,6 @@ export default class Board extends Component {
   }
 
   //Handles deck click
-  // THIS.CURRENTSTATE IS DEFINED IN THE CONSTRUCTOR, WE STILL NEED TO INCREMENT
-  // EVENTUALLY MAYBE HANDLE CURRENTPHASE IN A VAR INSTEAD OF IN THE STATE....
-  // MIGHT NOT EVEN NEED TO CALL IT IN THE VALIDATOR
   handleClick(target, reqCard, event) {
     event.preventDefault();
     if (
@@ -98,8 +84,6 @@ export default class Board extends Component {
 
       // if validator returned false, then check if theres a dependent
       // phase and set the currPhase to be that dependent phase
-      // TODO: take into account that sometimes the dependency will
-      // be set to true... ALSO....does that even make sense?!?
     } else {
       // need to account for going to the next state then
       if (this.state.currPhase.dependentPhase && !this.state.currPhase.dependency) {
