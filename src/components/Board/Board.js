@@ -27,12 +27,20 @@ export default class Board extends Component {
     // have to await the setstate so that then the currPhase can be added on the state!
     await this.setState({ ...this.props.boardSetup });
     await this.setState({ currPhase: this.state.turn[this.state.currentPhaseIdx] });
+    console.log(this.state);
   }
 
   // endTurn will run thru the remaining phases that arent dependent on
   // click events
+  // END TURN CANT WORK IF THERE ARE EVENTS THAT NEED TARGETS THAT HAVENT BEEN RUN
   endTurn() {
     for (let i = this.state.currentPhaseIdx; i < this.state.turn.length; i++) {
+      // right now the phases are returning the STRING NULL -_- so the below if
+      // statement wont work unless were strictly checking !== null
+      if (this.state.turn[i].target !== 'null') {
+        this.setState({ currentPhaseIdx: i });
+        break;
+      }
       if (this.state.turn[i] === this.state.currPhase) {
         if (!validator(this.state.turn[i], this.state.players[this.state.currentPlayerIdx])) {
           alert(`You can't do that`);
@@ -89,6 +97,20 @@ export default class Board extends Component {
       // need to account for going to the next state then
       if (this.state.currPhase.dependentPhase && !this.state.currPhase.dependency) {
         this.setState({ currPhase: this.state.currPhase.dependentPhase });
+      } else {
+        let currentPhaseIdx = this.state.currentPhaseIdx + 1;
+        let currentPlayerIdx = this.state.currentPlayerIdx;
+        // if the turn is over, update the currentPlayerIndex as well
+        if (currentPhaseIdx >= this.state.turn.length) {
+          currentPhaseIdx = 0;
+          currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
+        }
+        this.setState({
+          currentPhaseIdx,
+          currentPlayerIdx,
+          currPhase: this.state.turn[currentPhaseIdx],
+        });
+        winCheck(this.state.currPhase, this.state);
       }
     }
   }
@@ -135,7 +157,11 @@ export default class Board extends Component {
                 </button>
               );
             })}
-            <button type="button" onClick={this.endTurn}>
+            <button
+              type="button"
+              onClick={this.endTurn}
+              disabled={this.state.currPhase.target !== 'null'}
+            >
               End Turn
             </button>
           </div>
