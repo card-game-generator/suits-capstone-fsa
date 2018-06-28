@@ -34,7 +34,7 @@ button:focus {
 }
 
 .hidden {
-    margin: -211px;
+    left: -211px !important;
 }
 
 .hamburger-button {
@@ -170,6 +170,7 @@ button:focus {
     color: #ababab;
     top: 0;
     bottom: 0;
+    left: 0;
     transition: .3s ease-in-out;
 }
 
