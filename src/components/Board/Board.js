@@ -58,7 +58,6 @@ export default class Board extends Component {
   // EVENTUALLY MAYBE HANDLE CURRENTPHASE IN A VAR INSTEAD OF IN THE STATE....
   // MIGHT NOT EVEN NEED TO CALL IT IN THE VALIDATOR
   async handleClick(target, reqCard, event) {
-    console.log(this.state.currPhase);
     event.preventDefault();
     // let currPhase = this.state.turn[this.state.currentPhaseIdx];
     // if the action is valid, increment currPhaseIdx
@@ -88,9 +87,8 @@ export default class Board extends Component {
       // TODO: take into account that sometimes the dependency will
       // be set to true... ALSO....does that even make sense?!?
     } else {
-      console.log('you running?');
       await this.setState({ currPhase: this.state.currPhase.dependentPhase });
-      console.log('new currPhase: ', this.state.currPhase);
+    
     }
   }
 
