@@ -53,16 +53,20 @@ export default class Board extends Component {
           alert(`You can't do that`);
         }
       }
+      if (i === this.state.turn.length - 1) {
+        let currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
+        this.setState({ currentPlayerIdx, currentPhaseIdx: 0, currPhase: this.state.turn[0] });
+        winCheck(this.state.turn[this.state.currentPhaseIdx], this.state);
+      }
     }
+
     // next player's turn
-    let currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
-    this.setState({ currentPlayerIdx });
-    winCheck(this.state.turn[this.state.currentPhaseIdx], this.state);
   }
 
   //Handles deck click
   handleClick(target, reqCard, event) {
     event.preventDefault();
+    console.log('TARGET', target, 'REQCARD', reqCard, 'EVENT', event);
     if (
       validator(
         this.state.currPhase,
@@ -140,6 +144,9 @@ export default class Board extends Component {
     const deck = this.state.deck;
     const field = this.state.field;
     console.log('CURRENT PLAYER', this.state.players[this.state.currentPlayerIdx]);
+    console.log('STATE IN RENDER', this.state);
+    console.log('CURRPHASE', this.state.currPhase);
+    console.log('CURRPHASE IDX', this.state.currentPhaseIdx);
     return (
       //Use BoardContext Provider to pass state to children
 
