@@ -9,7 +9,6 @@ export default class Card extends Component {
   render() {
     let player = this.props.player || {};
     let field = this.props.field || {};
-    console.log(player, field);
     return (
       <div>
         {player.isCurrentPlayer
