@@ -33,6 +33,22 @@ button:focus {
     outline: none;
 }
 
+.hidden {
+    display: none;
+}
+
+.hamburger-button {
+    font-size: 28px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border: none;
+}
+
+.menu-open {
+    margin-left: 211px;
+}
+
 
 /* ---------- Parent Form ------------ */
 .parent-form {

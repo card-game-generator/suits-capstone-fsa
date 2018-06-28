@@ -24,6 +24,11 @@ export default class FormContainer extends Component {
   }
   handleGameStart() { }
 
+  showMenu() {
+    document.getElementById("hamburger-menu").classList.toggle('hidden');
+    document.getElementById("hamburger-button").classList.toggle('menu-open');
+  }
+
   render() {
     let idx = this.state.formIdx;
     const captureRules = this.props.captureRules;
@@ -32,7 +37,7 @@ export default class FormContainer extends Component {
     return (
       <div className="parent-form">
 
-        <div className="parent-form-menu">
+        <div id="hamburger-menu" className="parent-form-menu hidden">
 
           <div className="parent-form-title-container">
             <div className="parent-form-menu-icon"><i className="fas fa-heart"></i></div>
@@ -108,6 +113,8 @@ export default class FormContainer extends Component {
           </div>
 
         </div>
+
+        <button id="hamburger-button" onClick={this.showMenu} className="hamburger-button"><i className="fas fa-bars"></i></button>
 
 
         <div className="parent-form-main">
