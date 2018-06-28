@@ -1,24 +1,13 @@
 import React, { Component } from 'react';
 import PlayerComp from './Player';
 import DeckComp from './Deck';
+import FieldComp from './Field';
 import { validator, winCheck } from '../../utils/Game/CurrentGame';
-// import BoardContext, {
-//   currentGame,
-//   turn,
-//   whatToCheck,
-//   whenToCheck,
-// } from './components/Board/BoardContext';
-
-//Import createGame to populate Board state for validator testing
-// let currentGame = createGame(4, 7);
-// let players = currentGame.players;
-// let deck = currentGame.currentDeck;
-
 export default class Board extends Component {
   constructor() {
     super();
     this.state = {
-      deck: [],
+      deck: { cards: [] },
       field: 0,
       players: [],
       currentPlayerIdx: 0,
@@ -37,14 +26,33 @@ export default class Board extends Component {
     // have to await the setstate so that then the currPhase can be added on the state!
     await this.setState({ ...this.props.boardSetup });
     await this.setState({ currPhase: this.state.turn[this.state.currentPhaseIdx] });
+    console.log(this.state);
   }
 
   // endTurn will run thru the remaining phases that arent dependent on
   // click events
+  // END TURN CANT WORK IF THERE ARE EVENTS THAT NEED TARGETS THAT HAVENT BEEN RUN
   endTurn() {
     for (let i = this.state.currentPhaseIdx; i < this.state.turn.length; i++) {
-      if (!validator(this.state.turn[i], this.state.players[this.state.currentPlayerIdx])) {
-        alert(`You can't do that`);
+      // right now the phases are returning the STRING NULL -_- so the below if
+      // statement wont work unless were strictly checking !== null
+      if (this.state.turn[i].target !== 'null') {
+        this.setState({ currentPhaseIdx: i });
+        break;
+      }
+      if (this.state.turn[i] === this.state.currPhase) {
+        if (!validator(this.state.turn[i], this.state.players[this.state.currentPlayerIdx])) {
+          alert(`You can't do that`);
+        }
+      } else {
+        if (
+          !validator(
+            this.state.turn[i].dependentPhase,
+            this.state.players[this.state.currentPlayerIdx]
+          )
+        ) {
+          alert(`You can't do that`);
+        }
       }
     }
     // next player's turn
@@ -54,16 +62,8 @@ export default class Board extends Component {
   }
 
   //Handles deck click
-  // THIS.CURRENTSTATE IS DEFINED IN THE CONSTRUCTOR, WE STILL NEED TO INCREMENT
-  // EVENTUALLY MAYBE HANDLE CURRENTPHASE IN A VAR INSTEAD OF IN THE STATE....
-  // MIGHT NOT EVEN NEED TO CALL IT IN THE VALIDATOR
-  async handleClick(target, reqCard, event) {
+  handleClick(target, reqCard, event) {
     event.preventDefault();
-    // let currPhase = this.state.turn[this.state.currentPhaseIdx];
-    // if the action is valid, increment currPhaseIdx
-
-    // if the validator returns truthy, then set the currPhase to be the
-    // next phase in the turn arr
     if (
       validator(
         this.state.currPhase,
@@ -72,23 +72,45 @@ export default class Board extends Component {
         reqCard
       )
     ) {
-      let currentPhaseIdx = this.state.currentPhaseIdx + 1;
-      let currentPlayerIdx = this.state.currentPlayerIdx;
-      // if the turn is over, update the currentPlayerIndex as well
-      if (currentPhaseIdx >= this.state.turn.length) {
-        currentPhaseIdx = 0;
-        currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
+      if (this.state.currPhase.dependentPhase && this.state.currPhase.dependency) {
+        this.setState({ currPhase: this.state.currPhase.dependentPhase });
+      } else {
+        let currentPhaseIdx = this.state.currentPhaseIdx + 1;
+        let currentPlayerIdx = this.state.currentPlayerIdx;
+        // if the turn is over, update the currentPlayerIndex as well
+        if (currentPhaseIdx >= this.state.turn.length) {
+          currentPhaseIdx = 0;
+          currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
+        }
+        this.setState({
+          currentPhaseIdx,
+          currentPlayerIdx,
+          currPhase: this.state.turn[currentPhaseIdx],
+        });
+        winCheck(this.state.currPhase, this.state);
       }
-      this.setState({ currentPhaseIdx, currentPlayerIdx });
-      winCheck(this.state.currPhase, this.state);
 
       // if validator returned false, then check if theres a dependent
       // phase and set the currPhase to be that dependent phase
-      // TODO: take into account that sometimes the dependency will
-      // be set to true... ALSO....does that even make sense?!?
     } else {
-      await this.setState({ currPhase: this.state.currPhase.dependentPhase });
-    
+      // need to account for going to the next state then
+      if (this.state.currPhase.dependentPhase && !this.state.currPhase.dependency) {
+        this.setState({ currPhase: this.state.currPhase.dependentPhase });
+      } else {
+        let currentPhaseIdx = this.state.currentPhaseIdx + 1;
+        let currentPlayerIdx = this.state.currentPlayerIdx;
+        // if the turn is over, update the currentPlayerIndex as well
+        if (currentPhaseIdx >= this.state.turn.length) {
+          currentPhaseIdx = 0;
+          currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
+        }
+        this.setState({
+          currentPhaseIdx,
+          currentPlayerIdx,
+          currPhase: this.state.turn[currentPhaseIdx],
+        });
+        winCheck(this.state.currPhase, this.state);
+      }
     }
   }
 
@@ -117,7 +139,7 @@ export default class Board extends Component {
 
   render() {
     const deck = this.state.deck;
-
+    const field = this.state.field;
     return (
       //Use BoardContext Provider to pass state to children
 
@@ -134,20 +156,23 @@ export default class Board extends Component {
                 </button>
               );
             })}
-            <button type="button" onClick={this.endTurn}>
+            <button
+              type="button"
+              onClick={this.endTurn}
+              disabled={this.state.currPhase.target !== 'null'}
+            >
               End Turn
             </button>
           </div>
-          <div
-            onClick={event => {
-              this.handleClick(deck, event);
-            }}
-          >
-            <DeckComp deck={this.state.deck} />
+          <div className={'deck'}>
+            <DeckComp deck={deck} submitHandler={this.handleClick} />
           </div>
           <button type="button" onClick={this.checkWinCondition}>
             Win Condition Check
           </button>
+        </div>
+        <div>
+          <FieldComp field={field} submitHandler={this.handleClick} />
         </div>
       </div>
     );

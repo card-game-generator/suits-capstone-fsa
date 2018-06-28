@@ -85,7 +85,7 @@ export default class PhaseForm extends Component {
               <option>null</option>
               <option>player</option>
               <option>All Players</option>
-              <option>Deck</option>
+              <option>deck</option>
             </select>
           </label>
 
@@ -145,7 +145,7 @@ export default class PhaseForm extends Component {
                   <option>null</option>
                   <option>player</option>
                   <option>All Players</option>
-                  <option>Deck</option>
+                  <option>deck</option>
                 </select>
               </label>
               <label>

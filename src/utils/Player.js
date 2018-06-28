@@ -8,14 +8,14 @@ class Player {
   }
 
   createHand(numCards, currDeck) {
+    console.log(currDeck);
     let dealtCards = [];
-    if (currDeck.size < numCards) {
+    if (currDeck.getSize() < numCards) {
       throw new Error('Not enough cards');
     }
     let temp = [...currDeck.cards];
     dealtCards = temp.splice(0, numCards);
     currDeck.cards = temp;
-    currDeck.size -= dealtCards.length;
     this.hand = dealtCards;
   }
 
@@ -37,7 +37,7 @@ class Player {
     this.hand.push(card);
   }
 
-  // returns true if a player has any card 4x, false otherwise
+  // returns true if a player has any card 4x, false otherwise. yeet
   has4OfAKind() {
     const cardCount = {};
     this.hand.forEach(card => (cardCount[card] = ++cardCount[card] || 1));
