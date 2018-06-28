@@ -4,7 +4,6 @@ import { createGame } from './utils/Game/CurrentGame';
 import ParentForm from './components/CreateGame/PhaseForm/ParentForm';
 import './App.css';
 
-
 class App extends Component {
   constructor() {
     super();
@@ -16,9 +15,9 @@ class App extends Component {
   }
   getGameObj(obj) {
     const currentGame = createGame(obj.players, obj.cards);
-    const { players, deck } = currentGame;
+    const { players, deck, field } = currentGame;
     const { whatToCheck, whenToCheck, turn } = obj;
-    const boardSetup = { players, deck, turn, whatToCheck, whenToCheck };
+    const boardSetup = { players, deck, field, turn, whatToCheck, whenToCheck };
     this.setState({ boardSetup, show: false });
   }
   render() {
