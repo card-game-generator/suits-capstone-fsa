@@ -43,10 +43,11 @@ button:focus {
     top: 20px;
     left: 20px;
     border: none;
+    transition: .2s ease-in;
 }
 
 .menu-open {
-    margin-left: 211px;
+    left: 231px !important;
 }
 
 
@@ -171,7 +172,7 @@ button:focus {
     top: 0;
     bottom: 0;
     left: 0;
-    transition: .3s ease-in-out;
+    transition: .2s ease-in;
 }
 
 .parent-form-main {
