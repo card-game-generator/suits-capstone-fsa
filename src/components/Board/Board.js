@@ -58,6 +58,7 @@ export default class Board extends Component {
   // EVENTUALLY MAYBE HANDLE CURRENTPHASE IN A VAR INSTEAD OF IN THE STATE....
   // MIGHT NOT EVEN NEED TO CALL IT IN THE VALIDATOR
   async handleClick(target, reqCard, event) {
+    console.log(target, 'target!');
     event.preventDefault();
     // let currPhase = this.state.turn[this.state.currentPhaseIdx];
     // if the action is valid, increment currPhaseIdx
@@ -88,7 +89,6 @@ export default class Board extends Component {
       // be set to true... ALSO....does that even make sense?!?
     } else {
       await this.setState({ currPhase: this.state.currPhase.dependentPhase });
-    
     }
   }
 
@@ -117,7 +117,6 @@ export default class Board extends Component {
 
   render() {
     const deck = this.state.deck;
-
     return (
       //Use BoardContext Provider to pass state to children
 
@@ -138,12 +137,8 @@ export default class Board extends Component {
               End Turn
             </button>
           </div>
-          <div
-            onClick={event => {
-              this.handleClick(deck, event);
-            }}
-          >
-            <DeckComp deck={this.state.deck} />
+          <div className={'deck'}>
+            <DeckComp deck={deck} submitHandler={this.handleClick} />
           </div>
           <button type="button" onClick={this.checkWinCondition}>
             Win Condition Check
