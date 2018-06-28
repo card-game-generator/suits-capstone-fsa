@@ -7,7 +7,7 @@ export default class Board extends Component {
   constructor() {
     super();
     this.state = {
-      deck: [],
+      deck: { cards: [] },
       field: 0,
       players: [],
       currentPlayerIdx: 0,

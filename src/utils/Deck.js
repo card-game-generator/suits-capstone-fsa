@@ -6,7 +6,7 @@ class Deck {
     this.values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'K', 'Q', 'A'];
     this.type = 'deck';
     this.cards = [];
-    this.size = 52;
+    this.size = this.cards.length;
     this.create();
   }
 
@@ -43,12 +43,14 @@ class Deck {
     });
   }
 
-  show() {
-    return this.cards;
+  getSize() {
+    return this.cards.length;
   }
 
-  size() {
-    return this.size;
+  giveCard() {
+    if (this.getSize() > 0) {
+      return this.cards.shift();
+    } else return false;
   }
 }
 

@@ -16,7 +16,7 @@ export default class Card extends Component {
     let deck = this.props.deck;
     return (
       <div className="deck-container">
-        Hi I'm the deck, I have <p>{deck.size} cards</p>
+        Hi I'm the deck, I have <p>{deck.cards.length} cards</p>
         <form onSubmit={event => this.props.submitHandler(deck, this.state.reqCard, event)}>
           <label>Request Card: </label>
           <select onChange={this.handleChange}>

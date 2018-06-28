@@ -46,13 +46,13 @@ export function winCheck(currPhase, state) {
           winningPlayer = player;
         }
       });
-      if (!winningPlayer) winningPlayer.name = 'No one wins!';
+      if (!winningPlayer) winningPlayer = 'No one wins!';
       return winningPlayer;
     },
   };
   let { deck, players, currentPlayerIdx, whatToCheck, whenToCheck } = state;
   if (whenToCheck === 'When deck is empty') {
-    if (deck.size === 0) {
+    if (deck.cards.length === 0) {
       // run whatToCheck
       let winner = winningConditions[whatToCheck]();
       alert('This is the winner: ' + winner.name);
