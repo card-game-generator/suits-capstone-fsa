@@ -66,7 +66,6 @@ export default class Board extends Component {
   //Handles deck click
   handleClick(target, reqCard, event) {
     event.preventDefault();
-    console.log('TARGET', target, 'REQCARD', reqCard, 'EVENT', event);
     if (
       validator(
         this.state.currPhase,
