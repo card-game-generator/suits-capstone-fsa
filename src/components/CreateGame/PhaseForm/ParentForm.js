@@ -27,6 +27,7 @@ export default class FormContainer extends Component {
   render() {
     let idx = this.state.formIdx;
     const captureRules = this.props.captureRules;
+    console.log(this.state)
 
     return (
       <div className="parent-form">
@@ -40,26 +41,74 @@ export default class FormContainer extends Component {
 
           <div className="parent-form-menu-section-title-container">
             <div className="parent-form-menu-icon"><i className="fas fa-cog"></i></div>
-            <div className="parent-form-menu-title">Game Overview</div>
+            <div className="parent-form-menu-title">Starting Overview</div>
           </div>
 
           <div className="parent-form-menu-section-container">
-            <div className="parent-form-menu-section-title">Starting Options</div>
-            <div className="parent-form-menu-options">
-              <div className="parent-form-menu-players">Players: {this.state.players}</div>
-              <div className="parent-form-menu-cards">Cards: {this.state.players}</div>
+            <div className="menu-box">
+              <div className="parent-form-menu-section-title">Options</div>
+              <div className="parent-form-menu-options">
+                <div className="parent-form-menu-players">Players: {this.state.players}</div>
+                <div className="parent-form-menu-cards">Cards: {this.state.players}</div>
+              </div>
             </div>
           </div>
 
+          {this.state.turn.length !== 0 && <div className="parent-form-menu-section-title-container">
+            <div className="parent-form-menu-icon"><i className="fas fa-cog"></i></div>
+            <div className="parent-form-menu-title">Turn</div>
+          </div>}
+
           <div className="parent-form-menu-section-container">
-            <div className="parent-form-menu-section-title">Turn Options</div>
-            <div className="parent-form-menu-options">
-              <div className="parent-form-menu-players">Players: {this.state.players}</div>
-              <div className="parent-form-menu-cards">Cards: {this.state.players}</div>
-            </div>
+            {this.state.turn.map((phase, index) => {
+              return (
+                <div key={`${phase.source}${index}`} className="menu-box bottom-border">
+                  <div className="parent-form-menu-options phase-container">
+                    <div className="parent-form-menu-section-title">Phase {index + 1}</div>
+                    <div className="parent-form-menu-phases">
+
+
+                      <div className="parent-form-menu-phase-content phase-content">
+                        <div className="parent-form-menu-source source-title">Source</div>
+                        <div className="parent-form-menu-phase-group">
+                          <div className="parent-form-menu-phase-icon">&#8627;</div>
+                          <div className="parent-form-menu-source-content source-content">{phase.source}</div>
+                        </div>
+                      </div>
+
+                      <div className="parent-form-menu-phase-content phase-content">
+                        <div className="parent-form-menu-source-action source-title">Source Action</div>
+                        <div className="parent-form-menu-phase-group">
+                          <div className="parent-form-menu-phase-icon">&#8627;</div>
+                          <div className="parent-form-menu-source-content source-content">{phase.sourceAction}</div>
+                        </div>
+                      </div>
+
+                      <div className="parent-form-menu-phase-content phase-content">
+                        <div className="parent-form-menu-target source-title">Target</div>
+                        <div className="parent-form-menu-phase-group">
+                          <div className="parent-form-menu-phase-icon">&#8627;</div>
+                          <div className="parent-form-menu-source-content source-content">{phase.target}</div>
+                        </div>
+                      </div>
+
+                      <div className="parent-form-menu-phase-content phase-content">
+                        <div className="parent-form-menu-target-action source-title">Target Action</div>
+                        <div className="parent-form-menu-phase-group">
+                          <div className="parent-form-menu-phase-icon">&#8627;</div>
+                          <div className="parent-form-menu-source-content source-content">{phase.targetAction}</div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
           </div>
 
         </div>
+
 
         <div className="parent-form-main">
           <div className="parent-form-right-title">Suits</div>

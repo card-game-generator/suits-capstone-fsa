@@ -44,7 +44,6 @@ button:focus {
 
 .parent-form-menu > [class^="parent-form-"] {
     border-bottom: 2px solid #464646;
-    padding-left: 10px;
 }
 
 .parent-form-title-container {
@@ -79,6 +78,8 @@ button:focus {
 .parent-form .parent-form-menu-section-title {
     color: #ffffff;
     margin-bottom: 30px;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .parent-form-menu-icon {
@@ -106,9 +107,45 @@ button:focus {
     margin-left: 10px;
 }
 
-.parent-form .parent-form-menu-section-container {
+.menu-box.bottom-border {
+    border-bottom: 2px solid #464646;
+}
+
+.menu-box {
     padding: 20px;
+}
+
+.parent-form-menu-phases, 
+.parent-form-menu-options {
+    font-size: 13px;
+    letter-spacing: .5px;
+    font-weight: 200;
+}
+
+.parent-form-menu-phase-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.source-title {
+    color: #2fe48d;
+}
+
+.parent-form-menu-phase-icon {
+    width: 40px;
+    text-align: center;
+    font-size: 19px;
+    color: #b3b3b3;
+    font-weight: 900;
+}
+
+.parent-form .parent-form-menu-section-container {
     background: #1c2228;
+}
+
+.parent-form-menu-options.phase-container:not(:first-child) {
+    margin-top: 40px;
 }
 
 .parent-form-menu {
