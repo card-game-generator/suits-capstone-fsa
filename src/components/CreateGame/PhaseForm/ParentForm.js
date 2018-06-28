@@ -22,7 +22,7 @@ export default class FormContainer extends Component {
     let formIdx = this.state.formIdx + 1;
     this.setState({ ...stateChanges, formIdx });
   }
-  handleGameStart() {}
+  handleGameStart() { }
 
   render() {
     let idx = this.state.formIdx;
@@ -30,10 +30,37 @@ export default class FormContainer extends Component {
 
     return (
       <div className="parent-form">
-        {/* <div className="parent-form-menu">
-          <div className="parent-form-menu-players">Players: {this.state.players}</div>
-          <div className="parent-form-menu-cards">Cards: {this.state.players}</div>
-        </div> */}
+
+        <div className="parent-form-menu">
+
+          <div className="parent-form-title-container">
+            <div className="parent-form-menu-icon"><i className="fas fa-heart"></i></div>
+            <div className="parent-form-game-title">Suits</div>
+          </div>
+
+          <div className="parent-form-menu-section-title-container">
+            <div className="parent-form-menu-icon"><i className="fas fa-cog"></i></div>
+            <div className="parent-form-menu-title">Game Overview</div>
+          </div>
+
+          <div className="parent-form-menu-section-container">
+            <div className="parent-form-menu-section-title">Starting Options</div>
+            <div className="parent-form-menu-options">
+              <div className="parent-form-menu-players">Players: {this.state.players}</div>
+              <div className="parent-form-menu-cards">Cards: {this.state.players}</div>
+            </div>
+          </div>
+
+          <div className="parent-form-menu-section-container">
+            <div className="parent-form-menu-section-title">Turn Options</div>
+            <div className="parent-form-menu-options">
+              <div className="parent-form-menu-players">Players: {this.state.players}</div>
+              <div className="parent-form-menu-cards">Cards: {this.state.players}</div>
+            </div>
+          </div>
+
+        </div>
+
         <div className="parent-form-main">
           <div className="parent-form-right-title">Suits</div>
           {idx === 1 ? <StartingRules handleSubmit={this.handleState} /> : null}
