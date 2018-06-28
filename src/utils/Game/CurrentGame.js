@@ -17,7 +17,15 @@ export function createGame(numPlayers, numCardsPerPlayer) {
 //expects to check if move/click is valid based on the target value
 export function validator(currPhase, source, target, request) {
   // SOURCE IS ALWAYS CURRENT PLAYER...
-
+  console.log(
+    'in validator: the phase: ',
+    currPhase,
+    'SOURCE: ',
+    source,
+    'TARGET:',
+    target,
+    request
+  );
   let incrementPhase = false;
   // if theres no target, run the source action by default
   if (!target) {
@@ -32,11 +40,11 @@ export function validator(currPhase, source, target, request) {
     }
   }
   // if theres a dependent action, then run the validator again
-  // THIS IS EXPECTING TARGET AND SOURCE TO BE UNCHANGED
-  if (currPhase.dependentPhase) {
-    validator(currPhase.dependentPhase, source, target, request);
-    incrementPhase = true;
-  }
+  // pass in the same source from prev event since right now its the currPlayer obj always
+  // if (currPhase.dependentPhase) {
+  //   validator(currPhase.dependentPhase, source, currPhase.dependentPhase.target, request);
+  //   incrementPhase = true;
+  // }
   // the return value of the validator will determine if currPhaseIndex
   // should be incremented
   return incrementPhase;
