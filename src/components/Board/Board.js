@@ -26,7 +26,6 @@ export default class Board extends Component {
     // have to await the setstate so that then the currPhase can be added on the state!
     await this.setState({ ...this.props.boardSetup });
     await this.setState({ currPhase: this.state.turn[this.state.currentPhaseIdx] });
-    console.log(this.state);
   }
 
   // endTurn will run thru the remaining phases that arent dependent on
@@ -140,6 +139,7 @@ export default class Board extends Component {
   render() {
     const deck = this.state.deck;
     const field = this.state.field;
+    console.log('CURRENT PLAYER', this.state.players[this.state.currentPlayerIdx]);
     return (
       //Use BoardContext Provider to pass state to children
 

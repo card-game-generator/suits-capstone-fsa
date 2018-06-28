@@ -8,7 +8,6 @@ class Player {
   }
 
   createHand(numCards, currDeck) {
-    console.log(currDeck);
     let dealtCards = [];
     if (currDeck.getSize() < numCards) {
       throw new Error('Not enough cards');
