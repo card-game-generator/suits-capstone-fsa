@@ -26,14 +26,17 @@ export default class Board extends Component {
       currentPhaseIdx: 0,
       whatToCheck: '',
       whenToCheck: '',
+      currPhase: {},
     };
     this.handleClick = this.handleClick.bind(this);
     this.checkWinCondition = this.checkWinCondition.bind(this);
     this.endTurn = this.endTurn.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({ ...this.props.boardSetup });
+  async componentDidMount() {
+    // have to await the setstate so that then the currPhase can be added on the state!
+    await this.setState({ ...this.props.boardSetup });
+    await this.setState({ currPhase: this.state.turn[this.state.currentPhaseIdx] });
   }
 
   // endTurn will run thru the remaining phases that arent dependent on
@@ -51,11 +54,24 @@ export default class Board extends Component {
   }
 
   //Handles deck click
-  handleClick(target, reqCard, event) {
+  // THIS.CURRENTSTATE IS DEFINED IN THE CONSTRUCTOR, WE STILL NEED TO INCREMENT
+  // EVENTUALLY MAYBE HANDLE CURRENTPHASE IN A VAR INSTEAD OF IN THE STATE....
+  // MIGHT NOT EVEN NEED TO CALL IT IN THE VALIDATOR
+  async handleClick(target, reqCard, event) {
     event.preventDefault();
-    let currPhase = this.state.turn[this.state.currentPhaseIdx];
+    // let currPhase = this.state.turn[this.state.currentPhaseIdx];
     // if the action is valid, increment currPhaseIdx
-    if (validator(currPhase, this.state.players[this.state.currentPlayerIdx], target, reqCard)) {
+
+    // if the validator returns truthy, then set the currPhase to be the
+    // next phase in the turn arr
+    if (
+      validator(
+        this.state.currPhase,
+        this.state.players[this.state.currentPlayerIdx],
+        target,
+        reqCard
+      )
+    ) {
       let currentPhaseIdx = this.state.currentPhaseIdx + 1;
       let currentPlayerIdx = this.state.currentPlayerIdx;
       // if the turn is over, update the currentPlayerIndex as well
@@ -64,7 +80,15 @@ export default class Board extends Component {
         currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
       }
       this.setState({ currentPhaseIdx, currentPlayerIdx });
-      winCheck(currPhase, this.state);
+      winCheck(this.state.currPhase, this.state);
+
+      // if validator returned false, then check if theres a dependent
+      // phase and set the currPhase to be that dependent phase
+      // TODO: take into account that sometimes the dependency will
+      // be set to true... ALSO....does that even make sense?!?
+    } else {
+      await this.setState({ currPhase: this.state.currPhase.dependentPhase });
+    
     }
   }
 

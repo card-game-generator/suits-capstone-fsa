@@ -9,7 +9,9 @@ export default class PhaseForm extends Component {
       target: '',
       targetAction: '',
       dependency: true,
+      dependentSource: '',
       dependentSourceAction: '',
+      dependentTarget: '',
       dependentTargetAction: '',
       childFormShow: false,
     };
@@ -28,9 +30,9 @@ export default class PhaseForm extends Component {
 
     if (this.state.childFormShow) {
       dependentObj = {
-        source: this.state.source,
+        source: this.state.dependentSource,
         sourceAction: this.state.dependentSourceAction,
-        target: this.state.target,
+        target: this.state.dependentTarget,
         targetAction: this.state.dependentTargetAction,
       };
     }
@@ -117,6 +119,15 @@ export default class PhaseForm extends Component {
                   <option>false</option>
                 </select>
               </label>
+
+              <label>
+                Source
+                <select name="dependentSource" onChange={this.handleToggle}>
+                  <option>null</option>
+                  <option>self</option>
+                </select>
+              </label>
+
               <label>
                 Source Action
                 <select name="dependentSourceAction" onChange={this.handleToggle}>
@@ -128,6 +139,15 @@ export default class PhaseForm extends Component {
                 </select>
               </label>
 
+              <label>
+                Target
+                <select name="dependentTarget" onChange={this.handleToggle}>
+                  <option>null</option>
+                  <option>player</option>
+                  <option>All Players</option>
+                  <option>Deck</option>
+                </select>
+              </label>
               <label>
                 Target Action
                 <select name="dependentTargetAction" onChange={this.handleToggle}>
