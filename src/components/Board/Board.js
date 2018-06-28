@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PlayerComp from './Player';
 import DeckComp from './Deck';
+import FieldComp from './Field';
 import { validator, winCheck } from '../../utils/Game/CurrentGame';
 
 export default class Board extends Component {
@@ -8,7 +9,7 @@ export default class Board extends Component {
     super();
     this.state = {
       deck: [],
-      field: 0,
+      field: [],
       players: [],
       currentPlayerIdx: 0,
       turn: [],
@@ -139,6 +140,7 @@ export default class Board extends Component {
 
   render() {
     const deck = this.state.deck;
+    const field = this.state.field;
     return (
       //Use BoardContext Provider to pass state to children
 
@@ -169,6 +171,9 @@ export default class Board extends Component {
           <button type="button" onClick={this.checkWinCondition}>
             Win Condition Check
           </button>
+        </div>
+        <div>
+          <FieldComp field={field} submitHandler={this.handleClick} />
         </div>
       </div>
     );
