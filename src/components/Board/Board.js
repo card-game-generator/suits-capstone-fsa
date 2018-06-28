@@ -3,13 +3,12 @@ import PlayerComp from './Player';
 import DeckComp from './Deck';
 import FieldComp from './Field';
 import { validator, winCheck } from '../../utils/Game/CurrentGame';
-
 export default class Board extends Component {
   constructor() {
     super();
     this.state = {
-      deck: [],
-      field: [],
+      deck: { cards: [] },
+      field: 0,
       players: [],
       currentPlayerIdx: 0,
       turn: [],
