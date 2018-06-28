@@ -37,7 +37,7 @@ class Player {
     this.hand.push(card);
   }
 
-  // returns true if a player has any card 4x, false otherwise
+  // returns true if a player has any card 4x, false otherwise. yeet
   has4OfAKind() {
     const cardCount = {};
     this.hand.forEach(card => (cardCount[card] = ++cardCount[card] || 1));
