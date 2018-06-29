@@ -40,6 +40,12 @@ export default class Board extends Component {
         break;
       }
       if (this.state.turn[i] === this.state.currPhase) {
+        console.log(
+          'in endTurn func, the turn: ',
+          this.state.turn[i],
+          'the currPhase: ',
+          this.state.currPhase
+        );
         if (!validator(this.state.turn[i], this.state.players[this.state.currentPlayerIdx])) {
           alert(`You can't do that`);
         }
