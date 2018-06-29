@@ -23,7 +23,6 @@ export default class WinConditions extends Component {
     const { whatToCheck, whenToCheck } = this.state;
     return (
       <div>
-        <div className="parent-form-right-title">Suits</div>
         <form>
           <label>
             How do you win?
