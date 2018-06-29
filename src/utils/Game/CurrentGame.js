@@ -23,8 +23,6 @@ export function validator(currPhase, source, target, request) {
   // if theres no target, run the source action by default
   if (!target) {
     incrementPhase = source[currPhase.sourceAction]();
-    console.log('HERE IN VALIDATOR', source[currPhase.sourceAction]());
-
     // else make sure that the target is valid
   } else if (currPhase.target === target.type) {
     const found = target[currPhase.targetAction](request);

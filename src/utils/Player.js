@@ -36,12 +36,16 @@ class Player {
     this.hand.push(card);
   }
 
-  // returns true if a player has any card 4x, false otherwise. yeet
+  // returns true if a player has any card 4x, false otherwise. yeerrr
   has4OfAKind() {
     const cardCount = {};
-    this.hand.forEach(card => (cardCount[card] = ++cardCount[card] || 1));
-    console.log('CARD COUNT', cardCount);
-    return Object.values(cardCount).filter(value => value === 4).length >= 1;
+    this.hand.forEach(card => (cardCount[card.value] = ++cardCount[card.value] || 1));
+    const cards = Object.keys(cardCount).filter(key => cardCount[key] === 4);
+    if (cards.length > 0) {
+      this.hand = this.hand.filter(card => card.value !== cards[0]);
+      return true;
+    }
+    return false;
   }
 }
 
