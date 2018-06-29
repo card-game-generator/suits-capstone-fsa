@@ -34,7 +34,7 @@ button:focus {
 }
 
 .hidden {
-    margin: -211px;
+    left: -211px !important;
 }
 
 .hamburger-button {
@@ -43,10 +43,16 @@ button:focus {
     top: 20px;
     left: 20px;
     border: none;
+    transition: .2s ease-in-out;
+}
+
+.hamburger-button:hover {
+    color: #51cd98;
 }
 
 .menu-open {
-    margin-left: 211px;
+    left: 231px !important;
+    transform: rotate(90deg);
 }
 
 
@@ -170,7 +176,10 @@ button:focus {
     color: #ababab;
     top: 0;
     bottom: 0;
-    transition: .3s ease-in-out;
+    left: 0;
+    transition: .2s ease-in-out;
+    height: 100vh;
+    overflow-x: scroll;
 }
 
 .parent-form-main {
