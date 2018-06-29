@@ -34,8 +34,6 @@ export default class FormContainer extends Component {
   render() {
     let idx = this.state.formIdx;
     const captureRules = this.props.captureRules;
-    console.log(this.state)
-
     return (
       <div id="parent-form" className="parent-form">
 
