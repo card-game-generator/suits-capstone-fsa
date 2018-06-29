@@ -58,6 +58,7 @@ export default class PhaseForm extends Component {
     const handleSubmit = this.props.handleSubmit;
     return (
       <div className="turn-form">
+        <div className="parent-form-right-title">Suits</div>
         <div className="turn-form-title">Phase Form: </div>
         <form>
           <label>
