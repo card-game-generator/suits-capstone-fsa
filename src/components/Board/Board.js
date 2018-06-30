@@ -18,7 +18,6 @@ export default class Board extends Component {
       currPhase: {},
     };
     this.handleClick = this.handleClick.bind(this);
-    this.checkWinCondition = this.checkWinCondition.bind(this);
     this.endTurn = this.endTurn.bind(this);
     this.continueTurn = this.continueTurn.bind(this);
   }
@@ -151,29 +150,6 @@ export default class Board extends Component {
           currPhase: this.state.turn[currentPhaseIdx],
         });
         winCheck(this.state.currPhase, this.state);
-      }
-    }
-  }
-
-  //handles moving the 'what to check' into the appropriate 'when to check' for win conditions
-  checkWinCondition() {
-    if (this.state.whenToCheck === 'End of each turn') {
-      this.setState({
-        turn: [...this.state.turn, { whatToCheck: this.state.whatToCheck }],
-      });
-    }
-
-    if (this.state.whenToCheck === 'End of each phase') {
-      let newTurn = this.state.turn.map(phase => {
-        phase = { ...phase, whatToCheck: this.state.whatToCheck };
-        return phase;
-      });
-      this.setState({ turn: newTurn });
-    }
-
-    if (this.state.whenToCheck === 'When deck is empty') {
-      if (this.state.deck === 0) {
-        // console.log('idk what to do here');
       }
     }
   }
