@@ -226,7 +226,7 @@ export default class FormContainer extends Component {
             Choose a game
             <select name="gamelist" onChange={this.handleToggle}>
               {this.state.gameList.map(gameObj => {
-                return <option key={gameObj}>{gameObj.whatToCheck}</option>;
+                return <option key={gameObj}>{gameObj.name}</option>;
               })}
             </select>
           </label>
