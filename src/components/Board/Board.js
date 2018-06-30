@@ -18,7 +18,7 @@ export default class Board extends Component {
       currPhase: {},
     };
     this.handleClick = this.handleClick.bind(this);
-    this.checkWinCondition = this.checkWinCondition.bind(this);
+    // this.checkWinCondition = this.checkWinCondition.bind(this);
     this.endTurn = this.endTurn.bind(this);
     this.continueTurn = this.continueTurn.bind(this);
     this.setCurrPlayer = this.setCurrPlayer.bind(this);

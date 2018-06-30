@@ -19,6 +19,7 @@ export function createGame(numPlayers, numCardsPerPlayer) {
 //expects to check if move/click is valid based on the target value
 export function validator(currPhase, source, target, request) {
   // SOURCE IS ALWAYS CURRENT PLAYER...
+  console.log('in validator,', currPhase);
   let incrementPhase = false;
   // if theres no target, run the source action by default
   if (!target) {
