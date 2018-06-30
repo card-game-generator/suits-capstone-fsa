@@ -71,7 +71,9 @@ export default class Board extends Component {
 
     // if theres a dependent phase, we need to run it
     if (this.state.currPhase.dependentPhase) {
-      // CASES: validatorResult is dependent on TRUE, OR validatorResult is dependent on FALSE, if either is true, run the validator again on the dependent phase
+      // CASES: validatorResult is dependent on TRUE and the validatorResult returned true,
+      // OR validatorResult is dependent on FALSE and validatorResult returned false,
+      // if either is true, run the validator again on the dependent phase
       if ((dependency && validatorResult) || (!dependency && !validatorResult)) {
         validator(dependentPhase, currentPlayer);
       }
@@ -84,28 +86,29 @@ export default class Board extends Component {
   handleClick(target, reqCard, event) {
     event.preventDefault();
     let dependentPhase = this.state.currPhase.dependentPhase,
-      dependency = this.state.currPhase.dependency;
-    if (
-      validator(
+      dependency = this.state.currPhase.dependency,
+      validatorResult = validator(
         this.state.currPhase,
         this.state.players[this.state.currentPlayerIdx],
         target,
         reqCard
-      )
-    ) {
+      );
+    // if the validator returns true, then check if theres a dependentPhase and that the condition for the dependentPhase is also true
+    if (validatorResult) {
       if (dependentPhase && dependency) {
+        // if it is true, reset the currPhase on the state to the dependentPhase
         this.setState({ currPhase: dependentPhase });
+        // if not, update the state and run winCheck func
       } else {
         this.updateState();
         winCheck(this.state.currPhase, this.state);
       }
-
-      // if validator returned false, then check if theres a dependent
-      // phase and set the currPhase to be that dependent phase
+      // if the validator returned false
     } else {
-      // need to account for going to the next state then
-      if (this.state.currPhase.dependentPhase && !this.state.currPhase.dependency) {
-        this.setState({ currPhase: this.state.currPhase.dependentPhase });
+      // if there is a dependentPhase and the condition for that dependentPhase is false, then update the currPhase to that dependentPhase
+      if (dependentPhase && !dependency) {
+        this.setState({ currPhase: dependentPhase });
+        // else update the state and check for win conditions
       } else {
         this.updateState();
         winCheck(this.state.currPhase, this.state);
@@ -117,8 +120,6 @@ export default class Board extends Component {
     const deck = this.state.deck;
     const field = this.state.field;
     return (
-      //Use BoardContext Provider to pass state to children
-
       <div>
         {/* Create game board */}
         <div className="game-board">
