@@ -7,22 +7,22 @@ export default class Card extends Component {
   }
 
   render() {
-    let player = this.props.player || {};
+    let player = this.props.card;
     let field = this.props.field || {};
+    let card = this.props.card || { suit: '', value: '' };
     return (
       <div>
-        {player.isCurrentPlayer
-          ? player.hand.map(card => {
-              <div key={`${card.suit}${card.value}`}>{`${card.suit}${card.value}`}</div>;
-            })
-          : null}
-
-        {field.cards
-          ? field.cards.map(card => {
-              <div key={`${card.suit}${card.value}`}>{`${card.suit}${card.value}`}</div>;
-            })
-          : null}
+        <p>
+          {card.suit} {card.value}
+        </p>
       </div>
     );
   }
 }
+
+// {
+//   field.cards
+//     ? field.cards.map(card => {
+//         <div key={`${card.suit}${card.value}`}>{`${card.suit}${card.value}`}</div>;
+//       })
+//     : null;}
