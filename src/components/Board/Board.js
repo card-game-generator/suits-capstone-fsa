@@ -22,7 +22,7 @@ export default class Board extends Component {
     this.updateState = this.updateState.bind(this);
   }
 
-  updateState() {
+  updateState(validatorResult) {
     // first, calc the new indexes
     let currentPhaseIdx = this.state.currentPhaseIdx + 1;
     let currentPlayerIdx = this.state.currentPlayerIdx;
@@ -41,6 +41,14 @@ export default class Board extends Component {
 
     // the new currPhase based off the calculated currPhaseIdx
     const currPhase = this.state.turn[currentPhaseIdx];
+
+    // if the validator is returning an object instead of just a bool, then lets assume theyre cards that are expecting to be added to the field (maybe the deck too later...)
+    if (typeof validatorResult === 'object') {
+      const toSet = { cards: [...this.state.field.cards, ...validatorResult] };
+      this.setState({
+        field: toSet,
+      });
+    }
 
     // then reset the state
     this.setState({
@@ -79,7 +87,7 @@ export default class Board extends Component {
       }
     }
     // update the state
-    this.updateState();
+    this.updateState(validatorResult);
   }
 
   //Handles deck click
@@ -110,7 +118,7 @@ export default class Board extends Component {
         this.setState({ currPhase: dependentPhase });
         // else update the state and check for win conditions
       } else {
-        this.updateState();
+        this.updateState(validatorResult);
         winCheck(this.state.currPhase, this.state);
       }
     }
