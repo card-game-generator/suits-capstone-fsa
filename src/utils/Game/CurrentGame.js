@@ -43,7 +43,7 @@ export function winCheck(currPhase, state) {
     if (deck.cards.length === 0) {
       // run whatToCheck
       let winner = winningConditions(whatToCheck);
-      alert('This is the winner: ' + winner.name);
+      alert('The winner is: ' + winner.name);
       // then run an endGame function
     }
   }
@@ -79,7 +79,7 @@ export function winCheck(currPhase, state) {
           break;
       }
     });
-    if (!winningPlayer.name) winningPlayer.name = 'No one wins!';
+    if (!winningPlayer.name) winningPlayer.name = 'NO ONE';
     return winningPlayer;
   }
 }
