@@ -54,7 +54,7 @@ export function winCheck(currPhase, state) {
     let winningPlayer = {};
     players.forEach(player => {
       switch (condition) {
-        case 'playerHighestScore':
+        case 'Player with highest score':
           if (player.score > highestScore) {
             highestScore = player.score;
             winningPlayer = player;

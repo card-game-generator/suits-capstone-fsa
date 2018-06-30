@@ -28,7 +28,7 @@ export default class WinConditions extends Component {
           <label>
             How do you win?
             <select name="whatToCheck" onChange={this.handleToggle}>
-              <option>playerHighestScore</option>
+              <option>Player with highest score</option>
               <option>Player with most cards</option>
               <option>Player with least cards</option>
               <option>First with 4 of a kind</option>
