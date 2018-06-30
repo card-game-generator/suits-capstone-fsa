@@ -23,14 +23,6 @@ export default class Board extends Component {
     this.updateState = this.updateState.bind(this);
   }
 
-  // when a turn is over, call this func with the new player index to update the current player on the state
-  // setCurrPlayer(newPlayerIdx) {
-  //   const players = this.state.players;
-  //   players[this.state.currentPlayerIdx].isCurrentPlayer = false;
-  //   players[newPlayerIdx].isCurrentPlayer = true;
-  //   this.setState({ players });
-  // }
-
   updateState() {
     // first, calc the new indexes
     let currentPhaseIdx = this.state.currentPhaseIdx + 1;
