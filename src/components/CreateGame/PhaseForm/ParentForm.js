@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import StartingRules from './StartingRules';
 import PhaseForm from './PhaseForm';
 import WinForm from './WinConditions';
-// import { getGameObj } from '../../Board/BoardContext';
+import db from '../../../firestore';
 
 export default class FormContainer extends Component {
   constructor() {
@@ -14,36 +14,51 @@ export default class FormContainer extends Component {
       turn: [],
       whatToCheck: '',
       whenToCheck: '',
+      gameList: [],
     };
     this.handleState = this.handleState.bind(this);
   }
-
+  componentDidMount() {
+    const gameList = [];
+    db.collection('games')
+      .get()
+      .then(snap => {
+        snap.forEach(doc => {
+          gameList.push(doc.data());
+        });
+      });
+    this.setState({ gameList });
+  }
   handleState(stateChanges) {
     let formIdx = this.state.formIdx + 1;
     this.setState({ ...stateChanges, formIdx });
   }
-  handleGameStart() { }
+  handleGameStart() {}
 
   showMenu() {
-    document.getElementById("hamburger-menu").classList.toggle('hidden');
-    document.getElementById("hamburger-button").classList.toggle('menu-open');
+    document.getElementById('hamburger-menu').classList.toggle('hidden');
+    document.getElementById('hamburger-button').classList.toggle('menu-open');
   }
 
   render() {
     let idx = this.state.formIdx;
     const captureRules = this.props.captureRules;
+
+    console.log(this.state.gameList, 'ARGHHH');
     return (
       <div className="parent-form">
-
         <div id="hamburger-menu" className="parent-form-menu hidden">
-
           <div className="parent-form-title-container">
-            <div className="parent-form-menu-icon"><i className="fas fa-heart"></i></div>
+            <div className="parent-form-menu-icon">
+              <i className="fas fa-heart" />
+            </div>
             <div className="parent-form-game-title">Suits</div>
           </div>
 
           <div className="parent-form-menu-section-title-container">
-            <div className="parent-form-menu-icon"><i className="fas fa-cog"></i></div>
+            <div className="parent-form-menu-icon">
+              <i className="fas fa-cog" />
+            </div>
             <div className="parent-form-menu-title">Starting Overview</div>
           </div>
 
@@ -57,10 +72,14 @@ export default class FormContainer extends Component {
             </div>
           </div>
 
-          {this.state.turn.length !== 0 && <div className="parent-form-menu-section-title-container">
-            <div className="parent-form-menu-icon"><i className="fas fa-cog"></i></div>
-            <div className="parent-form-menu-title">Turn</div>
-          </div>}
+          {this.state.turn.length !== 0 && (
+            <div className="parent-form-menu-section-title-container">
+              <div className="parent-form-menu-icon">
+                <i className="fas fa-cog" />
+              </div>
+              <div className="parent-form-menu-title">Turn</div>
+            </div>
+          )}
 
           <div className="parent-form-menu-section-container">
             {this.state.turn.map((phase, index) => {
@@ -69,21 +88,25 @@ export default class FormContainer extends Component {
                   <div className="parent-form-menu-options phase-container">
                     <div className="parent-form-menu-section-title">Phase {index + 1}</div>
                     <div className="parent-form-menu-phases">
-
-
                       <div className="parent-form-menu-phase-content phase-content">
                         <div className="parent-form-menu-source source-title">Source</div>
                         <div className="parent-form-menu-phase-group">
                           <div className="parent-form-menu-phase-icon">&#8627;</div>
-                          <div className="parent-form-menu-source-content source-content">{phase.source}</div>
+                          <div className="parent-form-menu-source-content source-content">
+                            {phase.source}
+                          </div>
                         </div>
                       </div>
 
                       <div className="parent-form-menu-phase-content phase-content">
-                        <div className="parent-form-menu-source-action source-title">Source Action</div>
+                        <div className="parent-form-menu-source-action source-title">
+                          Source Action
+                        </div>
                         <div className="parent-form-menu-phase-group">
                           <div className="parent-form-menu-phase-icon">&#8627;</div>
-                          <div className="parent-form-menu-source-content source-content">{phase.sourceAction}</div>
+                          <div className="parent-form-menu-source-content source-content">
+                            {phase.sourceAction}
+                          </div>
                         </div>
                       </div>
 
@@ -91,29 +114,34 @@ export default class FormContainer extends Component {
                         <div className="parent-form-menu-target source-title">Target</div>
                         <div className="parent-form-menu-phase-group">
                           <div className="parent-form-menu-phase-icon">&#8627;</div>
-                          <div className="parent-form-menu-source-content source-content">{phase.target}</div>
+                          <div className="parent-form-menu-source-content source-content">
+                            {phase.target}
+                          </div>
                         </div>
                       </div>
 
                       <div className="parent-form-menu-phase-content phase-content">
-                        <div className="parent-form-menu-target-action source-title">Target Action</div>
+                        <div className="parent-form-menu-target-action source-title">
+                          Target Action
+                        </div>
                         <div className="parent-form-menu-phase-group">
                           <div className="parent-form-menu-phase-icon">&#8627;</div>
-                          <div className="parent-form-menu-source-content source-content">{phase.targetAction}</div>
+                          <div className="parent-form-menu-source-content source-content">
+                            {phase.targetAction}
+                          </div>
                         </div>
                       </div>
-
                     </div>
                   </div>
                 </div>
-              )
+              );
             })}
           </div>
-
         </div>
 
-        <button id="hamburger-button" onClick={this.showMenu} className="hamburger-button"><i className="fas fa-bars"></i></button>
-
+        <button id="hamburger-button" onClick={this.showMenu} className="hamburger-button">
+          <i className="fas fa-bars" />
+        </button>
 
         <div className="parent-form-main">
           <div className="parent-form-right-title">Suits</div>
@@ -151,14 +179,33 @@ export default class FormContainer extends Component {
         </div>
         {/* <div className="parent-form-next"><i className="fas fa-chevron-right"></i></div> */}
         {idx === 4 ? (
-          <button
-            onClick={() => {
-              captureRules(this.state);
-            }}
-          >
-            Play Game!
-          </button>
+          <div>
+            <button
+              onClick={() => {
+                captureRules(this.state);
+              }}
+            >
+              Play Game!
+            </button>
+            <button
+              onClick={() => {
+                db.collection('games').add(this.state);
+              }}
+            >
+              Save game!
+            </button>
+          </div>
         ) : null}
+        <form>
+          <label>
+            Choose a game
+            <select name="gamelist" onChange={this.handleToggle}>
+              {this.state.gameList.map(gameObj => {
+                return <option>{gameObj.whatToCheck}</option>;
+              })}
+            </select>
+          </label>
+        </form>
       </div>
     );
   }
