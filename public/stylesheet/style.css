@@ -59,7 +59,6 @@ button:focus {
 .parent-form {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     height: 100vh;
     position: relative;
 }
