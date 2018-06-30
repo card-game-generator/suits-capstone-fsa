@@ -29,6 +29,9 @@ export default class FormContainer extends Component {
           gameList.push(doc.data());
         });
       });
+    console.log(gameList);
+    // this.setState(prevState => ({ gameList: [...prevState.gameList, ...gameList] }));
+
     this.setState({ gameList });
   }
   handleState(stateChanges) {
@@ -46,7 +49,7 @@ export default class FormContainer extends Component {
     let idx = this.state.formIdx;
     const captureRules = this.props.captureRules;
 
-    console.log(this.state.gameList, 'ARGHHH');
+    console.log(this.state.gameList, 'ARGHHH', this.state.gameList.length);
     return (
       <div id="parent-form" className="parent-form">
         <div id="hamburger-menu" className="parent-form-menu hidden">
@@ -223,7 +226,7 @@ export default class FormContainer extends Component {
             Choose a game
             <select name="gamelist" onChange={this.handleToggle}>
               {this.state.gameList.map(gameObj => {
-                return <option>{gameObj.whatToCheck}</option>;
+                return <option key={gameObj}>{gameObj.whatToCheck}</option>;
               })}
             </select>
           </label>
