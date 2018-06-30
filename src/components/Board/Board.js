@@ -19,7 +19,6 @@ export default class Board extends Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.continueTurn = this.continueTurn.bind(this);
-    // this.setCurrPlayer = this.setCurrPlayer.bind(this);
     this.updateState = this.updateState.bind(this);
   }
 
@@ -61,9 +60,6 @@ export default class Board extends Component {
     await this.setState({ currPhase: this.state.turn[this.state.currentPhaseIdx], players });
   }
 
-  // endTurn will run thru the remaining phases that arent dependent on
-  // click events
-
   continueTurn() {
     const validatorResult = validator(
       this.state.currPhase,
@@ -87,6 +83,8 @@ export default class Board extends Component {
   //Handles deck click
   handleClick(target, reqCard, event) {
     event.preventDefault();
+    let dependentPhase = this.state.currPhase.dependentPhase,
+      dependency = this.state.currPhase.dependency;
     if (
       validator(
         this.state.currPhase,
@@ -95,8 +93,8 @@ export default class Board extends Component {
         reqCard
       )
     ) {
-      if (this.state.currPhase.dependentPhase && this.state.currPhase.dependency) {
-        this.setState({ currPhase: this.state.currPhase.dependentPhase });
+      if (dependentPhase && dependency) {
+        this.setState({ currPhase: dependentPhase });
       } else {
         this.updateState();
         winCheck(this.state.currPhase, this.state);
