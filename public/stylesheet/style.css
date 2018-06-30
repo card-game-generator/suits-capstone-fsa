@@ -34,7 +34,7 @@ button:focus {
 }
 
 .hidden {
-    margin: -211px;
+    width: 0 !important;
 }
 
 .hamburger-button {
@@ -43,10 +43,15 @@ button:focus {
     top: 20px;
     left: 20px;
     border: none;
+    transition: .2s ease-in-out;
+}
+
+.hamburger-button:hover {
+    color: #51cd98;
 }
 
 .menu-open {
-    margin-left: 211px;
+    transform: rotate(90deg);
 }
 
 
@@ -54,8 +59,8 @@ button:focus {
 .parent-form {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     height: 100vh;
+    position: relative;
 }
 
 .parent-form-menu > [class^="parent-form-"] {
@@ -165,19 +170,21 @@ button:focus {
 }
 
 .parent-form-menu {
-    position: absolute;
     background: #2d2d2d;
     color: #ababab;
-    top: 0;
-    bottom: 0;
-    transition: .3s ease-in-out;
+    transition: .2s ease-in-out;
+    height: 100vh;
+    overflow-x: scroll;
+    position: relative;
+    width: auto;
 }
 
 .parent-form-main {
-    width: 90vw;
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex: auto;
+    position: relative;
 }
 
 .parent-form-right {
@@ -206,6 +213,7 @@ button:focus {
     text-transform: uppercase;
     width: 100%;
     text-align: center;
+    margin-bottom: 30px;
 }
 
 .starting-container {
@@ -230,8 +238,14 @@ button:focus {
     flex-direction: column;
     flex-wrap: wrap;
     border-bottom: solid 5px #9bce5e;
-    margin-top: 30px;
     width: 100%;
+}
+
+.starting-rules-name-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .starting-rules-players-title,
@@ -363,9 +377,6 @@ button:focus {
 }
 
 .starting-button-next {
-    position: absolute;
-    right: 0;
-    top: 0;
     height: 100vh;
 }
 

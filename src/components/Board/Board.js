@@ -20,17 +20,52 @@ export default class Board extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.checkWinCondition = this.checkWinCondition.bind(this);
     this.endTurn = this.endTurn.bind(this);
+    this.continueTurn = this.continueTurn.bind(this);
   }
 
   async componentDidMount() {
     // have to await the setstate so that then the currPhase can be added on the state!
     await this.setState({ ...this.props.boardSetup });
     await this.setState({ currPhase: this.state.turn[this.state.currentPhaseIdx] });
-    console.log(this.state);
   }
 
   // endTurn will run thru the remaining phases that arent dependent on
   // click events
+
+  continueTurn() {
+    const validatorResult = validator(
+      this.state.currPhase,
+      this.state.players[this.state.currentPlayerIdx]
+    );
+
+    // if theres a dependent phase, we need to run it
+    if (this.state.currPhase.dependentPhase) {
+      // compare the result of the validator with the dependency on the currPhase
+      if (
+        (this.state.currPhase.dependency && validatorResult) ||
+        (!validatorResult && !this.state.currPhase.dependentPhase)
+      ) {
+        validator(
+          this.state.currPhase.dependentPhase,
+          this.state.players[this.state.currentPlayerIdx]
+        );
+      }
+    }
+
+    let currentPhaseIdx = this.state.currentPhaseIdx + 1;
+    let currentPlayerIdx = this.state.currentPlayerIdx;
+    // if the turn is over, update the currentPlayerIndex as well
+    if (currentPhaseIdx >= this.state.turn.length) {
+      currentPhaseIdx = 0;
+      currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
+    }
+    this.setState({
+      currentPhaseIdx,
+      currentPlayerIdx,
+      currPhase: this.state.turn[currentPhaseIdx],
+    });
+  }
+
   // END TURN CANT WORK IF THERE ARE EVENTS THAT NEED TARGETS THAT HAVENT BEEN RUN
   endTurn() {
     for (let i = this.state.currentPhaseIdx; i < this.state.turn.length; i++) {
@@ -44,6 +79,9 @@ export default class Board extends Component {
         if (!validator(this.state.turn[i], this.state.players[this.state.currentPlayerIdx])) {
           alert(`You can't do that`);
         }
+        // if (this.state.currPhase.dependentPhase && !this.state.currPhase.dependency) {
+
+        // }
       } else {
         if (
           !validator(
@@ -54,11 +92,14 @@ export default class Board extends Component {
           alert(`You can't do that`);
         }
       }
+      if (i === this.state.turn.length - 1) {
+        let currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
+        this.setState({ currentPlayerIdx, currentPhaseIdx: 0, currPhase: this.state.turn[0] });
+        winCheck(this.state.turn[this.state.currentPhaseIdx], this.state);
+      }
     }
+
     // next player's turn
-    let currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
-    this.setState({ currentPlayerIdx });
-    winCheck(this.state.turn[this.state.currentPhaseIdx], this.state);
   }
 
   //Handles deck click
@@ -162,6 +203,13 @@ export default class Board extends Component {
               disabled={this.state.currPhase.target !== 'null'}
             >
               End Turn
+            </button>
+            <button
+              type="button"
+              onClick={this.continueTurn}
+              disabled={this.state.currPhase.target !== 'null'}
+            >
+              Continue Turn
             </button>
           </div>
           <div className={'deck'}>

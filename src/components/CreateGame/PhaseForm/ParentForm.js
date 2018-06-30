@@ -9,6 +9,7 @@ export default class FormContainer extends Component {
     super();
     this.state = {
       formIdx: 1,
+      name: '',
       players: 0,
       cards: 0,
       turn: [],
@@ -17,6 +18,7 @@ export default class FormContainer extends Component {
       gameList: [],
     };
     this.handleState = this.handleState.bind(this);
+    this.showMenu = this.showMenu.bind(this);
   }
   componentDidMount() {
     const gameList = [];
@@ -46,7 +48,7 @@ export default class FormContainer extends Component {
 
     console.log(this.state.gameList, 'ARGHHH');
     return (
-      <div className="parent-form">
+      <div id="parent-form" className="parent-form">
         <div id="hamburger-menu" className="parent-form-menu hidden">
           <div className="parent-form-title-container">
             <div className="parent-form-menu-icon">
@@ -60,6 +62,15 @@ export default class FormContainer extends Component {
               <i className="fas fa-cog" />
             </div>
             <div className="parent-form-menu-title">Starting Overview</div>
+          </div>
+
+          <div className="parent-form-menu-section-container">
+            <div className="menu-box">
+              <div className="parent-form-menu-section-title">Game</div>
+              <div className="parent-form-menu-options">
+                <div className="parent-form-menu-name">Name: {this.state.name}</div>
+              </div>
+            </div>
           </div>
 
           <div className="parent-form-menu-section-container">
@@ -139,12 +150,10 @@ export default class FormContainer extends Component {
           </div>
         </div>
 
-        <button id="hamburger-button" onClick={this.showMenu} className="hamburger-button">
-          <i className="fas fa-bars" />
-        </button>
-
-        <div className="parent-form-main">
-          <div className="parent-form-right-title">Suits</div>
+        <div id="parent-form-main" className="parent-form-main">
+          <button id="hamburger-button" onClick={this.showMenu} className="hamburger-button">
+            <i className="fas fa-bars" />
+          </button>
           {idx === 1 ? <StartingRules handleSubmit={this.handleState} /> : null}
           {idx === 2 ? <PhaseForm handleSubmit={this.handleState} /> : null}
           {idx === 3 ? (
@@ -152,6 +161,27 @@ export default class FormContainer extends Component {
               <WinForm handleSubmit={this.handleState} />
               win rules what to check = {this.state.whatToCheck} when to check ={' '}
               {this.state.whenToCheck}
+            </div>
+          ) : null}
+          {idx === 4 ? (
+            <div className="parent-form-review-game">
+              <div className="parent-form-right-title">Suits</div>
+              {this.state.turn.map(phase => {
+                return (
+                  <div key={phase}>
+                    just a div showing phase {phase.source} {phase.sourceAction} {phase.target}
+                    {phase.targetAction}
+                  </div>
+                );
+              })}
+
+              <button
+                onClick={() => {
+                  captureRules(this.state);
+                }}
+              >
+                Play Game!
+              </button>
             </div>
           ) : null}
 
@@ -168,14 +198,6 @@ export default class FormContainer extends Component {
           just here to show local state of parent Number of players {this.state.players} Number of
           cards for each player {this.state.cards}
         </div> */}
-          {this.state.turn.map(phase => {
-            return (
-              <div key={phase}>
-                just a div showing phase {phase.source} {phase.sourceAction} {phase.target}
-                {phase.targetAction}
-              </div>
-            );
-          })}
         </div>
         {/* <div className="parent-form-next"><i className="fas fa-chevron-right"></i></div> */}
         {idx === 4 ? (
