@@ -34,28 +34,41 @@ export function validator(currPhase, source, target, request) {
   return incrementPhase;
 }
 
+/* winCheck will run at the end of each phase,
+depending on the whenToCheck string it'll run the
+appropriate function from the winningConditions helper func */
 export function winCheck(currPhase, state) {
-  let winningConditions = {
-    playerHighestScore: () => {
-      let highestScore = 0;
-      let winningPlayer;
-      players.forEach(player => {
-        if (player.score > highestScore) {
-          highestScore = player.score;
-          winningPlayer = player;
-        }
-      });
-      if (!winningPlayer) winningPlayer = 'No one wins!';
-      return winningPlayer;
-    },
-  };
   let { deck, players, currentPlayerIdx, whatToCheck, whenToCheck } = state;
   if (whenToCheck === 'When deck is empty') {
     if (deck.cards.length === 0) {
       // run whatToCheck
-      let winner = winningConditions[whatToCheck]();
+      let winner = winningConditions(whatToCheck);
       alert('This is the winner: ' + winner.name);
       // then run an endGame function
     }
+  }
+
+  function winningConditions(condition) {
+    let highestScore = 0,
+      highestCardCount = 0;
+    let winningPlayer = {};
+    players.forEach(player => {
+      switch (condition) {
+        case 'playerHighestScore':
+          if (player.score > highestScore) {
+            highestScore = player.score;
+            winningPlayer = player;
+          }
+          break;
+        case 'Player with most cards':
+          if (player.hand.length > highestCardCount) {
+            highestCardCount = player.hand.length;
+            winningPlayer = player;
+          }
+          break;
+      }
+    });
+    if (!winningPlayer.name) winningPlayer.name = 'No one wins!';
+    return winningPlayer;
   }
 }
