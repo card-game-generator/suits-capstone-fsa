@@ -8,7 +8,7 @@ export default class Board extends Component {
     super();
     this.state = {
       deck: { cards: [] },
-      field: 0,
+      field: { cards: [] },
       players: [],
       currentPlayerIdx: 0,
       turn: [],
@@ -77,6 +77,12 @@ export default class Board extends Component {
       currentPlayerIdx,
       currPhase: this.state.turn[currentPhaseIdx],
     });
+    if (typeof validatorResult === 'object') {
+      const toSet = { cards: validatorResult };
+      this.setState({
+        field: toSet,
+      });
+    }
   }
 
   // END TURN CANT WORK IF THERE ARE EVENTS THAT NEED TARGETS THAT HAVENT BEEN RUN
