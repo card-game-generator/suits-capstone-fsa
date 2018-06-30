@@ -18,15 +18,27 @@ export default class Board extends Component {
       currPhase: {},
     };
     this.handleClick = this.handleClick.bind(this);
-    this.checkWinCondition = this.checkWinCondition.bind(this);
+    // this.checkWinCondition = this.checkWinCondition.bind(this);
     this.endTurn = this.endTurn.bind(this);
     this.continueTurn = this.continueTurn.bind(this);
+    this.setCurrPlayer = this.setCurrPlayer.bind(this);
+  }
+
+  setCurrPlayer(newPlayerIdx) {
+    const players = this.state.players;
+    players[this.state.currentPlayerIdx].isCurrentPlayer = false;
+    players[newPlayerIdx].isCurrentPlayer = true;
+    this.setState({ players });
   }
 
   async componentDidMount() {
     // have to await the setstate so that then the currPhase can be added on the state!
     await this.setState({ ...this.props.boardSetup });
-    await this.setState({ currPhase: this.state.turn[this.state.currentPhaseIdx] });
+
+    const players = this.state.players;
+    players[0].isCurrentPlayer = true;
+
+    await this.setState({ currPhase: this.state.turn[this.state.currentPhaseIdx], players });
   }
 
   // endTurn will run thru the remaining phases that arent dependent on
@@ -54,11 +66,12 @@ export default class Board extends Component {
 
     let currentPhaseIdx = this.state.currentPhaseIdx + 1;
     let currentPlayerIdx = this.state.currentPlayerIdx;
-    // if the turn is over, update the currentPlayerIndex as well
+    // if the turn is over, update the currentPlayerIndex as well as the curr player
     if (currentPhaseIdx >= this.state.turn.length) {
       currentPhaseIdx = 0;
       currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
     }
+    this.setCurrPlayer(currentPlayerIdx);
     this.setState({
       currentPhaseIdx,
       currentPlayerIdx,
@@ -94,7 +107,12 @@ export default class Board extends Component {
       }
       if (i === this.state.turn.length - 1) {
         let currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
-        this.setState({ currentPlayerIdx, currentPhaseIdx: 0, currPhase: this.state.turn[0] });
+        this.setCurrPlayer(currentPlayerIdx);
+        this.setState({
+          currentPlayerIdx,
+          currentPhaseIdx: 0,
+          currPhase: this.state.turn[0],
+        });
         winCheck(this.state.turn[this.state.currentPhaseIdx], this.state);
       }
     }
@@ -123,6 +141,7 @@ export default class Board extends Component {
           currentPhaseIdx = 0;
           currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
         }
+        this.setCurrPlayer(currentPlayerIdx);
         this.setState({
           currentPhaseIdx,
           currentPlayerIdx,
@@ -145,6 +164,7 @@ export default class Board extends Component {
           currentPhaseIdx = 0;
           currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
         }
+        this.setCurrPlayer(currentPlayerIdx);
         this.setState({
           currentPhaseIdx,
           currentPlayerIdx,
