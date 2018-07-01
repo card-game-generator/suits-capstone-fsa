@@ -77,6 +77,9 @@ export default class Board extends Component {
       dependentPhase = this.state.currPhase.dependentPhase,
       currentPlayer = this.state.players[this.state.currentPlayerIdx];
 
+    // if the validator returns invalid
+    if (validatorResult === 'invalid') return;
+
     // if theres a dependent phase, we need to run it
     if (this.state.currPhase.dependentPhase) {
       // CASES: validatorResult is dependent on TRUE and the validatorResult returned true,
@@ -101,6 +104,10 @@ export default class Board extends Component {
         target,
         reqCard
       );
+
+    // if the validator returns invalid
+    if (validatorResult === 'invalid') return;
+
     // if the validator returns true, then check if theres a dependentPhase and that the condition for the dependentPhase is also true
     if (validatorResult) {
       if (dependentPhase && dependency) {
@@ -108,7 +115,7 @@ export default class Board extends Component {
         this.setState({ currPhase: dependentPhase });
         // if not, update the state and run winCheck func
       } else {
-        this.updateState();
+        this.updateState(validatorResult);
         winCheck(this.state.currPhase, this.state);
       }
       // if the validator returned false
@@ -116,10 +123,6 @@ export default class Board extends Component {
       // if there is a dependentPhase and the condition for that dependentPhase is false, then update the currPhase to that dependentPhase
       if (dependentPhase && !dependency) {
         this.setState({ currPhase: dependentPhase });
-        // else update the state and check for win conditions
-      } else {
-        this.updateState(validatorResult);
-        winCheck(this.state.currPhase, this.state);
       }
     }
   }
