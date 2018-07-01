@@ -25,6 +25,9 @@ export default class FormContainer extends Component {
   handleState(stateChanges) {
     let formIdx = this.state.formIdx + 1;
     this.setState({ ...stateChanges, formIdx });
+
+    let hidden = document.getElementById("hamburger-menu").classList.contains('hidden')
+    if (hidden) this.showMenu();
   }
 
   //For Jack to view imports, changes index to 10
