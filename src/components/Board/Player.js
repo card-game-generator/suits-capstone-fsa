@@ -5,16 +5,15 @@ export default class Player extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      player: '',
+      player: {},
       reqCard: 0,
     };
     this.handleChange = this.handleChange.bind(this);
   }
-  //TODO
-  //Handles player click
-  // handleClick(event) {
-  //   console.log(event.target.name);
-  // }
+
+  componentDidMount() {
+    this.setState({ player: this.props.player });
+  }
 
   handleChange(event) {
     //Changes state to card
@@ -35,7 +34,7 @@ export default class Player extends Component {
             player.hand.map(card => {
               return (
                 //Card component
-                <Card key={`${card.suit}${card.value}`} player={player} card={card} />
+                <Card key={`${card.suit}${card.value}`} player={this.state.player} card={card} />
               );
             })
           ) : (

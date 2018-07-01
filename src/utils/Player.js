@@ -42,8 +42,9 @@ class Player {
     this.hand.forEach(card => (cardCount[card.value] = ++cardCount[card.value] || 1));
     const cards = Object.keys(cardCount).filter(key => cardCount[key] === 4);
     if (cards.length > 0) {
+      const removed = this.hand.filter(card => card.value === cards[0]);
       this.hand = this.hand.filter(card => card.value !== cards[0]);
-      return true;
+      return removed;
     }
     return false;
   }

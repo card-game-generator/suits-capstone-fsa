@@ -19,43 +19,71 @@ export function createGame(numPlayers, numCardsPerPlayer) {
 //expects to check if move/click is valid based on the target value
 export function validator(currPhase, source, target, request) {
   // SOURCE IS ALWAYS CURRENT PLAYER...
-  let incrementPhase = false;
+  let result = false;
   // if theres no target, run the source action by default
   if (!target) {
-    incrementPhase = source[currPhase.sourceAction]();
+    result = source[currPhase.sourceAction]();
     // else make sure that the target is valid
   } else if (currPhase.target === target.type) {
     const found = target[currPhase.targetAction](request);
     if (found) {
       source[currPhase.sourceAction](found);
-      incrementPhase = true;
+      result = true;
     }
+    // if the player clicks on invalid target
+  } else {
+    alert(`You can't do that`);
+    return 'invalid';
   }
-  return incrementPhase;
+  return result;
 }
 
+/* winCheck will run at the end of each phase,
+depending on the whenToCheck string it'll run the
+appropriate function from the winningConditions helper func */
 export function winCheck(currPhase, state) {
-  let winningConditions = {
-    playerHighestScore: () => {
-      let highestScore = 0;
-      let winningPlayer;
-      players.forEach(player => {
-        if (player.score > highestScore) {
-          highestScore = player.score;
-          winningPlayer = player;
-        }
-      });
-      if (!winningPlayer) winningPlayer = 'No one wins!';
-      return winningPlayer;
-    },
-  };
   let { deck, players, currentPlayerIdx, whatToCheck, whenToCheck } = state;
   if (whenToCheck === 'When deck is empty') {
     if (deck.cards.length === 0) {
       // run whatToCheck
-      let winner = winningConditions[whatToCheck]();
-      alert('This is the winner: ' + winner.name);
+      let winner = winningConditions(whatToCheck);
+      alert('The winner is: ' + winner.name);
       // then run an endGame function
     }
+  }
+
+  function winningConditions(condition) {
+    let highestScore = 0,
+      highestCardCount = 0,
+      lowestCardCount = 52,
+      winningPlayer = {};
+    players.forEach(player => {
+      switch (condition) {
+        case 'Player with highest score':
+          if (player.score > highestScore) {
+            highestScore = player.score;
+            winningPlayer = player;
+          }
+          // if two players both have the highest score then THERE IS NO WINNER!!!!!!
+          if (player.score === highestScore) winningPlayer = {};
+          break;
+        case 'Player with most cards':
+          if (player.hand.length > highestCardCount) {
+            highestCardCount = player.hand.length;
+            winningPlayer = player;
+          }
+          if (player.hand.length === highestCardCount) winningPlayer = {};
+          break;
+        case 'Player with least cards':
+          if (player.hand.length < lowestCardCount) {
+            lowestCardCount = player.hand.length;
+            winningPlayer = player;
+          }
+          if (player.hand.length === lowestCardCount) winningPlayer = {};
+          break;
+      }
+    });
+    if (!winningPlayer.name) winningPlayer.name = 'NO ONE';
+    return winningPlayer;
   }
 }
