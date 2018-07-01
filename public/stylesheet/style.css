@@ -81,6 +81,13 @@ button:focus {
     display: flex;
     align-items: center;
     color: #ababab;
+    cursor: pointer;
+    transition: .1s ease-in-out;
+}
+
+.parent-form-menu-section-title-container:hover {
+    background: #424242;
+    color: #fff;
 }
 
 .parent-form-menu-title {

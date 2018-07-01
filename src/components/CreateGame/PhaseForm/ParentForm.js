@@ -19,6 +19,8 @@ export default class FormContainer extends Component {
     };
     this.handleState = this.handleState.bind(this);
     this.showMenu = this.showMenu.bind(this);
+    this.viewImport = this.viewImport.bind(this);
+    this.handleImport = this.handleImport.bind(this);
   }
   componentDidMount() {
     const gameList = [];
@@ -37,6 +39,19 @@ export default class FormContainer extends Component {
     let formIdx = this.state.formIdx + 1;
     this.setState({ ...stateChanges, formIdx });
   }
+
+  //For Jack to view imports, changes index to 10
+  viewImport() {
+    let formIdx = 10;
+    this.setState({ formIdx });
+  }
+
+  //For Jack to handle imports
+  handleImport(event) {
+    event.preventDefault();
+    //Logic here
+  }
+
   handleGameStart() {}
 
   showMenu() {
@@ -150,6 +165,15 @@ export default class FormContainer extends Component {
               );
             })}
           </div>
+
+          <div className="parent-form-menu-section-title-container">
+            <div className="parent-form-menu-icon">
+              <i className="fas fa-cog" />
+            </div>
+            <div onClick={this.viewImport} className="parent-form-menu-title">
+              My Games
+            </div>
+          </div>
         </div>
 
         <div id="parent-form-main" className="parent-form-main">
@@ -184,6 +208,25 @@ export default class FormContainer extends Component {
               >
                 Play Game!
               </button>
+            </div>
+          ) : null}
+
+          {/* For Jack to render saved Firebase configurations */}
+          {idx === 10 ? (
+            <div className="saved-games-dropdown-container">
+              <div className="parent-form-right-title">Suits</div>
+              <div className="saved-games-dropdown">
+                <form>
+                  <label>Import Game: </label>
+                  <select>
+                    <option>Game 1</option>
+                    <option>Game 2</option>
+                  </select>
+                  <button type="submit" onClick={event => this.handleImport(event)}>
+                    Import
+                  </button>
+                </form>
+              </div>
             </div>
           ) : null}
 
