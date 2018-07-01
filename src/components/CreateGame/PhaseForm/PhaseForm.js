@@ -67,7 +67,7 @@ export default class PhaseForm extends Component {
             Here, you'll be creating the rules for your game! A phase is each componenet of a turn.
             For example, if I want to play 'Go Fish', one turn will be made up of 2 phases, each
             with a dependent phase. The first, I want the current player to request a card from
-            another player. Since that has two outcomes, I want to add a{' '}
+            another player. Since that has two outcomes, I want to add a
             <strong>dependent phase</strong>. If the player does not have the card, I want to
             request a card from the deck - then I can finally submit the phase. But my turn isn't
             over yet! I need to check if I have a 4 of a kind - that'll be the next phase. Then my
@@ -126,7 +126,7 @@ export default class PhaseForm extends Component {
             <div className="turn-form-dependent">
               <hr />
               <div className="turn-form-dependent-title">
-                <strong>Dependent Form:</strong>{' '}
+                <strong>Dependent Form:</strong>
               </div>
               <label>
                 Did the above phase happen?
@@ -188,9 +188,12 @@ export default class PhaseForm extends Component {
             </div>
           )}
         </form>
-        <button type="button" onClick={this.handleSubmitDependentPhase}>
-          Add Dependent Phase
-        </button>
+
+        {!this.state.childFormShow && (
+          <button type="button" onClick={this.handleSubmitDependentPhase}>
+            Add Dependent Phase
+          </button>
+        )}
         <button type="button" onClick={this.handleSubmitPhase}>
           Submit Phase
         </button>
