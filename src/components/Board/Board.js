@@ -146,13 +146,6 @@ export default class Board extends Component {
             })}
             <button
               type="button"
-              onClick={this.endTurn}
-              disabled={this.state.currPhase.target !== 'null'}
-            >
-              End Turn
-            </button>
-            <button
-              type="button"
               onClick={this.continueTurn}
               disabled={this.state.currPhase.target !== 'null'}
             >
