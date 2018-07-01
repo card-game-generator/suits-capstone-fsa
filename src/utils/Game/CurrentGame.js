@@ -19,19 +19,23 @@ export function createGame(numPlayers, numCardsPerPlayer) {
 //expects to check if move/click is valid based on the target value
 export function validator(currPhase, source, target, request) {
   // SOURCE IS ALWAYS CURRENT PLAYER...
-  let incrementPhase = false;
+  let result = false;
   // if theres no target, run the source action by default
   if (!target) {
-    incrementPhase = source[currPhase.sourceAction]();
+    result = source[currPhase.sourceAction]();
     // else make sure that the target is valid
   } else if (currPhase.target === target.type) {
     const found = target[currPhase.targetAction](request);
     if (found) {
       source[currPhase.sourceAction](found);
-      incrementPhase = true;
+      result = true;
     }
+    // if the player clicks on invalid target
+  } else {
+    alert(`You can't do that`);
+    return 'invalid';
   }
-  return incrementPhase;
+  return result;
 }
 
 /* winCheck will run at the end of each phase,

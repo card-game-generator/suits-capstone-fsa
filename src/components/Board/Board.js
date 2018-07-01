@@ -18,165 +18,111 @@ export default class Board extends Component {
       currPhase: {},
     };
     this.handleClick = this.handleClick.bind(this);
-    // this.checkWinCondition = this.checkWinCondition.bind(this);
-    this.endTurn = this.endTurn.bind(this);
     this.continueTurn = this.continueTurn.bind(this);
-    this.setCurrPlayer = this.setCurrPlayer.bind(this);
+    this.updateState = this.updateState.bind(this);
   }
 
-  setCurrPlayer(newPlayerIdx) {
+  updateState(validatorResult) {
+    // first, calc the new indexes
+    let currentPhaseIdx = this.state.currentPhaseIdx + 1;
+    let currentPlayerIdx = this.state.currentPlayerIdx;
+    // if the turn is over, update the currentPlayerIndex as well as the currentPlayerIdx
+    if (currentPhaseIdx >= this.state.turn.length) {
+      currentPhaseIdx = 0;
+      currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
+    }
+
+    // to reset the current player
     const players = this.state.players;
+    // first set the previous players isCurrentPlayer prop to false
     players[this.state.currentPlayerIdx].isCurrentPlayer = false;
-    players[newPlayerIdx].isCurrentPlayer = true;
-    this.setState({ players });
+    // set the new players isCurrentPlayer prop to true
+    players[currentPlayerIdx].isCurrentPlayer = true;
+
+    // the new currPhase based off the calculated currPhaseIdx
+    const currPhase = this.state.turn[currentPhaseIdx];
+
+    // if the validator is returning an object instead of just a bool, then lets assume theyre cards that are expecting to be added to the field (maybe the deck too later...)
+    if (typeof validatorResult === 'object') {
+      const toSet = { cards: [...this.state.field.cards, ...validatorResult] };
+      this.setState({
+        field: toSet,
+      });
+    }
+
+    // then reset the state
+    this.setState({
+      currentPhaseIdx,
+      currentPlayerIdx,
+      currPhase,
+      players,
+    });
   }
 
   async componentDidMount() {
-    // have to await the setstate so that then the currPhase can be added on the state!
+    // have to await the setstate so that then the currPhase can be added on the state...
     await this.setState({ ...this.props.boardSetup });
-
+    // set the current player on start
     const players = this.state.players;
     players[0].isCurrentPlayer = true;
-
     await this.setState({ currPhase: this.state.turn[this.state.currentPhaseIdx], players });
   }
-
-  // endTurn will run thru the remaining phases that arent dependent on
-  // click events
 
   continueTurn() {
     const validatorResult = validator(
       this.state.currPhase,
       this.state.players[this.state.currentPlayerIdx]
     );
+    const dependency = this.state.currPhase.dependency,
+      dependentPhase = this.state.currPhase.dependentPhase,
+      currentPlayer = this.state.players[this.state.currentPlayerIdx];
+
+    // if the validator returns invalid
+    if (validatorResult === 'invalid') return;
 
     // if theres a dependent phase, we need to run it
     if (this.state.currPhase.dependentPhase) {
-      // compare the result of the validator with the dependency on the currPhase
-      if (
-        (this.state.currPhase.dependency && validatorResult) ||
-        (!validatorResult && !this.state.currPhase.dependentPhase)
-      ) {
-        validator(
-          this.state.currPhase.dependentPhase,
-          this.state.players[this.state.currentPlayerIdx]
-        );
+      // CASES: validatorResult is dependent on TRUE and the validatorResult returned true,
+      // OR validatorResult is dependent on FALSE and validatorResult returned false,
+      // if either is true, run the validator again on the dependent phase
+      if ((dependency && validatorResult) || (!dependency && !validatorResult)) {
+        validator(dependentPhase, currentPlayer);
       }
     }
-
-    let currentPhaseIdx = this.state.currentPhaseIdx + 1;
-    let currentPlayerIdx = this.state.currentPlayerIdx;
-    // if the turn is over, update the currentPlayerIndex as well as the curr player
-    if (currentPhaseIdx >= this.state.turn.length) {
-      currentPhaseIdx = 0;
-      currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
-    }
-    this.setCurrPlayer(currentPlayerIdx);
-    this.setState({
-      currentPhaseIdx,
-      currentPlayerIdx,
-      currPhase: this.state.turn[currentPhaseIdx],
-    });
-    if (typeof validatorResult === 'object') {
-      const toSet = { cards: validatorResult };
-      this.setState({
-        field: toSet,
-      });
-    }
-  }
-
-  // END TURN CANT WORK IF THERE ARE EVENTS THAT NEED TARGETS THAT HAVENT BEEN RUN
-  endTurn() {
-    for (let i = this.state.currentPhaseIdx; i < this.state.turn.length; i++) {
-      // right now the phases are returning the STRING NULL -_- so the below if
-      // statement wont work unless were strictly checking !== null
-      if (this.state.turn[i].target !== 'null') {
-        this.setState({ currentPhaseIdx: i });
-        break;
-      }
-      if (this.state.turn[i] === this.state.currPhase) {
-        if (!validator(this.state.turn[i], this.state.players[this.state.currentPlayerIdx])) {
-          alert(`You can't do that`);
-        }
-        // if (this.state.currPhase.dependentPhase && !this.state.currPhase.dependency) {
-
-        // }
-      } else {
-        if (
-          !validator(
-            this.state.turn[i].dependentPhase,
-            this.state.players[this.state.currentPlayerIdx]
-          )
-        ) {
-          alert(`You can't do that`);
-        }
-      }
-      if (i === this.state.turn.length - 1) {
-        let currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
-        this.setCurrPlayer(currentPlayerIdx);
-        this.setState({
-          currentPlayerIdx,
-          currentPhaseIdx: 0,
-          currPhase: this.state.turn[0],
-        });
-        winCheck(this.state.turn[this.state.currentPhaseIdx], this.state);
-      }
-    }
-
-    // next player's turn
+    // update the state
+    this.updateState(validatorResult);
   }
 
   //Handles deck click
   handleClick(target, reqCard, event) {
     event.preventDefault();
-    if (
-      validator(
+    let dependentPhase = this.state.currPhase.dependentPhase,
+      dependency = this.state.currPhase.dependency,
+      validatorResult = validator(
         this.state.currPhase,
         this.state.players[this.state.currentPlayerIdx],
         target,
         reqCard
-      )
-    ) {
-      if (this.state.currPhase.dependentPhase && this.state.currPhase.dependency) {
-        this.setState({ currPhase: this.state.currPhase.dependentPhase });
+      );
+
+    // if the validator returns invalid
+    if (validatorResult === 'invalid') return;
+
+    // if the validator returns true, then check if theres a dependentPhase and that the condition for the dependentPhase is also true
+    if (validatorResult) {
+      if (dependentPhase && dependency) {
+        // if it is true, reset the currPhase on the state to the dependentPhase
+        this.setState({ currPhase: dependentPhase });
+        // if not, update the state and run winCheck func
       } else {
-        let currentPhaseIdx = this.state.currentPhaseIdx + 1;
-        let currentPlayerIdx = this.state.currentPlayerIdx;
-        // if the turn is over, update the currentPlayerIndex as well
-        if (currentPhaseIdx >= this.state.turn.length) {
-          currentPhaseIdx = 0;
-          currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
-        }
-        this.setCurrPlayer(currentPlayerIdx);
-        this.setState({
-          currentPhaseIdx,
-          currentPlayerIdx,
-          currPhase: this.state.turn[currentPhaseIdx],
-        });
+        this.updateState(validatorResult);
         winCheck(this.state.currPhase, this.state);
       }
-
-      // if validator returned false, then check if theres a dependent
-      // phase and set the currPhase to be that dependent phase
+      // if the validator returned false
     } else {
-      // need to account for going to the next state then
-      if (this.state.currPhase.dependentPhase && !this.state.currPhase.dependency) {
-        this.setState({ currPhase: this.state.currPhase.dependentPhase });
-      } else {
-        let currentPhaseIdx = this.state.currentPhaseIdx + 1;
-        let currentPlayerIdx = this.state.currentPlayerIdx;
-        // if the turn is over, update the currentPlayerIndex as well
-        if (currentPhaseIdx >= this.state.turn.length) {
-          currentPhaseIdx = 0;
-          currentPlayerIdx = (this.state.currentPlayerIdx + 1) % this.state.players.length;
-        }
-        this.setCurrPlayer(currentPlayerIdx);
-        this.setState({
-          currentPhaseIdx,
-          currentPlayerIdx,
-          currPhase: this.state.turn[currentPhaseIdx],
-        });
-        winCheck(this.state.currPhase, this.state);
+      // if there is a dependentPhase and the condition for that dependentPhase is false, then update the currPhase to that dependentPhase
+      if (dependentPhase && !dependency) {
+        this.setState({ currPhase: dependentPhase });
       }
     }
   }
@@ -185,8 +131,6 @@ export default class Board extends Component {
     const deck = this.state.deck;
     const field = this.state.field;
     return (
-      //Use BoardContext Provider to pass state to children
-
       <div>
         {/* Create game board */}
         <div className="game-board">
@@ -200,13 +144,6 @@ export default class Board extends Component {
                 </button>
               );
             })}
-            <button
-              type="button"
-              onClick={this.endTurn}
-              disabled={this.state.currPhase.target !== 'null'}
-            >
-              End Turn
-            </button>
             <button
               type="button"
               onClick={this.continueTurn}
