@@ -26,10 +26,9 @@ export default class FormContainer extends Component {
       .get()
       .then(snap => {
         snap.forEach(doc => {
-          gameList.push(doc.data());
+          gameList.push({ ...doc.data(), id: doc.id });
         });
       });
-    console.log(gameList);
     // this.setState(prevState => ({ gameList: [...prevState.gameList, ...gameList] }));
 
     this.setState({ gameList });
@@ -226,7 +225,7 @@ export default class FormContainer extends Component {
             Choose a game
             <select name="gamelist" onChange={this.handleToggle}>
               {this.state.gameList.map(gameObj => {
-                return <option key={gameObj}>{gameObj.name}</option>;
+                return <option key={gameObj.name}>{gameObj.name}</option>;
               })}
             </select>
           </label>
