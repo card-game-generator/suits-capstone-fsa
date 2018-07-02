@@ -73,87 +73,21 @@ export default class PhaseForm extends Component {
     return (
       <div className="phase-form-container main-window">
         <div className="phase-form">
-
           <div className="phase-form-form">
             <div className="parent-form-right-title">{name}</div>
-        
-        <form>
-          <label>
-            Who's turn is it?
-            <select name="source" onChange={this.handleToggle}>
-              <option>null</option>
-              <option>self</option>
-            </select>
-          </label>
-          <br />
-          <label>
-            What's happening to this player?
-            <select name="sourceAction" onChange={this.handleToggle}>
-              <option>null</option>
-              <option>giveCard</option>
-              <option>addCard</option>
-              <option>has4OfAKind</option>
-              <option>incrementScore</option>
-            </select>
-          </label>
-          <br />
 
-          <label>
-            Who/what am I targeting?
-            <select name="target" onChange={this.handleToggle}>
-              <option>null</option>
-              <option>player</option>
-              <option>All Players</option>
-              <option>deck</option>
-            </select>
-          </label>
-          <br />
-
-          <label>
-            What do I want the target to do?
-            <select name="targetAction" onChange={this.handleToggle}>
-              <option>null</option>
-              <option>giveCard</option>
-              <option>addCard</option>
-              <option>has4OfAKind</option>
-              <option>incrementScore</option>
-            </select>
-          </label>
-
-          {/* These are the dependent action select options, refactor later */}
-
-          {this.state.childFormShow && (
-            <div className="turn-form-dependent">
-              <hr />
-              <div className="turn-form-dependent-title">
-                <strong>Dependent Form:</strong>
-              </div>
-              <label>
-                Did the above phase happen?
-                <select
-                  onChange={() =>
-                    this.setState({
-                      dependency: !this.state.dependency,
-                    })
-                  }
-                >
-                  <option>true</option>
-                  <option>false</option>
-                </select>
-              </label>
-
+            <form>
               <label>
                 Who's turn is it?
-                <select name="dependentSource" onChange={this.handleToggle}>
+                <select name="source" onChange={this.handleToggle}>
                   <option>null</option>
                   <option>self</option>
                 </select>
               </label>
               <br />
-
               <label>
                 What's happening to this player?
-                <select name="dependentSourceAction" onChange={this.handleToggle}>
+                <select name="sourceAction" onChange={this.handleToggle}>
                   <option>null</option>
                   <option>giveCard</option>
                   <option>addCard</option>
@@ -165,7 +99,7 @@ export default class PhaseForm extends Component {
 
               <label>
                 Who/what am I targeting?
-                <select name="dependentTarget" onChange={this.handleToggle}>
+                <select name="target" onChange={this.handleToggle}>
                   <option>null</option>
                   <option>player</option>
                   <option>All Players</option>
@@ -176,7 +110,7 @@ export default class PhaseForm extends Component {
 
               <label>
                 What do I want the target to do?
-                <select name="dependentTargetAction" onChange={this.handleToggle}>
+                <select name="targetAction" onChange={this.handleToggle}>
                   <option>null</option>
                   <option>giveCard</option>
                   <option>addCard</option>
@@ -184,39 +118,112 @@ export default class PhaseForm extends Component {
                   <option>incrementScore</option>
                 </select>
               </label>
-              </div>
-          )}
 
-              </form>
+              {/* These are the dependent action select options, refactor later */}
 
+              {this.state.childFormShow && (
+                <div className="turn-form-dependent">
+                  <hr />
+                  <div className="turn-form-dependent-title">
+                    <strong>Dependent Form:</strong>
+                  </div>
+                  <label>
+                    Did the above phase happen?
+                    <select
+                      onChange={() =>
+                        this.setState({
+                          dependency: !this.state.dependency,
+                        })
+                      }
+                    >
+                      <option>true</option>
+                      <option>false</option>
+                    </select>
+                  </label>
 
-        <button type="button" onClick={this.handleSubmitDependentPhase}>
+                  <label>
+                    Who's turn is it?
+                    <select name="dependentSource" onChange={this.handleToggle}>
+                      <option>null</option>
+                      <option>self</option>
+                    </select>
+                  </label>
+                  <br />
+
+                  <label>
+                    What's happening to this player?
+                    <select name="dependentSourceAction" onChange={this.handleToggle}>
+                      <option>null</option>
+                      <option>giveCard</option>
+                      <option>addCard</option>
+                      <option>has4OfAKind</option>
+                      <option>incrementScore</option>
+                    </select>
+                  </label>
+                  <br />
+
+                  <label>
+                    Who/what am I targeting?
+                    <select name="dependentTarget" onChange={this.handleToggle}>
+                      <option>null</option>
+                      <option>player</option>
+                      <option>All Players</option>
+                      <option>deck</option>
+                    </select>
+                  </label>
+                  <br />
+
+                  <label>
+                    What do I want the target to do?
+                    <select name="dependentTargetAction" onChange={this.handleToggle}>
+                      <option>null</option>
+                      <option>giveCard</option>
+                      <option>addCard</option>
+                      <option>has4OfAKind</option>
+                      <option>incrementScore</option>
+                    </select>
+                  </label>
+                </div>
+              )}
+            </form>
+
+            <button type="button" onClick={this.handleSubmitDependentPhase}>
               Add Dependent Phase
-        </button>
+            </button>
             <button type="button" onClick={this.handleSubmitPhase}>
               Submit Phase
-        </button>
+            </button>
           </div>
 
           <div className="phase-form-bottom-container bottom-container">
             {this.state.turn.map((phase, index) => {
               return (
                 <div key={`${phase}${index + 1}`} className="phase-form-bottom-content">
+                  <button>Delete</button>
                   <div className="phase-form-source">{phase.source}</div>
                   <div className="phase-form-sourceAction">{phase.sourceAction}</div>
                   <div className="phase-form-target">{phase.target}</div>
                   <div className="phase-form-targetAction">{phase.targetAction}</div>
                   <div className="phase-form-dependentSource">{phase.dependantSource}</div>
-                  <div className="phase-form-dependentSourceAction">{phase.dependentSourceAction}</div>
+                  <div className="phase-form-dependentSourceAction">
+                    {phase.dependentSourceAction}
+                  </div>
                   <div className="phase-form-dependentTarget">{phase.dependentTarget}</div>
-                  <div className="phase-form-dependentTargetAction">{phase.dependentTargetAction}</div>
+                  <div className="phase-form-dependentTargetAction">
+                    {phase.dependentTargetAction}
+                  </div>
                 </div>
-              )
+              );
             })}
           </div>
-
         </div>
-        <div id="next-button" className="starting-button-next"><button className="starting-rules-bottom-button fas fa-chevron-right" type="button" onClick={() => handleSubmit({ turn })}></button></div>
+        <div id="next-button" className="starting-button-next">
+          <button
+            className="starting-rules-bottom-button fas fa-chevron-right"
+            type="button"
+            onClick={() => handleSubmit({ turn })}
+          />
+        </div>
       </div>
     );
   }
