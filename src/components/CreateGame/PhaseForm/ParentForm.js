@@ -64,8 +64,8 @@ export default class FormContainer extends Component {
   }
 
   //For Jack to view imports, changes index to 10
-  handleNavigate() {
-    let formIdx = 10;
+  handleNavigate(num) {
+    let formIdx = num;
     this.setState({ formIdx });
   }
 
