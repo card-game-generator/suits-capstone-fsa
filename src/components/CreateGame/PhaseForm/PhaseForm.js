@@ -70,7 +70,7 @@ export default class PhaseForm extends Component {
     if (window.confirm('Are you sure you want to delete this phase?')) {
       let turnArrayCopy = [...this.state.turn];
       let index = turnArrayCopy.indexOf(event.target.value);
-      turnArrayCopy.splice(index, 1);
+      turnArrayCopy.splice(turnArrayCopy, 1);
       this.setState({ turn: turnArrayCopy });
     }
   }
