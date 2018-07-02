@@ -1,23 +1,35 @@
 import React, { Component } from 'react';
+
+//Set initial state
+let state = {
+  turn: [],
+  source: 'null',
+  sourceAction: 'null',
+  target: 'null',
+  targetAction: 'null',
+  dependency: true,
+  dependentSource: 'null',
+  dependentSourceAction: 'null',
+  dependentTarget: 'null',
+  dependentTargetAction: 'null',
+  childFormShow: false,
+};
+
 export default class PhaseForm extends Component {
   constructor() {
     super();
-    this.state = {
-      turn: [],
-      source: 'null',
-      sourceAction: 'null',
-      target: 'null',
-      targetAction: 'null',
-      dependency: true,
-      dependentSource: 'null',
-      dependentSourceAction: 'null',
-      dependentTarget: 'null',
-      dependentTargetAction: 'null',
-      childFormShow: false,
-    };
+    //Retrieve last state
+    this.state = state;
+
+    //bind all click functions
     this.handleToggle = this.handleToggle.bind(this);
     this.handleSubmitPhase = this.handleSubmitPhase.bind(this);
     this.handleSubmitDependentPhase = this.handleSubmitDependentPhase.bind(this);
+  }
+
+  componentWillUnmount() {
+    //remember state for next mount
+    state = this.state;
   }
 
   //sets source, and target
@@ -56,27 +68,15 @@ export default class PhaseForm extends Component {
   render() {
     const turn = this.state.turn;
     const handleSubmit = this.props.handleSubmit;
+    const name = this.props.gameName;
+
     return (
-      <div className="turn-form">
-        <div className="parent-form-right-title">Suits</div>
-        <div className="turn-form-title">
-          <h3>Welcome to the Phase Form!</h3>
-        </div>
-        <div>
-          <p>
-            Here, you'll be creating the rules for your game! A phase is each componenet of a turn.
-            For example, if I want to play 'Go Fish', one turn will be made up of 2 phases, each
-            with a dependent phase. The first, I want the current player to request a card from
-            another player. Since that has two outcomes, I want to add a
-            <strong>dependent phase</strong>. If the player does not have the card, I want to
-            request a card from the deck - then I can finally submit the phase. But my turn isn't
-            over yet! I need to check if I have a 4 of a kind - that'll be the next phase. Then my
-            turn is over and I can hit 'submit turn' - let's get creative!
-          </p>
-          <small>
-            <p />
-          </small>
-        </div>
+      <div className="phase-form-container main-window">
+        <div className="phase-form">
+
+          <div className="phase-form-form">
+            <div className="parent-form-right-title">{name}</div>
+        
         <form>
           <label>
             Who's turn is it?
@@ -141,7 +141,6 @@ export default class PhaseForm extends Component {
                   <option>false</option>
                 </select>
               </label>
-              <br />
 
               <label>
                 Who's turn is it?
@@ -185,21 +184,39 @@ export default class PhaseForm extends Component {
                   <option>incrementScore</option>
                 </select>
               </label>
-            </div>
+              </div>
           )}
-        </form>
 
-        {!this.state.childFormShow && (
-          <button type="button" onClick={this.handleSubmitDependentPhase}>
-            Add Dependent Phase
-          </button>
-        )}
-        <button type="button" onClick={this.handleSubmitPhase}>
-          Submit Phase
+              </form>
+
+
+        <button type="button" onClick={this.handleSubmitDependentPhase}>
+              Add Dependent Phase
         </button>
-        <button type="button" onClick={() => handleSubmit({ turn })}>
-          Submit Turn
+            <button type="button" onClick={this.handleSubmitPhase}>
+              Submit Phase
         </button>
+          </div>
+
+          <div className="phase-form-bottom-container bottom-container">
+            {this.state.turn.map((phase, index) => {
+              return (
+                <div key={`${phase}${index + 1}`} className="phase-form-bottom-content">
+                  <div className="phase-form-source">{phase.source}</div>
+                  <div className="phase-form-sourceAction">{phase.sourceAction}</div>
+                  <div className="phase-form-target">{phase.target}</div>
+                  <div className="phase-form-targetAction">{phase.targetAction}</div>
+                  <div className="phase-form-dependentSource">{phase.dependantSource}</div>
+                  <div className="phase-form-dependentSourceAction">{phase.dependentSourceAction}</div>
+                  <div className="phase-form-dependentTarget">{phase.dependentTarget}</div>
+                  <div className="phase-form-dependentTargetAction">{phase.dependentTargetAction}</div>
+                </div>
+              )
+            })}
+          </div>
+
+        </div>
+        <div id="next-button" className="starting-button-next"><button className="starting-rules-bottom-button fas fa-chevron-right" type="button" onClick={() => handleSubmit({ turn })}></button></div>
       </div>
     );
   }

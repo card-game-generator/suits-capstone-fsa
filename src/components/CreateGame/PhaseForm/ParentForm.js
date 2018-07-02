@@ -3,26 +3,29 @@ import StartingRules from './StartingRules';
 import PhaseForm from './PhaseForm';
 import WinForm from './WinConditions';
 import db from '../../../firestore';
+import Modal from 'react-responsive-modal';
+import Documentation from './Documentation';
 
 export default class FormContainer extends Component {
   constructor() {
     super();
     this.state = {
       formIdx: 1,
-      name: '',
-      players: 0,
-      cards: 0,
+      name: 'SUITS',
+      players: 1,
+      cards: 1,
       turn: [],
       whatToCheck: '',
       whenToCheck: '',
       gameList: [],
       importedGame: '',
+      modalOpen: false,
     };
     this.handleState = this.handleState.bind(this);
     this.showMenu = this.showMenu.bind(this);
-    this.viewImport = this.viewImport.bind(this);
     this.handleImport = this.handleImport.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleNavigate = this.handleNavigate.bind(this);
   }
   componentDidMount() {
     const gameList = [];
@@ -38,18 +41,30 @@ export default class FormContainer extends Component {
     this.setState({ gameList });
   }
 
+  //for Modal opening
+  onOpenModal = () => {
+    this.setState({ modalOpen: true });
+  };
+
+  //for Modal closing
+  onCloseModal = () => {
+    this.setState({ modalOpen: false });
+  };
+
   handleState(stateChanges) {
     let formIdx = this.state.formIdx + 1;
     this.setState({ ...stateChanges, formIdx });
+
+    let hidden = document.getElementById('hamburger-menu').classList.contains('hidden');
+    if (hidden) this.showMenu();
   }
 
   handleChange(event) {
-    console.log(event.target.value);
     this.setState({ importedGame: event.target.value });
   }
 
   //For Jack to view imports, changes index to 10
-  viewImport() {
+  handleNavigate() {
     let formIdx = 10;
     this.setState({ formIdx });
   }
@@ -74,9 +89,10 @@ export default class FormContainer extends Component {
 
   render() {
     let idx = this.state.formIdx;
+    console.log(idx);
     const captureRules = this.props.captureRules;
+    const { modalOpen } = this.state;
 
-    console.log(this.state, 'lksdjfkljdslk');
     return (
       <div id="parent-form" className="parent-form">
         <div id="hamburger-menu" className="parent-form-menu hidden">
@@ -87,12 +103,17 @@ export default class FormContainer extends Component {
             <div className="parent-form-game-title">Suits</div>
           </div>
 
-          <div className="parent-form-menu-section-title-container">
-            <div className="parent-form-menu-icon">
-              <i className="fas fa-cog" />
+          {this.state.players > 0 && (
+            <div
+              onClick={() => this.handleNavigate(1)}
+              className="parent-form-menu-section-title-container"
+            >
+              <div className="parent-form-menu-icon">
+                <i className="fas fa-cog" />
+              </div>
+              <div className="parent-form-menu-title">Starting Overview</div>
             </div>
-            <div className="parent-form-menu-title">Starting Overview</div>
-          </div>
+          )}
 
           <div className="parent-form-menu-section-container">
             <div className="menu-box">
@@ -108,13 +129,16 @@ export default class FormContainer extends Component {
               <div className="parent-form-menu-section-title">Options</div>
               <div className="parent-form-menu-options">
                 <div className="parent-form-menu-players">Players: {this.state.players}</div>
-                <div className="parent-form-menu-cards">Cards: {this.state.players}</div>
+                <div className="parent-form-menu-cards">Cards: {this.state.cards}</div>
               </div>
             </div>
           </div>
 
           {this.state.turn.length !== 0 && (
-            <div className="parent-form-menu-section-title-container">
+            <div
+              onClick={() => this.handleNavigate(2)}
+              className="parent-form-menu-section-title-container"
+            >
               <div className="parent-form-menu-icon">
                 <i className="fas fa-cog" />
               </div>
@@ -122,68 +146,107 @@ export default class FormContainer extends Component {
             </div>
           )}
 
-          <div className="parent-form-menu-section-container">
-            {this.state.turn.map((phase, index) => {
-              return (
-                <div key={`${phase.source}${index}`} className="menu-box bottom-border">
-                  <div className="parent-form-menu-options phase-container">
-                    <div className="parent-form-menu-section-title">Phase {index + 1}</div>
-                    <div className="parent-form-menu-phases">
-                      <div className="parent-form-menu-phase-content phase-content">
-                        <div className="parent-form-menu-source source-title">Source</div>
-                        <div className="parent-form-menu-phase-group">
-                          <div className="parent-form-menu-phase-icon">&#8627;</div>
-                          <div className="parent-form-menu-source-content source-content">
-                            {phase.source}
+          {this.state.turn.length !== 0 && (
+            <div className="parent-form-menu-section-container">
+              {this.state.turn.map((phase, index) => {
+                return (
+                  <div key={`${phase.source}${index}`} className="menu-box bottom-border">
+                    <div className="parent-form-menu-options phase-container">
+                      <div className="parent-form-menu-section-title">Phase {index + 1}</div>
+                      <div className="parent-form-menu-phases">
+                        <div className="parent-form-menu-phase-content phase-content">
+                          <div className="parent-form-menu-source source-title">Source</div>
+                          <div className="parent-form-menu-phase-group">
+                            <div className="parent-form-menu-phase-icon">&#8627;</div>
+                            <div className="parent-form-menu-source-content source-content">
+                              {phase.source}
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      <div className="parent-form-menu-phase-content phase-content">
-                        <div className="parent-form-menu-source-action source-title">
-                          Source Action
-                        </div>
-                        <div className="parent-form-menu-phase-group">
-                          <div className="parent-form-menu-phase-icon">&#8627;</div>
-                          <div className="parent-form-menu-source-content source-content">
-                            {phase.sourceAction}
+                        <div className="parent-form-menu-phase-content phase-content">
+                          <div className="parent-form-menu-source-action source-title">
+                            Source Action
+                          </div>
+                          <div className="parent-form-menu-phase-group">
+                            <div className="parent-form-menu-phase-icon">&#8627;</div>
+                            <div className="parent-form-menu-source-content source-content">
+                              {phase.sourceAction}
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      <div className="parent-form-menu-phase-content phase-content">
-                        <div className="parent-form-menu-target source-title">Target</div>
-                        <div className="parent-form-menu-phase-group">
-                          <div className="parent-form-menu-phase-icon">&#8627;</div>
-                          <div className="parent-form-menu-source-content source-content">
-                            {phase.target}
+                        <div className="parent-form-menu-phase-content phase-content">
+                          <div className="parent-form-menu-target source-title">Target</div>
+                          <div className="parent-form-menu-phase-group">
+                            <div className="parent-form-menu-phase-icon">&#8627;</div>
+                            <div className="parent-form-menu-source-content source-content">
+                              {phase.target}
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      <div className="parent-form-menu-phase-content phase-content">
-                        <div className="parent-form-menu-target-action source-title">
-                          Target Action
-                        </div>
-                        <div className="parent-form-menu-phase-group">
-                          <div className="parent-form-menu-phase-icon">&#8627;</div>
-                          <div className="parent-form-menu-source-content source-content">
-                            {phase.targetAction}
+                        <div className="parent-form-menu-phase-content phase-content">
+                          <div className="parent-form-menu-target-action source-title">
+                            Target Action
+                          </div>
+                          <div className="parent-form-menu-phase-group">
+                            <div className="parent-form-menu-phase-icon">&#8627;</div>
+                            <div className="parent-form-menu-source-content source-content">
+                              {phase.targetAction}
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          )}
 
-          <div className="parent-form-menu-section-title-container">
+          {this.state.whatToCheck.length !== 0 &&
+            this.state.whenToCheck.length !== 0 && (
+              <div
+                onClick={() => this.handleNavigate(3)}
+                className="parent-form-menu-section-title-container"
+              >
+                <div className="parent-form-menu-icon">
+                  <i className="fas fa-cog" />
+                </div>
+                <div className="parent-form-menu-title">Victory</div>
+              </div>
+            )}
+
+          {this.state.whatToCheck.length !== 0 &&
+            this.state.whenToCheck.length !== 0 && (
+              <div className="parent-form-menu-section-container">
+                <div className="menu-box">
+                  <div className="parent-form-menu-section-title">Frequency</div>
+                  <div className="parent-form-menu-options">
+                    <div className="parent-form-menu-name">Time: {this.state.whenToCheck}</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+          {this.state.whatToCheck.length !== 0 &&
+            this.state.whenToCheck.length !== 0 && (
+              <div className="parent-form-menu-section-container">
+                <div className="menu-box">
+                  <div className="parent-form-menu-section-title">Condition</div>
+                  <div className="parent-form-menu-options">
+                    <div className="parent-form-menu-name">Win: {this.state.whatToCheck}</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+          <div className="parent-form-menu-section-title-container bottom-button">
             <div className="parent-form-menu-icon">
               <i className="fas fa-cog" />
             </div>
-            <div onClick={this.viewImport} className="parent-form-menu-title">
+            <div onClick={() => this.handleNavigate(10)} className="parent-form-menu-title">
               My Games
             </div>
           </div>
@@ -193,49 +256,61 @@ export default class FormContainer extends Component {
           <button id="hamburger-button" onClick={this.showMenu} className="hamburger-button">
             <i className="fas fa-bars" />
           </button>
-          {idx === 1 ? <StartingRules handleSubmit={this.handleState} /> : null}
-          {idx === 2 ? <PhaseForm handleSubmit={this.handleState} /> : null}
+          <button id="help-button" onClick={this.onOpenModal} className="help-button">
+            <i className="fas fa-question-circle" />
+          </button>
+
+          <Modal open={modalOpen} onClose={this.onCloseModal} center>
+            <Documentation />
+          </Modal>
+
+          {idx === 1 ? (
+            <StartingRules gameName={this.state.name} handleSubmit={this.handleState} />
+          ) : null}
+          {idx === 2 ? (
+            <PhaseForm gameName={this.state.name} handleSubmit={this.handleState} />
+          ) : null}
           {idx === 3 ? (
-            <div>
-              <WinForm handleSubmit={this.handleState} />
-              win rules what to check = {this.state.whatToCheck} when to check ={' '}
-              {this.state.whenToCheck}
-            </div>
+            <WinForm gameName={this.state.name} handleSubmit={this.handleState} />
           ) : null}
           {idx === 4 ? (
-            <div className="parent-form-review-game">
-              <div className="parent-form-right-title">Suits</div>
-              {this.state.turn.map(phase => {
-                return (
-                  <div key={phase}>
-                    just a div showing phase {phase.source} {phase.sourceAction} {phase.target}
-                    {phase.targetAction}
-                  </div>
-                );
-              })}
+            <div className="review-game-container main-window">
+              <div className="review-game">
+                <div className="review-game-content">
+                  <div className="parent-form-right-title">{this.state.name}</div>
+                  {this.state.turn.map(phase => {
+                    return (
+                      <div key={phase}>
+                        just a div showing phase {phase.source} {phase.sourceAction} {phase.target}
+                        {phase.targetAction}
+                      </div>
+                    );
+                  })}
 
-              <button
-                onClick={() => {
-                  captureRules(this.state);
-                }}
-              >
-                Play Game!
-              </button>
-              <button
-                onClick={() => {
-                  // db.collection('games').add(obj);
-                  console.log(this.state);
-                }}
-              >
-                save game!
-              </button>
+                  <button
+                    onClick={() => {
+                      db.collection('games').add(this.state);
+                    }}
+                  >
+                    Save game!
+                  </button>
+                </div>
+              </div>
+
+              <div id="next-button" className="starting-button-next">
+                <button
+                  className="starting-rules-bottom-button fas fa-chevron-right"
+                  type="button"
+                  onClick={() => captureRules(this.state)}
+                />
+              </div>
             </div>
           ) : null}
 
           {/* JL: Hits Firebase for saved Game Objects */}
           {idx === 10 ? (
             <div className="saved-games-dropdown-container">
-              <div className="parent-form-right-title">Suits</div>
+              <div className="parent-form-right-title">{this.state.name}</div>
               <div className="saved-games-dropdown">
                 <form onSubmit={this.handleImport}>
                   <label>Import Game: </label>
@@ -260,24 +335,6 @@ export default class FormContainer extends Component {
             </div>
           ) : null}
         </div>
-        {idx === 4 ? (
-          <div>
-            <button
-              onClick={() => {
-                captureRules(this.state);
-              }}
-            >
-              Play Game!
-            </button>
-            <button
-              onClick={() => {
-                db.collection('games').add(this.state);
-              }}
-            >
-              Save game!
-            </button>
-          </div>
-        ) : null}
       </div>
     );
   }
