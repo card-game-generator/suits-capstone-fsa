@@ -59,13 +59,13 @@ export default class Board extends Component {
     });
   }
 
-  async componentDidMount() {
-    // have to await the setstate so that then the currPhase can be added on the state...
-    await this.setState({ ...this.props.boardSetup });
-    // set the current player on start
-    const players = this.state.players;
+  componentDidMount() {
+    // set currPlayer
+    const players = this.props.boardSetup.players;
     players[0].isCurrentPlayer = true;
-    await this.setState({ currPhase: this.state.turn[this.state.currentPhaseIdx], players });
+    // get currPhase from boardSetup
+    const currPhase = { ...this.props.boardSetup.turn[0] };
+    this.setState({ ...this.props.boardSetup, currPhase });
   }
 
   continueTurn() {
@@ -130,6 +130,7 @@ export default class Board extends Component {
   render() {
     const deck = this.state.deck;
     const field = this.state.field;
+    console.log(this.state);
     return (
       <div>
         {/* Create game board */}
