@@ -18,11 +18,57 @@ export default class Documentation extends Component {
   }
 
   render() {
-    
+
     return (
       <div className="documentation-container">
+        <div className="documentation-menu">
+
+          <div className="documentation-menu-section">
+            <div className="documentation-title">Starting Overview</div>
+            <div className="documentation-sub-container">
+              <div className="documentation-subtitle">Name</div>
+              <div className="documentation-subtitle">Players</div>
+              <div className="documentation-subtitle">Cards</div>
+            </div>
+
+          </div>
+
+          <div className="documentation-menu-section">
+            <div className="documentation-title">Turn</div>
+            <div className="documentation-sub-container">
+              <div className="documentation-subtitle">Phase</div>
+              
+              <div className="documentation-sub-container">
+                <div className="documentation-subtitle">Source</div>
+                <div className="documentation-subtitle">Source Action</div>
+                <div className="documentation-subtitle">Target</div>
+                <div className="documentation-subtitle">Target Action</div>
+              </div>
+              
+              <div className="documentation-subtitle">Dependent Phase</div>
+              <div className="documentation-sub-container">
+                <div className="documentation-subtitle">Dependent Source</div>
+                <div className="documentation-subtitle">Dependent Source Action</div>
+                <div className="documentation-subtitle">Dependent Target</div>
+                <div className="documentation-subtitle">Dependent Target Action</div>
+              </div>
+              
+            </div>
+
+          </div>
+
+          <div className="documentation-menu-section">
+            <div className="documentation-title">Victory</div>
+            <div className="documentation-sub-container">
+              <div className="documentation-subtitle">Time</div>
+              <div className="documentation-subtitle">Win</div>
+            </div>
+          </div>
+
+        </div>
+
         <div className="documentation">
-        
+
           <div className="documentation-title">Phase Form: </div>
           <div className="documentation-content">
             <h4>Here, you'll be creating your game! You can do it for the following:</h4>
@@ -47,7 +93,7 @@ export default class Documentation extends Component {
               <p>
                 Then, we want to add a <strong>dependent phase</strong>. Let's click there and set
               toggle dependency to <strong>false</strong>. This means that this is what's going to
-                happen when the player we target doesn't have the card we request.
+                      happen when the player we target doesn't have the card we request.
             </p>
               <p>
                 The <strong>source</strong> is still 'self', and the <strong>source action</strong> is

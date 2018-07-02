@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 //Set initial state
 let state = {
       players: 1,
-      cards: 0,
+      cards: 1,
       name: 'SUITS'
     }
 
@@ -78,7 +78,7 @@ export default class StartRules extends Component {
     let cardArr = [];
     this.state.cards > 0 ? (cardArr = new Array(this.state.cards).fill('card')) : [];
     return (
-      <div className="starting-container">
+      <div className="starting-container main-window">
         <div className="starting-rules">
           <div className="starting-rules-form">
             <div className="parent-form-right-title">
@@ -117,7 +117,7 @@ export default class StartRules extends Component {
 
           </div>
 
-          <div className="starting-rules-bottom-container">
+          <div className="starting-rules-bottom-container bottom-container">
             {playerArr.map((player, index) => {
               return (
                 <div key={`${player}${index + 1}`} className="starting-rules-bottom-icons">

@@ -34,7 +34,7 @@ button:focus {
 }
 
 .hidden {
-    margin-left: -211px !important;
+    margin-left: -226px !important;
 }
 
 .hamburger-button {
@@ -69,6 +69,24 @@ button:focus {
 
 input:focus {
     outline: #5ece98 auto 5px;
+}
+
+.main-window {
+    flex: auto;
+    display: flex;
+    width: 100%;
+}
+
+.bottom-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    height: 20vh;
+    background: #1c2227;
+    align-items: flex-end;
+    width: 100%;
+    border-top: solid 5px #9bce5e;
 }
 
 
@@ -201,7 +219,7 @@ input:focus {
     overflow-x: auto;
     position: relative;
     margin-left: 0px;
-    min-width: 211px;
+    width: 226px;
 }
 
 .parent-form-main {
@@ -235,7 +253,6 @@ input:focus {
     font-size: 7em;
     color: #51cd98;
     font-weight: 700;
-    text-transform: uppercase;
     width: 100%;
     text-align: center;
     margin-bottom: 30px;
@@ -250,12 +267,6 @@ input:focus {
     margin-bottom: 30px;
     border: 0px;
     font-family: 'Poppins';
-}
-
-.starting-container {
-    flex: auto;
-    display: flex;
-    width: 100%;
 }
 
 .starting-rules {
@@ -357,18 +368,6 @@ input:focus {
   flex-wrap: wrap;
 }
 
-.starting-rules-bottom-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    height: 20vh;
-    background: #1c2227;
-    align-items: flex-end;
-    width: 100%;
-    border-top: solid 5px #9bce5e;
-}
-
 .starting-rules-bottom-icons {
     position: relative;
 }
@@ -419,14 +418,75 @@ input:focus {
 
 
 /* ---------- Phase Form ---------- */
-.turn-container {
+.phase-form {
+    flex: auto;
     display: flex;
-    flex-direction: row;
-    width: 100%;
+    flex-direction: column;
 }
 
-.turn-form {
+.phase-form-form {
     flex: auto;
+}
+
+
+/* ---------- Win Condition ----------- */
+.win-condition {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.win-condition-form {
+    flex: auto;
+}
+
+
+/* ---------- Review Game ----------- */
+.review-game {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.review-game-content {
+    flex: auto;
+}
+
+/* ---------- Help Menu --------- */
+.documentation-container {
+    display: flex;
+    flex-direction: row;
+    max-height: 70vh;
+    margin: 45px 0px;
+}
+
+.documentation-menu {
+    margin-right: 20px;
+    border-right: 2px solid #d0d0d0;
+    overflow: auto;
+    display: flex;
+    min-width: 200px;
+    flex-direction: column;
+}
+
+.documentation-menu-section {
+    border-bottom: 2px solid #d0d0d0
+}
+
+.documentation-sub-container {
+    font-size: 13px;
+    font-weight: 400;
+    text-indent: 10px;
+}
+
+.documentation-sub-container > .documentation-sub-container {
+    text-indent: 20px;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.documentation {
+    overflow: auto;
 }
 
 
