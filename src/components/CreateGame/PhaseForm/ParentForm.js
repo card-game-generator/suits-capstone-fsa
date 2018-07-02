@@ -221,6 +221,14 @@ export default class FormContainer extends Component {
               >
                 Play Game!
               </button>
+              <button
+                onClick={() => {
+                  // db.collection('games').add(obj);
+                  console.log(this.state);
+                }}
+              >
+                save game!
+              </button>
             </div>
           ) : null}
 

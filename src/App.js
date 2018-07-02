@@ -3,7 +3,6 @@ import Board from './components/Board/Board';
 import { createGame } from './utils/Game/CurrentGame';
 import ParentForm from './components/CreateGame/PhaseForm/ParentForm';
 import './App.css';
-import db from './firestore';
 class App extends Component {
   constructor() {
     super();
@@ -14,7 +13,6 @@ class App extends Component {
     this.getGameObj = this.getGameObj.bind(this);
   }
   getGameObj(obj) {
-    db.collection('games').add(obj);
     const currentGame = createGame(obj.players, obj.cards);
     const { players, deck, field } = currentGame;
     const { whatToCheck, whenToCheck, turn } = obj;
