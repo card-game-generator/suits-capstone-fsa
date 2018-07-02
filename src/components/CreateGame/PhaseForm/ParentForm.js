@@ -16,11 +16,13 @@ export default class FormContainer extends Component {
       whatToCheck: '',
       whenToCheck: '',
       gameList: [],
+      importedGame: '',
     };
     this.handleState = this.handleState.bind(this);
     this.showMenu = this.showMenu.bind(this);
     this.viewImport = this.viewImport.bind(this);
     this.handleImport = this.handleImport.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
   componentDidMount() {
     const gameList = [];
@@ -35,9 +37,15 @@ export default class FormContainer extends Component {
 
     this.setState({ gameList });
   }
+
   handleState(stateChanges) {
     let formIdx = this.state.formIdx + 1;
     this.setState({ ...stateChanges, formIdx });
+  }
+
+  handleChange(event) {
+    console.log(event.target.value);
+    this.setState({ importedGame: event.target.value });
   }
 
   //For Jack to view imports, changes index to 10
@@ -47,12 +55,17 @@ export default class FormContainer extends Component {
   }
 
   //For Jack to handle imports
-  handleImport(event) {
+  async handleImport(event) {
     event.preventDefault();
+    const game = await db
+      .collection('games')
+      .doc(`${this.state.importedGame}`)
+      .get();
+
+    console.log(game.data());
+    this.setState({ ...game.data() });
     //Logic here
   }
-
-  handleGameStart() {}
 
   showMenu() {
     document.getElementById('hamburger-menu').classList.toggle('hidden');
@@ -63,7 +76,7 @@ export default class FormContainer extends Component {
     let idx = this.state.formIdx;
     const captureRules = this.props.captureRules;
 
-    console.log(this.state.gameList, 'ARGHHH', this.state.gameList.length);
+    console.log(this.state, 'lksdjfkljdslk');
     return (
       <div id="parent-form" className="parent-form">
         <div id="hamburger-menu" className="parent-form-menu hidden">
@@ -211,40 +224,34 @@ export default class FormContainer extends Component {
             </div>
           ) : null}
 
-          {/* For Jack to render saved Firebase configurations */}
+          {/* JL: Hits Firebase for saved Game Objects */}
           {idx === 10 ? (
             <div className="saved-games-dropdown-container">
               <div className="parent-form-right-title">Suits</div>
               <div className="saved-games-dropdown">
-                <form>
+                <form onSubmit={this.handleImport}>
                   <label>Import Game: </label>
-                  <select>
-                    <option>Game 1</option>
-                    <option>Game 2</option>
+                  <select onChange={this.handleChange}>
+                    <option>Select a Game!</option>
+                    {this.state.gameList.map(gameObj => {
+                      return (
+                        <option key={gameObj.id} value={gameObj.id}>
+                          {gameObj.name}
+                        </option>
+                      );
+                    })}
                   </select>
-                  <button type="submit" onClick={event => this.handleImport(event)}>
+                  <button
+                    type="submit"
+                    // onClick={event => this.handleImport(event)}
+                  >
                     Import
                   </button>
                 </form>
               </div>
             </div>
           ) : null}
-
-          {/* <div>players and cards populate here, maybe another subComponent</div>
-      <div>
-        {idx === 1 ? <StartingRules handleSubmit={this.handleState} /> : null}
-        {idx === 2 ? <PhaseForm handleSubmit={this.handleState} /> : null}
-        {idx === 3 ? <WinForm handleSubmit={this.handleState} /><div>
-          win rules what to check = {this.state.whatToCheck} when to check ={' '}
-          {this.state.whenToCheck}
-        </div> : null}
-        <div>players and cards populate here, maybe another subComponent</div>
-        <div>
-          just here to show local state of parent Number of players {this.state.players} Number of
-          cards for each player {this.state.cards}
-        </div> */}
         </div>
-        {/* <div className="parent-form-next"><i className="fas fa-chevron-right"></i></div> */}
         {idx === 4 ? (
           <div>
             <button
@@ -263,16 +270,6 @@ export default class FormContainer extends Component {
             </button>
           </div>
         ) : null}
-        <form>
-          <label>
-            Choose a game
-            <select name="gamelist" onChange={this.handleToggle}>
-              {this.state.gameList.map(gameObj => {
-                return <option key={gameObj.name}>{gameObj.name}</option>;
-              })}
-            </select>
-          </label>
-        </form>
       </div>
     );
   }
