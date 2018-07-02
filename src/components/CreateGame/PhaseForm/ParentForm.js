@@ -89,7 +89,6 @@ export default class FormContainer extends Component {
 
   render() {
     let idx = this.state.formIdx;
-    console.log(idx);
     const captureRules = this.props.captureRules;
     const { modalOpen } = this.state;
 
