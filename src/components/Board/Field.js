@@ -13,18 +13,17 @@ export default class Field extends Component {
   }
 
   render() {
-    let deckValues = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'K', 'Q', 'A'];
     let field = this.props.field;
     return (
       <div className="field-container">
-        Hi I'm the field, I have <p>{field.size} cards</p>
+        Hi I'm the field, I have <p>{field.cards.length} cards</p>
         <form onSubmit={event => this.props.submitHandler(field, this.state.reqCard, event)}>
           <label>Request Card: </label>
           <select onChange={this.handleChange}>
-            {deckValues.map(deckValue => {
+            {field.cards.map((card, i) => {
               return (
-                <option value={deckValue} key={deckValue}>
-                  {deckValue}
+                <option value={card.value} key={i}>
+                  {card.value} {card.suit}
                 </option>
               );
             })}
