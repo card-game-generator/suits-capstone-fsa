@@ -35,6 +35,7 @@ button:focus {
 
 .hidden {
     width: 0 !important;
+    min-width: 0 !important;
 }
 
 .hamburger-button {
@@ -50,8 +51,43 @@ button:focus {
     color: #51cd98;
 }
 
+.help-button {
+    font-size: 28px;
+    position: absolute;
+    top: 20px;
+    right: 11vw;
+    border: none;
+    transition: .2s ease-in-out;
+}
+
+.help-button:hover {
+    color: #51cd98;
+}
+
 .menu-open {
     transform: rotate(90deg);
+}
+
+input:focus {
+    outline: #5ece98 auto 5px;
+}
+
+.main-window {
+    flex: auto;
+    display: flex;
+    width: 100%;
+}
+
+.bottom-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    height: 20vh;
+    background: #1c2227;
+    align-items: flex-end;
+    width: 100%;
+    border-top: solid 5px #9bce5e;
 }
 
 
@@ -181,9 +217,10 @@ button:focus {
     color: #ababab;
     transition: .2s ease-in-out;
     height: 100vh;
-    overflow-x: scroll;
+    overflow-x: auto;
     position: relative;
     width: auto;
+    min-width: 211px;
 }
 
 .parent-form-main {
@@ -217,16 +254,20 @@ button:focus {
     font-size: 7em;
     color: #51cd98;
     font-weight: 700;
-    text-transform: uppercase;
     width: 100%;
     text-align: center;
     margin-bottom: 30px;
 }
 
-.starting-container {
-    flex: auto;
-    display: flex;
-    width: 100%;
+.parent-form-right-title input {
+    font-size: 1em;
+    color: #51cd98;
+    font-weight: 700;
+    width: 80%;
+    text-align: center;
+    margin-bottom: 30px;
+    border: 0px;
+    font-family: 'Poppins';
 }
 
 .starting-rules {
@@ -244,7 +285,6 @@ button:focus {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    border-bottom: solid 5px #9bce5e;
     width: 100%;
 }
 
@@ -253,6 +293,7 @@ button:focus {
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
+    margin-bottom: 40px;
 }
 
 .starting-rules-players-title,
@@ -328,17 +369,6 @@ button:focus {
   flex-wrap: wrap;
 }
 
-.starting-rules-bottom-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    height: 20vh;
-    background: #1c2227;
-    align-items: flex-end;
-    width: 100%;
-}
-
 .starting-rules-bottom-icons {
     position: relative;
 }
@@ -385,6 +415,79 @@ button:focus {
 
 .starting-button-next {
     height: 100vh;
+}
+
+
+/* ---------- Phase Form ---------- */
+.phase-form {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.phase-form-form {
+    flex: auto;
+}
+
+
+/* ---------- Win Condition ----------- */
+.win-condition {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.win-condition-form {
+    flex: auto;
+}
+
+
+/* ---------- Review Game ----------- */
+.review-game {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.review-game-content {
+    flex: auto;
+}
+
+/* ---------- Help Menu --------- */
+.documentation-container {
+    display: flex;
+    flex-direction: row;
+    max-height: 70vh;
+    margin: 45px 0px;
+}
+
+.documentation-menu {
+    margin-right: 20px;
+    border-right: 2px solid #d0d0d0;
+    overflow: auto;
+    display: flex;
+    min-width: 200px;
+    flex-direction: column;
+}
+
+.documentation-menu-section {
+    border-bottom: 2px solid #d0d0d0
+}
+
+.documentation-sub-container {
+    font-size: 13px;
+    font-weight: 400;
+    text-indent: 10px;
+}
+
+.documentation-sub-container > .documentation-sub-container {
+    text-indent: 20px;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.documentation {
+    overflow: auto;
 }
 
 
