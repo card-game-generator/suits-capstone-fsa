@@ -69,6 +69,64 @@ export default class Documentation extends Component {
 
         <div className="documentation">
 
+
+          {/* ----SECTION BLOCK STARTS HERE */}
+          <div id="SECTION-NAME" className="documentation-section">
+            <div className="documentation-section-title">Section Title</div>
+
+            <div className="documentation-section-content">
+              Content can be written here.
+            </div>
+
+            {/* ----SUB SECTION BLOCK STARTS HERE */}
+            <div id="SUB-SECTION-NAME" className="documentation-sub-section">
+              <div className="documentation-sub-section-title">Sub Section Title</div>
+
+              <div className="documentation-section-content">
+                Content can be written here.
+            </div>
+
+              {/* ----NESTED SUB SECTION BLOCK STARTS HERE */}
+              <div id="NESTED-SUB-SECTION-NAME" className="documentation-nested-sub-section">
+                <div className="documentation-nested-sub-section-title">Nested Sub Section Title</div>
+
+                <div className="documentation-section-content">
+                  Content can be written here.
+                </div>
+              </div>
+              {/* NESTED SUB SECTION BLOCK ENDS HERE */}
+
+            </div>
+            {/* SUB SECTION BLOCK ENDS HERE */}
+
+          </div>
+          {/* SECTION BLOCK ENDS HERE */}
+          
+
+
+          {/* ----SECTION BLOCK STARTS HERE */}
+          <div id="SECTION-NAME" className="documentation-section">
+            <div className="documentation-section-title">Section Title</div>
+
+            <div className="documentation-section-content">
+              Content can be written here.
+            </div>
+
+            {/* ----SUB SECTION BLOCK STARTS HERE */}
+            <div id="SUB-SECTION-NAME" className="documentation-sub-section">
+              <div className="documentation-sub-section-title">Sub Section Title</div>
+
+              <div className="documentation-section-content">
+                Content can be written here.
+            </div>
+            </div>
+            {/* SUB SECTION BLOCK ENDS HERE */}
+
+          </div>
+          {/* SECTION BLOCK ENDS HERE */}
+
+
+
           <div className="turn-form-title">
             <h3>Welcome to the Phase Form!</h3>
           </div>

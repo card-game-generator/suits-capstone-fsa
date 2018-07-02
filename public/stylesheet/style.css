@@ -490,6 +490,41 @@ input:focus {
     overflow: auto;
 }
 
+.documentation-section {
+    background: #f7f7f7;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.documentation-section-content {
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.documentation-section-title {
+    font-size: 20px;
+    letter-spacing: .5px;
+    font-weight: 600;
+}
+
+.documentation-sub-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed #b5b5b5;
+}
+
+.documentation-sub-section-title {
+    letter-spacing: .5px;
+    font-weight: 500;
+}
+
+.documentation-nested-sub-section-title {
+    letter-spacing: .5px;
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
 
 /* ---------- Board ------------ */
 
