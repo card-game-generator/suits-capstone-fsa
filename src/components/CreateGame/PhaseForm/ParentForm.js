@@ -76,8 +76,6 @@ export default class FormContainer extends Component {
       .collection('games')
       .doc(`${this.state.importedGame}`)
       .get();
-
-    console.log(game.data());
     this.setState({ ...game.data() });
     //Logic here
   }

@@ -130,7 +130,6 @@ export default class Board extends Component {
   render() {
     const deck = this.state.deck;
     const field = this.state.field;
-    console.log(this.state);
     return (
       <div>
         {/* Create game board */}
