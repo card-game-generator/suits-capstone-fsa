@@ -4,8 +4,8 @@ export default class WinConditions extends Component {
   constructor() {
     super();
     this.state = {
-      whatToCheck: '',
-      whenToCheck: '',
+      whatToCheck: 'Player with highest score',
+      whenToCheck: 'When deck is empty',
     };
     this.handleToggle = this.handleToggle.bind(this);
   }
@@ -24,6 +24,13 @@ export default class WinConditions extends Component {
     return (
       <div>
         <div className="parent-form-right-title">Suits</div>
+        <div>
+          <h4>How do you win?</h4>
+          <p>
+            Below, enter the condition that will lead to winning a game, and when we should be
+            checking for the condition.
+          </p>
+        </div>
         <form>
           <label>
             How do you win?
@@ -37,7 +44,7 @@ export default class WinConditions extends Component {
           <div>
             <strong>How:</strong> {this.state.whatToCheck}
           </div>
-
+          <br />
           <label>
             When do you check?
             <select name="whenToCheck" onChange={this.handleToggle}>
@@ -49,6 +56,7 @@ export default class WinConditions extends Component {
             <strong>When:</strong> {this.state.whenToCheck}
           </div>
         </form>
+        <br />
         <button
           type="button"
           onClick={() => {
