@@ -25,6 +25,7 @@ export default class PhaseForm extends Component {
     this.handleToggle = this.handleToggle.bind(this);
     this.handleSubmitPhase = this.handleSubmitPhase.bind(this);
     this.handleSubmitDependentPhase = this.handleSubmitDependentPhase.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentWillUnmount() {
@@ -64,6 +65,15 @@ export default class PhaseForm extends Component {
     this.setState({ childFormShow: !this.state.childFormShow });
   }
   //TODO we might want to implement a button to remove a phase from the turn Array
+
+  handleDelete(event) {
+    if (window.confirm('Are you sure you want to delete this phase?')) {
+      let turnArrayCopy = [...this.state.turn];
+      let index = turnArrayCopy.indexOf(event.target.value);
+      turnArrayCopy.splice(index, 1);
+      this.setState({ turn: turnArrayCopy });
+    }
+  }
 
   render() {
     const turn = this.state.turn;
@@ -199,7 +209,9 @@ export default class PhaseForm extends Component {
             {this.state.turn.map((phase, index) => {
               return (
                 <div key={`${phase}${index + 1}`} className="phase-form-bottom-content">
-                  <button>Delete</button>
+                  <button type="button" onClick={this.handleDelete}>
+                    Delete!
+                  </button>
                   <div className="phase-form-source">{phase.source}</div>
                   <div className="phase-form-sourceAction">{phase.sourceAction}</div>
                   <div className="phase-form-target">{phase.target}</div>
