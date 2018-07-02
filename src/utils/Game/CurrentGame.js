@@ -41,7 +41,7 @@ export function validator(currPhase, source, target, request) {
 /* winCheck will run at the end of each phase,
 depending on the whenToCheck string it'll run the
 appropriate function from the winningConditions helper func */
-export function winCheck(currPhase, state) {
+export function winCheck(state) {
   let { deck, players, currentPlayerIdx, whatToCheck, whenToCheck } = state;
   if (whenToCheck === 'When deck is empty') {
     if (deck.cards.length === 0) {

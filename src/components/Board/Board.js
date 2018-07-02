@@ -116,7 +116,7 @@ export default class Board extends Component {
         // if not, update the state and run winCheck func
       } else {
         this.updateState(validatorResult);
-        winCheck(this.state.currPhase, this.state);
+        winCheck(this.state);
       }
       // if the validator returned false
     } else {
