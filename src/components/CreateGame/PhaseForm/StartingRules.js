@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
 
+//Set initial state
+let state = {
+      players: 1,
+      cards: 0,
+      name: 'SUITS'
+    }
+
 export default class StartRules extends Component {
   constructor() {
     super();
-    this.state = {
-      players: 1,
-      cards: 0,
-      name: ''
-    };
+    //Retrieve last state
+    this.state = state;
+
+    //bind all click functions
     this.incrementPlayers = this.incrementPlayers.bind(this);
     this.incrementCards = this.incrementCards.bind(this);
     this.decrementPlayers = this.decrementPlayers.bind(this);
     this.decrementCards = this.decrementCards.bind(this);
     this.handleName = this.handleName.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
-    // this.moveNextButton = this.moveNextButton.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.moveNextButton();
-  // }
+  componentWillUnmount() {
+    //remember state for next mount
+    state = this.state;
+  }
 
   handleName(event) {
     let name = event.target.value
@@ -76,8 +81,7 @@ export default class StartRules extends Component {
       <div className="starting-container">
         <div className="starting-rules">
           <div className="starting-rules-form">
-            <div className="parent-form-right-title">Suits</div>
-            <div className="starting-rules-name-container">
+            <div className="parent-form-right-title">
               <input onChange={this.handleName} value={this.state.name}/>
             </div>
             <div className="starting-rules-options-container">

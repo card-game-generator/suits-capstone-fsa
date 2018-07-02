@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import StartingRules from './StartingRules';
 import PhaseForm from './PhaseForm';
 import WinForm from './WinConditions';
-// import { getGameObj } from '../../Board/BoardContext';
+import Modal from 'react-responsive-modal';
+import Documentation from './Documentation';
 
 export default class FormContainer extends Component {
   constructor() {
@@ -15,12 +16,23 @@ export default class FormContainer extends Component {
       turn: [],
       whatToCheck: '',
       whenToCheck: '',
+      modalOpen: false
     };
     this.handleState = this.handleState.bind(this);
     this.showMenu = this.showMenu.bind(this);
-    this.viewImport = this.viewImport.bind(this);
     this.handleImport = this.handleImport.bind(this);
+    this.handleNavigate = this.handleNavigate.bind(this);
   }
+
+  //for Modal opening
+  onOpenModal = () => {
+    this.setState({ modalOpen: true });
+  };
+ 
+  //for Modal closing
+  onCloseModal = () => {
+    this.setState({ modalOpen: false });
+  };
 
   handleState(stateChanges) {
     let formIdx = this.state.formIdx + 1;
@@ -30,9 +42,8 @@ export default class FormContainer extends Component {
     if (hidden) this.showMenu();
   }
 
-  //For Jack to view imports, changes index to 10
-  viewImport() {
-    let formIdx = 10;
+  handleNavigate(index) {
+    let formIdx = index;
     this.setState({ formIdx });
   }
 
@@ -52,6 +63,8 @@ export default class FormContainer extends Component {
   render() {
     let idx = this.state.formIdx;
     const captureRules = this.props.captureRules;
+    const { modalOpen } = this.state;
+
     return (
       <div id="parent-form" className="parent-form">
 
@@ -62,7 +75,7 @@ export default class FormContainer extends Component {
             <div className="parent-form-game-title">Suits</div>
           </div>
 
-          <div className="parent-form-menu-section-title-container">
+          <div onClick={() => this.handleNavigate(1)} className="parent-form-menu-section-title-container">
             <div className="parent-form-menu-icon"><i className="fas fa-cog"></i></div>
             <div className="parent-form-menu-title">Starting Overview</div>
           </div>
@@ -86,7 +99,7 @@ export default class FormContainer extends Component {
             </div>
           </div>
 
-          {this.state.turn.length !== 0 && <div className="parent-form-menu-section-title-container">
+          {this.state.turn.length !== 0 && <div onClick={() => this.handleNavigate(2)} className="parent-form-menu-section-title-container">
             <div className="parent-form-menu-icon"><i className="fas fa-cog"></i></div>
             <div className="parent-form-menu-title">Turn</div>
           </div>}
@@ -141,7 +154,7 @@ export default class FormContainer extends Component {
 
           <div className="parent-form-menu-section-title-container">
             <div className="parent-form-menu-icon"><i className="fas fa-cog"></i></div>
-            <div onClick={this.viewImport} className="parent-form-menu-title">My Games</div>
+            <div onClick={() => this.handleNavigate(10)} className="parent-form-menu-title">My Games</div>
           </div>
 
         </div>
@@ -149,6 +162,12 @@ export default class FormContainer extends Component {
 
         <div id="parent-form-main" className="parent-form-main">
           <button id="hamburger-button" onClick={this.showMenu} className="hamburger-button"><i className="fas fa-bars"></i></button>
+          <button id="help-button" onClick={this.onOpenModal} className="help-button"><i class="fas fa-question-circle"></i></button>
+
+          <Modal open={modalOpen} onClose={this.onCloseModal} center>
+            <Documentation />
+          </Modal>
+          
           {idx === 1 ? <StartingRules handleSubmit={this.handleState} /> : null}
           {idx === 2 ? <PhaseForm handleSubmit={this.handleState} /> : null}
           {idx === 3 ? (

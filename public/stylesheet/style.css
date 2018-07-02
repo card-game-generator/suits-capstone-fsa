@@ -34,7 +34,7 @@ button:focus {
 }
 
 .hidden {
-    width: 0 !important;
+    margin-left: -211px !important;
 }
 
 .hamburger-button {
@@ -50,8 +50,25 @@ button:focus {
     color: #51cd98;
 }
 
+.help-button {
+    font-size: 28px;
+    position: absolute;
+    top: 20px;
+    right: 11vw;
+    border: none;
+    transition: .2s ease-in-out;
+}
+
+.help-button:hover {
+    color: #51cd98;
+}
+
 .menu-open {
     transform: rotate(90deg);
+}
+
+input:focus {
+    outline: #5ece98 auto 5px;
 }
 
 
@@ -181,9 +198,10 @@ button:focus {
     color: #ababab;
     transition: .2s ease-in-out;
     height: 100vh;
-    overflow-x: scroll;
+    overflow-x: auto;
     position: relative;
-    width: auto;
+    margin-left: 0px;
+    min-width: 211px;
 }
 
 .parent-form-main {
@@ -223,6 +241,17 @@ button:focus {
     margin-bottom: 30px;
 }
 
+.parent-form-right-title input {
+    font-size: 1em;
+    color: #51cd98;
+    font-weight: 700;
+    width: 80%;
+    text-align: center;
+    margin-bottom: 30px;
+    border: 0px;
+    font-family: 'Poppins';
+}
+
 .starting-container {
     flex: auto;
     display: flex;
@@ -244,7 +273,6 @@ button:focus {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    border-bottom: solid 5px #9bce5e;
     width: 100%;
 }
 
@@ -253,6 +281,7 @@ button:focus {
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
+    margin-bottom: 40px;
 }
 
 .starting-rules-players-title,
@@ -337,6 +366,7 @@ button:focus {
     background: #1c2227;
     align-items: flex-end;
     width: 100%;
+    border-top: solid 5px #9bce5e;
 }
 
 .starting-rules-bottom-icons {
@@ -385,6 +415,18 @@ button:focus {
 
 .starting-button-next {
     height: 100vh;
+}
+
+
+/* ---------- Phase Form ---------- */
+.turn-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.turn-form {
+    flex: auto;
 }
 
 
