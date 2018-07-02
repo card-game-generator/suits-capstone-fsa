@@ -34,7 +34,8 @@ button:focus {
 }
 
 .hidden {
-    margin-left: -226px !important;
+    width: 0 !important;
+    min-width: 0 !important;
 }
 
 .hamburger-button {
@@ -218,8 +219,8 @@ input:focus {
     height: 100vh;
     overflow-x: auto;
     position: relative;
-    margin-left: 0px;
-    width: 226px;
+    width: auto;
+    min-width: 211px;
 }
 
 .parent-form-main {
