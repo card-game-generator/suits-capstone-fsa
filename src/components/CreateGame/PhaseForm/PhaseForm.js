@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+//CG: Consider putting things into a separate folder.
 export default class PhaseForm extends Component {
   constructor() {
     super();
@@ -52,7 +53,7 @@ export default class PhaseForm extends Component {
     this.setState({ childFormShow: !this.state.childFormShow });
   }
   //TODO we might want to implement a button to remove a phase from the turn Array
-
+  //CG: We may want to put a json config file that loads up all of the content of our forms.
   render() {
     const turn = this.state.turn;
     const handleSubmit = this.props.handleSubmit;

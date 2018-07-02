@@ -9,6 +9,16 @@ class Field {
 
   // this func is expecting reqCard to be a VALUE (without SUIT)
   giveCard(reqCard) {
+    /*
+      let cardFound;
+      this.hand.filter(card => {
+        if(card.value === String(reqCard)){
+          cardFound = card; 
+          retrun false;
+        }
+      })
+
+    */
     let cardFound = this.hand.find(card => card.value === String(reqCard));
     if (cardFound) {
       this.hand.splice(this.hand.indexOf(cardFound), 1);

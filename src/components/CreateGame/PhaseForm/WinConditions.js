@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 
+//CG: Use some sort of mapping system to load these in along with good descriptions of what they are.
+let optionMapper = {
+  'score:highest': 'Player with highest score', 
+  'deck:empty': 'When deck is empty'
+}
 export default class WinConditions extends Component {
   constructor() {
     super();
@@ -12,7 +17,7 @@ export default class WinConditions extends Component {
 
   //sets the state upon selection of whenToCheck & whatToCheck options
   handleToggle(event) {
-    event.preventDefault();
+    event.preventDefault(); //CG: Not sure if we need this. 
     this.setState({
       [event.target.name]: event.target.value,
     });
@@ -35,6 +40,7 @@ export default class WinConditions extends Component {
           <label>
             How do you win?
             <select name="whatToCheck" onChange={this.handleToggle}>
+            {/* CG: Utilize value on option. */}
               <option>Player with highest score</option>
               <option>Player with most cards</option>
               <option>Player with least cards</option>
@@ -42,6 +48,7 @@ export default class WinConditions extends Component {
           </label>
 
           <div>
+            {/* CG: Avoid strong tag. */}
             <strong>How:</strong> {this.state.whatToCheck}
           </div>
           <br />

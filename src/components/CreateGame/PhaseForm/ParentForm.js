@@ -23,10 +23,12 @@ export default class FormContainer extends Component {
   }
 
   handleState(stateChanges) {
+    //CG: Consider adding backward functionality. Low input cost a lot of functionality improvements.
     let formIdx = this.state.formIdx + 1;
     this.setState({ ...stateChanges, formIdx });
   }
 
+  //CG: Worlflow comments are fine, but maybe generalize functionality
   //For Jack to view imports, changes index to 10
   viewImport() {
     let formIdx = 10;
@@ -39,6 +41,7 @@ export default class FormContainer extends Component {
     //Logic here
   }
 
+  //CG: Remove this
   handleGameStart() { }
 
   showMenu() {
@@ -47,6 +50,7 @@ export default class FormContainer extends Component {
   }
 
   render() {
+    //CG: Be consistent on destructuring or not.
     let idx = this.state.formIdx;
     const captureRules = this.props.captureRules;
     return (
@@ -143,7 +147,7 @@ export default class FormContainer extends Component {
 
         </div>
 
-
+            {/* We already have react-router-dom for the purpose of views based off of state. Maybe consider using a subrouter. */}
         <div id="parent-form-main" className="parent-form-main">
           <button id="hamburger-button" onClick={this.showMenu} className="hamburger-button"><i className="fas fa-bars"></i></button>
           {idx === 1 ? <StartingRules handleSubmit={this.handleState} /> : null}
@@ -194,7 +198,7 @@ export default class FormContainer extends Component {
               </div>
             </div>
           ) : null}
-
+          {/* We didn't forget! Of course we didn't! So this will be removed when... */}
           {/* <div>players and cards populate here, maybe another subComponent</div>
       <div>
         {idx === 1 ? <StartingRules handleSubmit={this.handleState} /> : null}

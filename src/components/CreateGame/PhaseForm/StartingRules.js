@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
+//CG: As move toward cleanup make sure to remove any commented out code or explain why it's here.
 export default class StartRules extends Component {
   constructor() {
     super();
     this.state = {
       players: 1,
       cards: 0,
-      name: '',
+      name: '', //CG: seems like a strange place to name a game. 
     };
     this.incrementPlayers = this.incrementPlayers.bind(this);
     this.incrementCards = this.incrementCards.bind(this);
@@ -43,10 +44,13 @@ export default class StartRules extends Component {
           cards,
         })
       : alert('Bro...we only have 52 cards in the deck.');
+      //CG: PLEASE make a toast and don't alert. 
   }
 
   decrementPlayers() {
-    let players = this.state.players - 1;
+    let players = this.state.players - 1; //CG: Math.min(1, this.state.players)
+    //CG: keep in mind that ternaries are usually utilized for right-hand assignment 
+    //let x = someCondition ? a : b; 
     this.state.players >= 1 ? this.setState({ players }) : '';
   }
 

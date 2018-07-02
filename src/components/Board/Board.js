@@ -61,6 +61,7 @@ export default class Board extends Component {
 
   async componentDidMount() {
     // have to await the setstate so that then the currPhase can be added on the state...
+    //CG: Don't have multiple setStates in a componentDidMount
     await this.setState({ ...this.props.boardSetup });
     // set the current player on start
     const players = this.state.players;
