@@ -37,14 +37,14 @@ export default class Documentation extends Component {
             <div className="documentation-title">Turn</div>
             <div className="documentation-sub-container">
               <div className="documentation-subtitle">Phase</div>
-              
+
               <div className="documentation-sub-container">
                 <div className="documentation-subtitle">Source</div>
                 <div className="documentation-subtitle">Source Action</div>
                 <div className="documentation-subtitle">Target</div>
                 <div className="documentation-subtitle">Target Action</div>
               </div>
-              
+
               <div className="documentation-subtitle">Dependent Phase</div>
               <div className="documentation-sub-container">
                 <div className="documentation-subtitle">Dependent Source</div>
@@ -52,7 +52,7 @@ export default class Documentation extends Component {
                 <div className="documentation-subtitle">Dependent Target</div>
                 <div className="documentation-subtitle">Dependent Target Action</div>
               </div>
-              
+
             </div>
 
           </div>
@@ -69,58 +69,21 @@ export default class Documentation extends Component {
 
         <div className="documentation">
 
-          <div className="documentation-title">Phase Form: </div>
-          <div className="documentation-content">
-            <h4>Here, you'll be creating your game! You can do it for the following:</h4>
-            <small>
-              <p>
-                First, you choose a <strong>source</strong>. Your source is going to be who the
-                current player is, if there is any. Right now, it can only be yourself so choose
-                'self'.
-            </p>
-              <p>
-                Second, you choose a <strong>source action</strong>. This is going to be the action
-                that the source is going to be going through. For now, choose 'add card'.
-            </p>
-              <p>
-                Third, you choose a <strong>target</strong>. Who is the player that we want to target?
-                For now, choose 'player'.
-            </p>
-              <p>
-                Fourth, you choose a <strong>target action</strong>. What to we want the player to do?
-                Let's choose 'give card'
-            </p>
-              <p>
-                Then, we want to add a <strong>dependent phase</strong>. Let's click there and set
-              toggle dependency to <strong>false</strong>. This means that this is what's going to
-                      happen when the player we target doesn't have the card we request.
-            </p>
-              <p>
-                The <strong>source</strong> is still 'self', and the <strong>source action</strong> is
-              still 'add card', but the <strong>target</strong> is now 'deck' and the
-              <strong>target action</strong> is 'give card'.
-            </p>
-              <p>
-                Click on <strong>submit phase</strong> and lets add another phase:
-              <br />
-                <strong>Source:</strong> self
-              <br />
-                <strong>Source Action:</strong> has 4 of a kind
-              <br />
-                <strong>Target & target action:</strong> null (select something else and then select
-                null - we're working on this big)
-              <br />
-                <strong>Add Dependent Phase => Toggle:</strong> true
-              <br />
-                <strong>source:</strong> self
-              <br />
-                <strong>source action:</strong> increment score
-              <br />
-                <strong>target & target action:</strong> null (select somehting else and then select
-                null - we're working on this big)
-            </p>
-            </small>
+          <div className="turn-form-title">
+            <h3>Welcome to the Phase Form!</h3>
           </div>
+
+          <div className="documentation-content">
+            Here, you'll be creating the rules for your game! A phase is each componenet of a turn.
+            For example, if I want to play 'Go Fish', one turn will be made up of 2 phases, each
+            with a dependent phase. The first, I want the current player to request a card from
+            another player. Since that has two outcomes, I want to add a
+            <strong>dependent phase</strong>. If the player does not have the card, I want to
+            request a card from the deck - then I can finally submit the phase. But my turn isn't
+            over yet! I need to check if I have a 4 of a kind - that'll be the next phase. Then my
+            turn is over and I can hit 'submit turn' - let's get creative!
+          </div>
+
 
         </div>
       </div>

@@ -10,10 +10,18 @@ let state = {
 export default class StartRules extends Component {
   constructor() {
     super();
+<<<<<<< HEAD
     //Retrieve last state
     this.state = state;
 
     //bind all click functions
+=======
+    this.state = {
+      players: 1,
+      cards: 0,
+      name: '',
+    };
+>>>>>>> master
     this.incrementPlayers = this.incrementPlayers.bind(this);
     this.incrementCards = this.incrementCards.bind(this);
     this.decrementPlayers = this.decrementPlayers.bind(this);
@@ -81,8 +89,15 @@ export default class StartRules extends Component {
       <div className="starting-container main-window">
         <div className="starting-rules">
           <div className="starting-rules-form">
+<<<<<<< HEAD
             <div className="parent-form-right-title">
               <input onChange={this.handleName} value={this.state.name}/>
+=======
+            <div className="parent-form-right-title">Suits</div>
+            <div className="starting-rules-name-container">
+              <h4>Please enter the game name: </h4>
+              <input onChange={this.handleName} value={this.state.name} />
+>>>>>>> master
             </div>
             <div className="starting-rules-options-container">
               <div className="starting-rules-players">

@@ -53,8 +53,6 @@ export default class FormContainer extends Component {
     //Logic here
   }
 
-  handleGameStart() { }
-
   showMenu() {
     document.getElementById("hamburger-menu").classList.toggle('hidden');
     document.getElementById("hamburger-button").classList.toggle('menu-open');
@@ -96,7 +94,7 @@ export default class FormContainer extends Component {
                 <div className="parent-form-menu-section-title">Options</div>
                 <div className="parent-form-menu-options">
                   <div className="parent-form-menu-players">Players: {this.state.players}</div>
-                  <div className="parent-form-menu-cards">Cards: {this.state.players}</div>
+                  <div className="parent-form-menu-cards">Cards: {this.state.cards}</div>
                 </div>
               </div>
             </div>
