@@ -76,8 +76,6 @@ export default class FormContainer extends Component {
       .collection('games')
       .doc(`${this.state.importedGame}`)
       .get();
-
-    console.log(game.data());
     this.setState({ ...game.data() });
     //Logic here
   }
@@ -89,7 +87,6 @@ export default class FormContainer extends Component {
 
   render() {
     let idx = this.state.formIdx;
-    console.log(idx);
     const captureRules = this.props.captureRules;
     const { modalOpen } = this.state;
 
