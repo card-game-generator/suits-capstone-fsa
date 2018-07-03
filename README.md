@@ -4,6 +4,7 @@ Below you will find some information on how to navigate through our code.<br>
 
 ## Table of Contents
 
+- [Run Repo Locally](#run-repo-locally)
 - [Folder Structure](#folder-structure)
 - [Components](#components)
   - [Board.js](#board.js)
@@ -25,6 +26,10 @@ Below you will find some information on how to navigate through our code.<br>
   - [Deck.js](#deck.js)
   - [Field.js](#field.js)
   - [Player.js](#player.js)
+
+## Run Repo Locally
+
+For the project to run locally, you must first `npm install`, then `npm run start`. The project is running on port 3000.
 
 ## Folder Structure
 
@@ -66,13 +71,13 @@ suits-capstone-fsa/
   README.md
 ```
 
-For the project to run locally, you must first `npm install`, then `npm run start`.
-
 ## Components
 
 In `src/components/`, you have the following components:
 
 ### Board.js
+
+Here, you'll be able to see the logic for all of the comopnents on the board. This includes each player, their hand, the deck, the field, win phases, and all the game logic behind building a game.
 
 ### BoardContext.js
 
