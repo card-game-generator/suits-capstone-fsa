@@ -28,6 +28,7 @@ export default class PhaseForm extends Component {
     this.handleSubmitPhase = this.handleSubmitPhase.bind(this);
     this.handleSubmitDependentPhase = this.handleSubmitDependentPhase.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentWillUnmount() {
@@ -76,6 +77,15 @@ export default class PhaseForm extends Component {
   }
   //TODO we might want to implement a button to remove a phase from the turn Array
 
+  handleDelete(event) {
+    if (window.confirm('Are you sure you want to delete this phase?')) {
+      let turnArrayCopy = [...this.state.turn];
+      let index = turnArrayCopy.indexOf(event.target.value);
+      turnArrayCopy.splice(turnArrayCopy, 1);
+      this.setState({ turn: turnArrayCopy });
+    }
+  }
+
   render() {
     const turn = this.state.turn;
     const handleSubmit = this.props.handleSubmit;
@@ -84,7 +94,6 @@ export default class PhaseForm extends Component {
     return (
       <div className="phase-form-container main-window">
         <div className="phase-form">
-
           <div className="phase-form-form">
             <div className="parent-form-right-title">{name}</div>
             <div className="phase-form-options-container">
@@ -210,13 +219,13 @@ export default class PhaseForm extends Component {
 
               </div>
 
-
               <button type="button" onClick={this.handleSubmitDependentPhase}>
                 Add Dependent Phase
-        </button>
+              </button>
               <button type="button" onClick={this.handleSubmitPhase}>
                 Submit Phase
-        </button>
+              </button>
+              
             </div>
           </div>
 
@@ -224,22 +233,35 @@ export default class PhaseForm extends Component {
             {this.state.turn.map((phase, index) => {
               return (
                 <div key={`${phase}${index + 1}`} className="phase-form-bottom-content">
+                  <button type="button" onClick={this.handleDelete}>
+                    Delete!
+                  </button>
                   <div className="phase-form-source">{phase.source}</div>
                   <div className="phase-form-sourceAction">{phase.sourceAction}</div>
                   <div className="phase-form-target">{phase.target}</div>
                   <div className="phase-form-targetAction">{phase.targetAction}</div>
                   <div className="phase-form-dependentSource">{phase.dependantSource}</div>
-                  <div className="phase-form-dependentSourceAction">{phase.dependentSourceAction}</div>
+                  <div className="phase-form-dependentSourceAction">
+                    {phase.dependentSourceAction}
+                  </div>
                   <div className="phase-form-dependentTarget">{phase.dependentTarget}</div>
-                  <div className="phase-form-dependentTargetAction">{phase.dependentTargetAction}</div>
+                  <div className="phase-form-dependentTargetAction">
+                    {phase.dependentTargetAction}
+                  </div>
                 </div>
-              )
+              );
             })}
           </div>
-
         </div>
-        <div id="next-button" className="starting-button-next"><button className="starting-rules-bottom-button fas fa-chevron-right" type="button" onClick={() => handleSubmit({ turn })}></button></div>
+        <div id="next-button" className="starting-button-next">
+          <button
+            className="starting-rules-bottom-button fas fa-chevron-right"
+            type="button"
+            onClick={() => handleSubmit({ turn })}
+          />
+        </div>
       </div>
+
     );
   }
 }
