@@ -149,13 +149,23 @@ In `utils/`, you will have the following utilities files that hold some our core
 
 ### CurrentGame.js
 
+In this file inside the Game folder, we hold the logic for beginning a game. We have functions for creating each individual player's hand, checking for win conditions, and the most important part of our application - the validator function. In this function, we pass in every current phase and cross reference it with the move that is supposed to be made during that phase, not allowing invalid moves to be done.
+
 ### Card.js
+
+This component creates an individual card, made up of a suit and a value.
 
 ### Deck.js
 
+This is where the deck is created and shuffled. We also have methods 'getSize' and 'giveCard', which check the size of the deck and give a random card to the player if needed, respectively.
+
 ### Field.js
 
+Similar to the [Deck](#deck.js) Component, the field consists of face up cards that aren't in a player's hand. It also has methods on it to give a card to a player if needed, or to allow a player to drop a card on it.
+
 ### Player.js
+
+Player is class with many methods on it that belong to an individual player. We can create a player's hand; increment their score; give a card to another player; add a card from another player, the deck, or field; and check if a player has 4 of a kind.
 
 <!--SECTION FIVE-->
 
