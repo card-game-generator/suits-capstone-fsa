@@ -1,3 +1,5 @@
+import Toastify from 'toastify-js';
+
 import Deck from '../Deck';
 import Player from '../Player';
 import Field from '../Field';
@@ -32,7 +34,14 @@ export function validator(currPhase, source, target, request) {
     }
     // if the player clicks on invalid target
   } else {
-    alert(`You can't do that`);
+    Toastify({
+      text: `You can't do that`,
+      duration: 3000,
+      close: true,
+      gravity: 'top', // `top` or `bottom`
+      positionLeft: false, // `true` or `false`
+      backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
+    }).showToast();
     return 'invalid';
   }
   return result;
@@ -60,26 +69,26 @@ export function winCheck(currPhase, state) {
     players.forEach(player => {
       switch (condition) {
         case 'Player with highest score':
+          // if two players both have the highest score then THERE IS NO WINNER!!!!!!
+          if (player.score === highestScore) winningPlayer = {};
           if (player.score > highestScore) {
             highestScore = player.score;
             winningPlayer = player;
           }
-          // if two players both have the highest score then THERE IS NO WINNER!!!!!!
-          if (player.score === highestScore) winningPlayer = {};
           break;
         case 'Player with most cards':
+          if (player.hand.length === highestCardCount) winningPlayer = {};
           if (player.hand.length > highestCardCount) {
             highestCardCount = player.hand.length;
             winningPlayer = player;
           }
-          if (player.hand.length === highestCardCount) winningPlayer = {};
           break;
         case 'Player with least cards':
+          if (player.hand.length === lowestCardCount) winningPlayer = {};
           if (player.hand.length < lowestCardCount) {
             lowestCardCount = player.hand.length;
             winningPlayer = player;
           }
-          if (player.hand.length === lowestCardCount) winningPlayer = {};
           break;
       }
     });

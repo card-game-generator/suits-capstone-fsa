@@ -17,19 +17,12 @@ export default class Deck extends Component {
     return (
       <div className="deck-container">
         Hi I'm the deck, I have <p>{deck.cards.length} cards</p>
-        <form onSubmit={event => this.props.submitHandler(deck, this.state.reqCard, event)}>
-          <label>Request Card: </label>
-          <select onChange={this.handleChange}>
-            {deckValues.map(deckValue => {
-              return (
-                <option value={deckValue} key={deckValue}>
-                  {deckValue}
-                </option>
-              );
-            })}
-          </select>
-          <button type="submit">Request</button>
-        </form>
+        <button
+          type="submit"
+          onClick={event => this.props.submitHandler(deck, this.state.reqCard, event)}
+        >
+          Draw from Deck
+        </button>
       </div>
     );
   }
