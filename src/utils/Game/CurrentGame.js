@@ -1,3 +1,5 @@
+import Toastify from 'toastify-js';
+
 import Deck from '../Deck';
 import Player from '../Player';
 import Field from '../Field';
@@ -32,7 +34,14 @@ export function validator(currPhase, source, target, request) {
     }
     // if the player clicks on invalid target
   } else {
-    alert(`You can't do that`);
+    Toastify({
+      text: `You can't do that`,
+      duration: 3000,
+      close: true,
+      gravity: 'top', // `top` or `bottom`
+      positionLeft: false, // `true` or `false`
+      backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
+    }).showToast();
     return 'invalid';
   }
   return result;
