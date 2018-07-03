@@ -9,9 +9,9 @@ Below you will find some information on how to navigate through our code.<br>
   - [npm start](#npm-start)
   - [npm test](#npm-test)
 - [Board Components](#board-components)
-  - [Board.js](#Board)
+  - [Board.js](#Board.js)
   - [Card.js](#Card.js)
-  - [Deck](#Deck)
+  - [Deck.js](#Deck.js)
   - [Field.js](#Field.js)
   - [Player.js](#Player.js)
 - [CreateGame Components](#creategame-components)
@@ -28,6 +28,7 @@ Below you will find some information on how to navigate through our code.<br>
   - [Field.js](#field.js)
   - [Player.js](#player.js)
 - [Playing the Game](#playing-the-game)
+- [Developers](#developers)
 
 ## Folder Structure
 
@@ -91,7 +92,7 @@ Launches the test runner in the interactive watch mode.
 
 After running `npm install` and `npm start`, you should be able to begin a game.
 
-1.  Select the number of players and number of cards per hand.
+1.  Select the number of players and number of cards per hand. You can also add a name to your game,
 
 <!--SECTION THREE-->
 
@@ -99,11 +100,11 @@ After running `npm install` and `npm start`, you should be able to begin a game.
 
 In `src/components/Board`, you have the following components:
 
-### Board
+### Board.js
 
 Here, you'll be able to see the logic for all of the components on the board. This includes each player, their hand, the deck, the field, win phases, and all the game logic behind building a game.
 
-### `Card.js`
+### Card.js
 
 Renders the card components for each player's hand.
 
@@ -174,3 +175,10 @@ Similar to the [Deck](#deck.js) Component, the field consists of face up cards t
 ### Player.js
 
 Player is class with many methods on it that belong to an individual player. We can create a player's hand; increment their score; give a card to another player; add a card from another player, the deck, or field; and check if a player has 4 of a kind.
+
+# Developers
+
+- [Bernice Marie Abreu](https://github.com/bmabreu)
+- [Daniel Castillo](https://github.com/dcastillo3)
+- [Dolibeth Estevez](https://github.com/dolibethestevez)
+- [Jack Lye](https://github.com/catncradle)
