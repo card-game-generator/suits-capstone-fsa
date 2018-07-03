@@ -10,14 +10,12 @@ Below you will find some information on how to navigate through our code.<br>
   - [npm test](#npm-test)
 - [Board Components](#board-components)
   - [Board.js](#board.js)
-    <!-- - [BoardContext.js](#boardcontext.js) -->
   - [Card.js](#card.js)
   - [Deck.js](#deck.js)
   - [Field.js](#field.js)
   - [Player.js](#player.js)
 - [CreateGame Components](#creategame-components)
   - [Documentation.js](#documentation.js)
-    <!-- - [FormContext.js](#formcontext.js) -->
   - [GameImport.js](#gameimport.js)
   - [ParentForm.js](#parentform.js)
   - [PhaseForm.js](#phaseform.js)
@@ -97,8 +95,6 @@ In `src/components/Board`, you have the following components:
 
 Here, you'll be able to see the logic for all of the comopnents on the board. This includes each player, their hand, the deck, the field, win phases, and all the game logic behind building a game.
 
-<!-- ### BoardContext.js -->
-
 ### Card.js
 
 Renders the card components for each player's hand.
@@ -125,21 +121,25 @@ In `src/components/CreateGame/PhaseForm`, you have the following components:
 
 Where we render the create-game instructions in the help module in the upper right hand corner of the screen.
 
-<!-- ### FormContext.js -->
-
 ### GameImport.js
 
 Importing a single game upon click of a button, controlled by firebase.
 
 ### ParentForm.js
 
-This is the home page.
+This is the home page. Here, we being in the [StartingRules](#startingrules.js) We also have the code for our hamburger menu on this component.
 
 ### PhaseForm.js
 
+One of our more reobust components, this is where a user can actually create the game they want to play. Composed of one form and one form that you can toggle, you can input the rules for your game. If there are any questions, the user can click the help modal on the top right corner of the page to see descriptive instructions on how to fill out the forms on this page.
+
 ### StartingRules.js
 
+Here is the logic that's rendered on the ParentForm component. We can find logic for incrementing and decrementing players and cards, as well as changing the name of the game right on the title of the page.
+
 ### WinConditions.js
+
+Here we have the front-end for win conditions. This is where we simply render the dropdown with selections on how you can win a game, and when to check for that win condition.
 
 <!--SECTION FOUR-->
 
