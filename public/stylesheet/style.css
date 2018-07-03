@@ -14,6 +14,7 @@
     height: 20px;
 }
 
+
 /* ---------- Global ------------ */
 body {
   margin: 0;
@@ -88,6 +89,44 @@ input:focus {
     align-items: flex-end;
     width: 100%;
     border-top: solid 5px #9bce5e;
+}
+
+.form-dropdown {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.label-option-container select {
+    background: #5ece98;
+    color: #fff;
+    font-size: 14px;
+    border: transparent;
+    -webkit-appearance: menulist-text;
+    padding: 5px;
+    position: relative;
+    width: 170px;
+    font-weight: 200;
+    border-radius: 0;
+    outline: none;
+}
+
+.label-option-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.label-option-container label {
+    padding: 5px 10px;
+    font-size: 2em;
+    font-weight: 200;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+}
+
+.Select-input input {
+    width: auto !important;
 }
 
 
@@ -452,6 +491,7 @@ input:focus {
 .review-game-content {
     flex: auto;
 }
+
 
 /* ---------- Help Menu --------- */
 .documentation-container {
