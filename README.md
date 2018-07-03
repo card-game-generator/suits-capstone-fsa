@@ -4,8 +4,10 @@ Below you will find some information on how to navigate through our code.<br>
 
 ## Table of Contents
 
-- [Run Repo Locally](#run-repo-locally)
 - [Folder Structure](#folder-structure)
+- [Available Scripts](#available-scripts)
+  - [npm start](#npm-start)
+  - [npm test](#npm-test)
 - [Components](#components)
   - [Board.js](#board.js)
   - [BoardContext.js](#boardcontext.js)
@@ -26,10 +28,6 @@ Below you will find some information on how to navigate through our code.<br>
   - [Deck.js](#deck.js)
   - [Field.js](#field.js)
   - [Player.js](#player.js)
-
-## Run Repo Locally
-
-For the project to run locally, you must first `npm install`, then `npm run start`. The project is running on port 3000.
 
 ## Folder Structure
 
@@ -70,6 +68,20 @@ suits-capstone-fsa/
     index.js
   README.md
 ```
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser. Don't forget to `npm install` before `npm start` the first time you open the repo.
+
+The page will reload if you make edits. You will also see any lint errors in the console.
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.
 
 ## Components
 
