@@ -11,24 +11,24 @@ Below you will find some information on how to navigate through our code.<br>
   - [npm start](#npm-start)
   - [npm test](#npm-test)
 - [Board Components](#board-components)
-  - [Board.js](#Board.js)
+  <!-- - [Board.js](#Board.js)
   - [Card.js](#Card.js)
   - [Deck.js](#Deck.js)
   - [Field.js](#Field.js)
-  - [Player.js](#Player.js)
+  - [Player.js](#Player.js) -->
 - [CreateGame Components](#creategame-components)
-  - [Documentation.js](#documentation.js)
+  <!-- - [Documentation.js](#documentation.js)
   - [GameImport.js](#gameimport.js)
   - [ParentForm.js](#parentform.js)
   - [PhaseForm.js](#phaseform.js)
   - [StartingRules.js](#startingrules.js)
-  - [WinConditions.js](#winconditions.js)
+  - [WinConditions.js](#winconditions.js) -->
 - [Game Logic](#game-logic)
-  - [CurrentGame.js](#currentgame.js)
+  <!-- - [CurrentGame.js](#currentgame.js)
   - [Card.js](#card.js)
   - [Deck.js](#deck.js)
   - [Field.js](#field.js)
-  - [Player.js](#player.js)
+  - [Player.js](#player.js) -->
 - [Developers](#developers)
 
 ## Introduction
@@ -103,7 +103,7 @@ After running `npm install` and `npm start` and opening [http://localhost:3000](
 
 ![alt text](./public/photos/suits-homepage.png 'Suits HomePage')
 
-2.  Select the phases you wish a turn to consist of. On the site, clicking on the help modal on the top right corner will provide you with directions on how to complete this section. Click on the right green bar to navigate to the next page.
+2.  Select the phases you wish a turn to consist of. On the site, clicking on the help modal on the top right corner will provide you with directions on how to complete this section. If you wish to delete a phase, click on the _x_ on the top right hand corner of the individual phase at the bottom of the screen. Click on the right green bar to navigate to the next page.
 
 3.  Select how your game would be won, and when to check for this - at the end of each phase? At the end of each turn? When the deck is empty? The possibilities are _almost_ endless! Click on the right green bar to navigate to the next page.
 
