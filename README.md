@@ -24,7 +24,6 @@ Below you will find some information on how to navigate through our code.<br>
   - [StartingRules.js](#startingrules.js)
   - [WinConditions.js](#winconditions.js)
 - [Game Logic](#game-logic)
-  - [Game Logic](#game-logic)
   - [CurrentGame.js](#currentgame.js)
   - [Card.js](#card.js)
   - [Deck.js](#deck.js)
@@ -33,6 +32,8 @@ Below you will find some information on how to navigate through our code.<br>
 - [Developers](#developers)
 
 ## Introduction
+
+![alt text](./public/photos/suits-logo.png 'Suits Logo')
 
 Welcome to Suits, a card-game generator geared towards game-makers and card-game fanatics alike.
 
