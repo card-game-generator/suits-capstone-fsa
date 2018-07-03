@@ -11,7 +11,7 @@ Below you will find some information on how to navigate through our code.<br>
 - [Board Components](#board-components)
   - [Board.js](#Board)
   - [Card.js](#Card.js)
-  - [Deck.js](#Deck.js)
+  - [Deck](#Deck)
   - [Field.js](#Field.js)
   - [Player.js](#Player.js)
 - [CreateGame Components](#creategame-components)
