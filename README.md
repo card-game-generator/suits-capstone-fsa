@@ -9,11 +9,11 @@ Below you will find some information on how to navigate through our code.<br>
   - [npm start](#npm-start)
   - [npm test](#npm-test)
 - [Board Components](#board-components)
-  - [Board.js](#board.js)
-  - [Card.js](#card.js)
-  - [Deck.js](#deck.js)
-  - [Field.js](#field.js)
-  - [Player.js](#player.js)
+  - [Board.js](#Board.js)
+  - [Card.js](#Card.js)
+  - [Deck.js](#Deck.js)
+  - [Field.js](#Field.js)
+  - [Player.js](#Player.js)
 - [CreateGame Components](#creategame-components)
   - [Documentation.js](#documentation.js)
   - [GameImport.js](#gameimport.js)
@@ -87,6 +87,14 @@ Launches the test runner in the interactive watch mode.
 
 <!--SECTION TWO-->
 
+## Playing the Game
+
+After running `npm install` and `npm start`, you should be able to begin a game.
+
+1.  Select the number of players and number of cards per hand.
+
+<!--SECTION THREE-->
+
 ## Board Components
 
 In `src/components/Board`, you have the following components:
@@ -111,7 +119,7 @@ Renders the field, or the face up deck, that's on the board components, making i
 
 This handles the 'request card from another player' aspect of the card game. It also shows and hides the cards as the game allows for currently and inactive players.
 
-<!--SECTION THREE-->
+<!--SECTION FOUR-->
 
 ## CreateGame Components
 
@@ -141,7 +149,7 @@ Here is the logic that's rendered on the ParentForm component. We can find logic
 
 Here we have the front-end for win conditions. This is where we simply render the dropdown with selections on how you can win a game, and when to check for that win condition.
 
-<!--SECTION FOUR-->
+<!--SECTION FIVE-->
 
 ## Game Logic
 
@@ -166,7 +174,3 @@ Similar to the [Deck](#deck.js) Component, the field consists of face up cards t
 ### Player.js
 
 Player is class with many methods on it that belong to an individual player. We can create a player's hand; increment their score; give a card to another player; add a card from another player, the deck, or field; and check if a player has 4 of a kind.
-
-<!--SECTION FIVE-->
-
-## Playing the Game
