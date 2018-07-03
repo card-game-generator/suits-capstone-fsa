@@ -1,6 +1,8 @@
 import Deck from '../Deck';
 import Player from '../Player';
 import Field from '../Field';
+import openSocket from 'socket.io-client';
+const socket = openSocket('http://localhost:8000');
 
 export function createGame(numPlayers, numCardsPerPlayer) {
   const deck = new Deck();
@@ -19,6 +21,10 @@ export function createGame(numPlayers, numCardsPerPlayer) {
 //expects to check if move/click is valid based on the target value
 export function validator(currPhase, source, target, request) {
   // SOURCE IS ALWAYS CURRENT PLAYER...
+  socket.emit('message', { message: 'hi' });
+  socket.on('message', payload => {
+    console.log(payload);
+  });
   let result = false;
   // if theres no target, run the source action by default
   if (!target) {

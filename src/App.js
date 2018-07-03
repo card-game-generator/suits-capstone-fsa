@@ -3,6 +3,7 @@ import Board from './components/Board/Board';
 import { createGame } from './utils/Game/CurrentGame';
 import ParentForm from './components/CreateGame/PhaseForm/ParentForm';
 import './App.css';
+
 class App extends Component {
   constructor() {
     super();

@@ -8,7 +8,9 @@
     "react-dom": "^16.4.1",
     "react-fontawesome": "^1.6.1",
     "react-responsive-modal": "^3.0.3",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
