@@ -9,7 +9,7 @@ Below you will find some information on how to navigate through our code.<br>
   - [npm start](#npm-start)
   - [npm test](#npm-test)
 - [Board Components](#board-components)
-  - [Board.js](#Board.js)
+  - [Board.js](#Board)
   - [Card.js](#Card.js)
   - [Deck.js](#Deck.js)
   - [Field.js](#Field.js)
@@ -99,11 +99,11 @@ After running `npm install` and `npm start`, you should be able to begin a game.
 
 In `src/components/Board`, you have the following components:
 
-### Board.js
+### Board
 
-Here, you'll be able to see the logic for all of the comopnents on the board. This includes each player, their hand, the deck, the field, win phases, and all the game logic behind building a game.
+Here, you'll be able to see the logic for all of the components on the board. This includes each player, their hand, the deck, the field, win phases, and all the game logic behind building a game.
 
-### Card.js
+### `Card.js`
 
 Renders the card components for each player's hand.
 
