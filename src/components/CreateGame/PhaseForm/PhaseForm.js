@@ -9,7 +9,7 @@ let state = {
   sourceAction: 'null',
   target: 'null',
   targetAction: 'null',
-  dependency: true,
+  dependency: false,
   dependentSource: 'null',
   dependentSourceAction: 'null',
   dependentTarget: 'null',
@@ -29,6 +29,7 @@ export default class PhaseForm extends Component {
     this.handleSubmitDependentPhase = this.handleSubmitDependentPhase.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.toggleDropDownButtons = this.toggleDropDownButtons.bind(this);
   }
 
   componentWillUnmount() {
@@ -68,16 +69,32 @@ export default class PhaseForm extends Component {
         { source, sourceAction, target, targetAction, dependency, dependentPhase: dependentObj },
       ],
       childFormShow: false,
-      dependency: true,
+      dependency: false,
     }));
+
+    let dropdownButtons = document.getElementsByClassName('dropdown-form-button');
+    let buttonsArr = Array.from(dropdownButtons);
+
+    buttonsArr.forEach((button) => {
+      if (button.classList.contains('hidden-display')) {
+        button.classList.remove('hidden-display');
+      }
+    })
   }
   // Toggles the view for the dependent phase
   handleSubmitDependentPhase() {
-    this.setState({ childFormShow: !this.state.childFormShow });
-    
+    this.setState({ childFormShow: !this.state.childFormShow, dependency: !this.state.dependency });
 
+    this.toggleDropDownButtons();
   }
   //TODO we might want to implement a button to remove a phase from the turn Array
+
+  toggleDropDownButtons() {
+    //toggles dependent phase button
+    let dropdownButtons = document.getElementsByClassName('dropdown-form-button');
+    let buttonsArr = Array.from(dropdownButtons);
+    buttonsArr.forEach(button => button.classList.toggle('hidden-display'));
+  }
 
   handleDelete(event) {
     if (window.confirm('Are you sure you want to delete this phase?')) {
@@ -100,7 +117,7 @@ export default class PhaseForm extends Component {
             <div className="parent-form-right-title">{name}</div>
             <div className="phase-form-options-container">
               <div className="form-dropdown">
-                <div className="turn-form-independent">
+                <div className="turn-form-independent turn-form-dropdown-container">
 
 
                   <div className="label-option-container">
@@ -162,8 +179,8 @@ export default class PhaseForm extends Component {
                       ]}
                     />
                   </div>
-                  <button className="dependent-form-button" type="button" onClick={this.handleSubmitDependentPhase}>
-                    Add Dependent Phase
+                  <button className="dropdown-form-button" type="button" onClick={this.handleSubmitDependentPhase}>
+                    <i className="fas fa-plus-circle"></i>
                   </button>
                 </div>
 
@@ -176,7 +193,7 @@ export default class PhaseForm extends Component {
                 {/* These are the dependent action select options, refactor later */}
 
                 {this.state.childFormShow && (
-                  <div className="turn-form-dependent">
+                  <div className="turn-form-dependent turn-form-dropdown-container">
 
                     <div className="label-option-container">
                       <label>Source</label>
@@ -238,8 +255,8 @@ export default class PhaseForm extends Component {
                       />
                     </div>
 
-                    <button className="hidden dependent-form-button" type="button" onClick={this.handleSubmitDependentPhase}>
-                      <i class="fas fa-times-circle"></i>
+                    <button className="dropdown-form-button" type="button" onClick={this.handleSubmitDependentPhase}>
+                      <i className="fas fa-times-circle"></i>
                     </button>
 
                   </div>
@@ -257,7 +274,7 @@ export default class PhaseForm extends Component {
                 return (
                   <div key={`${phase}${index + 1}`} className="phase-form-bottom-content">
                     <button className="button-close" type="button" onClick={this.handleDelete}>
-                      <i class="fas fa-times-circle"></i>
+                      <i className="fas fa-times-circle"></i>
                     </button>
                     <div className="phase-form-bottom-group">
                       <div className="phase-form-source">{phase.source}</div>
@@ -265,17 +282,27 @@ export default class PhaseForm extends Component {
                       <div className="phase-form-target">{phase.target}</div>
                       <div className="phase-form-targetAction">{phase.targetAction}</div>
                     </div>
+
+                    {phase.dependency && (
+                      <div className="turn-form-plus">
+                        <i className="fas fa-plus-circle"></i>
+                      </div>
+                    )}
+
+                    {phase.dependency && (
                     <div className="phase-form-bottom-group">
-                      <div className="phase-form-dependentSource">{phase.dependantSource}</div>
-                      <div className="phase-form-dependentSourceAction">{phase.dependentSourceAction}</div>
-                      <div className="phase-form-dependentTarget">{phase.dependentTarget}</div>
-                      <div className="phase-form-dependentTargetAction">{phase.dependentTargetAction}</div>
+                      <div className="phase-form-dependentSource">{phase.dependentPhase.source}</div>
+                      <div className="phase-form-dependentSourceAction">{phase.dependentPhase.sourceAction}</div>
+                      <div className="phase-form-dependentTarget">{phase.dependentPhase.target}</div>
+                      <div className="phase-form-dependentTargetAction">{phase.dependentPhase.targetAction}</div>
                     </div>
+                    )}
+
                   </div>
                 );
               })}
               <button className="button-submit-phase" type="button" onClick={this.handleSubmitPhase}>
-                <i class="far fa-plus-square"></i>
+                <i className="far fa-plus-square"></i>
               </button>
             </div>
           </div>

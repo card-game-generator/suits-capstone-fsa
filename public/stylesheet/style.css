@@ -39,6 +39,10 @@ button:focus {
     min-width: 0 !important;
 }
 
+.hidden-display {
+    display: none;
+}
+
 .hamburger-button {
     font-size: 28px;
     position: absolute;
@@ -83,6 +87,15 @@ button:focus {
     font-size: 50px;
 }
 
+.dropdown-form-button {
+    position: absolute;
+    top: 5px;
+    right: 0px;
+    border: none;
+    background: transparent;
+    font-size: 20px;
+}
+
 .menu-open {
     transform: rotate(90deg);
 }
@@ -117,7 +130,7 @@ input:focus {
     align-items: center;
 }
 
-.turn-form-independent {
+.turn-form-dropdown-container {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -125,21 +138,18 @@ input:focus {
     padding: 6px 20px;
     border: 1px solid #8e8e8e;
     border-radius: 7px;
-}
-
-.turn-form-dependent {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    padding: 6px 20px;
-    border: 1px solid #8e8e8e;
-    border-radius: 7px;
+    position: relative;
 }
 
 .turn-form-plus {
     font-size: 5em;
     color: #1d2329;
+}
+
+.phase-form-bottom-content .turn-form-plus {
+    font-size: 20px;
+    color: #ffffff;
+    margin-left: 20px;
 }
 
 .label-option-container select {
@@ -175,6 +185,7 @@ input:focus {
 /* -------- React Select Library (poor choice of class names .From-them...) -------- */
 .label-option-container .Select-input input {
     width: auto !important;
+    color: #fff;
 }
 
 .label-option-container .Select-control {
@@ -580,6 +591,13 @@ input:focus {
     font-size: 12px;
     letter-spacing: .5px;
     font-weight: 200;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.phase-form-bottom-group {
+    margin-left: 20px;
 }
 
 /* ---------- Win Condition ----------- */
