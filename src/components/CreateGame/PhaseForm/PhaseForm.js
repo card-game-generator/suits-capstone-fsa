@@ -66,10 +66,9 @@ export default class PhaseForm extends Component {
   }
   //TODO we might want to implement a button to remove a phase from the turn Array
 
-  handleDelete(event) {
+  handleDelete() {
     if (window.confirm('Are you sure you want to delete this phase?')) {
       let turnArrayCopy = [...this.state.turn];
-      let index = turnArrayCopy.indexOf(event.target.value);
       turnArrayCopy.splice(turnArrayCopy, 1);
       this.setState({ turn: turnArrayCopy });
     }
