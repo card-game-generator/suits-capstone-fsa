@@ -14,6 +14,7 @@
     height: 20px;
 }
 
+
 /* ---------- Global ------------ */
 body {
   margin: 0;
@@ -36,6 +37,10 @@ button:focus {
 .hidden {
     width: 0 !important;
     min-width: 0 !important;
+}
+
+.hidden-display {
+    display: none;
 }
 
 .hamburger-button {
@@ -64,6 +69,33 @@ button:focus {
     color: #51cd98;
 }
 
+.button-close {
+    background: transparent;
+    border: 0;
+    position: absolute;
+    top: 5px;
+    right: 0px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.button-submit-phase {
+    align-self: center;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 50px;
+}
+
+.dropdown-form-button {
+    position: absolute;
+    top: 5px;
+    right: 0px;
+    border: none;
+    background: transparent;
+    font-size: 20px;
+}
+
 .menu-open {
     transform: rotate(90deg);
 }
@@ -88,6 +120,108 @@ input:focus {
     align-items: flex-end;
     width: 100%;
     border-top: solid 5px #9bce5e;
+}
+
+.form-dropdown {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.turn-form-dropdown-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 6px 20px;
+    border: 1px solid #8e8e8e;
+    border-radius: 7px;
+    position: relative;
+}
+
+.turn-form-plus {
+    font-size: 5em;
+    color: #1d2329;
+}
+
+.phase-form-bottom-content .turn-form-plus {
+    font-size: 20px;
+    color: #ffffff;
+    margin-left: 20px;
+}
+
+.label-option-container select {
+    background: #5ece98;
+    color: #fff;
+    font-size: 14px;
+    border: transparent;
+    -webkit-appearance: menulist-text;
+    padding: 5px;
+    position: relative;
+    width: 170px;
+    font-weight: 200;
+    border-radius: 0;
+    outline: none;
+}
+
+.label-option-container {
+    display: flex;
+    flex-direction: column;
+    width: 270px;
+    margin: 14px 0px;
+}
+
+.label-option-container label {
+    padding: 5px 10px;
+    font-size: 1em;
+    font-weight: 300;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+}
+
+
+/* -------- React Select Library (poor choice of class names .From-them...) -------- */
+.label-option-container .Select-input input {
+    width: auto !important;
+    color: #fff;
+}
+
+.label-option-container .Select-control {
+    background: #50cd98 !important;
+    border: none;
+    font-size: 14px;
+    letter-spacing: .7px;
+}
+
+.label-option-container .Select-value-label {
+    color: #fff !important;
+}
+
+.label-option-container .Select-arrow {
+    border-color: #fff transparent transparent;
+}
+
+.label-option-container .Select-arrow-zone:hover > .Select-arrow {
+    border-top-color: #fff !important;
+}
+
+.label-option-container .Select-menu-outer {
+    font-size: 14px;
+    letter-spacing: .7px;
+    border: 0;
+    border-top: 10px solid #fff;
+}
+
+.label-option-container .Select-menu-outer > div > div {
+    background: #50cd98;
+    color: #fff;
+    transition: .1s ease-in-out;
+}
+
+.label-option-container .Select-menu-outer > div > div:hover {
+    background: #438c6d;
 }
 
 
@@ -427,8 +561,44 @@ input:focus {
 
 .phase-form-form {
     flex: auto;
+    overflow-x: auto;
 }
 
+.phase-form-bottom-container {
+    justify-content: flex-start;
+}
+
+.phase-form-bottom-group-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.phase-form-bottom-container-float {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.phase-form-bottom-content {
+    background: #5eb11e;
+    color: #fff;
+    padding: 14px;
+    position: relative;
+    border-radius: 7px 7px 0px 0px;
+    padding-right: 50px;
+    margin: 0 20px;
+    font-size: 12px;
+    letter-spacing: .5px;
+    font-weight: 200;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.phase-form-bottom-group {
+    margin-left: 20px;
+}
 
 /* ---------- Win Condition ----------- */
 .win-condition {
@@ -452,6 +622,7 @@ input:focus {
 .review-game-content {
     flex: auto;
 }
+
 
 /* ---------- Help Menu --------- */
 .documentation-container {
