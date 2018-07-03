@@ -74,6 +74,8 @@ export default class PhaseForm extends Component {
   // Toggles the view for the dependent phase
   handleSubmitDependentPhase() {
     this.setState({ childFormShow: !this.state.childFormShow });
+    
+
   }
   //TODO we might want to implement a button to remove a phase from the turn Array
 
@@ -98,160 +100,186 @@ export default class PhaseForm extends Component {
             <div className="parent-form-right-title">{name}</div>
             <div className="phase-form-options-container">
               <div className="form-dropdown">
+                <div className="turn-form-independent">
 
 
+                  <div className="label-option-container">
+                    <label>Source</label>
+                    <Select
+                      clearable={false}
+                      value={this.state.source}
+                      onChange={this.handleSelect}
+                      options={[
+                        { value: 'null', label: 'Blank', name: 'source' },
+                        { value: 'self', label: 'Self', name: 'source' },
+                      ]}
+                    />
+                  </div>
 
-                <div className="label-option-container">
-                  <label>Who's turn is it?</label>
-                  <Select
-                    value={this.state.source}
-                    onChange={this.handleSelect}
-                    options={[
-                      { value: 'null', label: 'Blank', name: 'source' },
-                      { value: 'self', label: 'Self', name: 'source' },
-                    ]}
-                  />
+                  <div className="label-option-container">
+                    <label>Source Action</label>
+                    <Select
+                      clearable={false}
+                      value={this.state.sourceAction}
+                      onChange={this.handleSelect}
+                      options={[
+                        { value: 'null', label: 'Blank', name: 'sourceAction' },
+                        { value: 'giveCard', label: 'Give Card', name: 'sourceAction' },
+                        { value: 'addCard', label: 'Add Card', name: 'sourceAction' },
+                        { value: 'has4ofAKind', label: '4 of a Kind', name: 'sourceAction' },
+                        { value: 'incrementScore', label: 'Increment Score', name: 'sourceAction' },
+                      ]}
+                    />
+                  </div>
+
+                  <div className="label-option-container">
+                    <label>Target</label>
+                    <Select
+                      clearable={false}
+                      value={this.state.target}
+                      onChange={this.handleSelect}
+                      options={[
+                        { value: 'null', label: 'Blank', name: 'target' },
+                        { value: 'player', label: 'Player', name: 'target' },
+                        { value: 'All Players', label: 'All Players', name: 'target' },
+                        { value: 'deck', label: 'Deck', name: 'target' },
+                      ]}
+                    />
+                  </div>
+
+                  <div className="label-option-container">
+                    <label>Target Action</label>
+                    <Select
+                      clearable={false}
+                      value={this.state.targetAction}
+                      onChange={this.handleSelect}
+                      options={[
+                        { value: 'null', label: 'Blank', name: 'targetAction' },
+                        { value: 'giveCard', label: 'Give Card', name: 'targetAction' },
+                        { value: 'addCard', label: 'Add Card', name: 'targetAction' },
+                        { value: 'has4ofAKind', label: '4 of a Kind', name: 'targetAction' },
+                        { value: 'incrementScore', label: 'Increment Score', name: 'targetAction' },
+                      ]}
+                    />
+                  </div>
+                  <button className="dependent-form-button" type="button" onClick={this.handleSubmitDependentPhase}>
+                    Add Dependent Phase
+                  </button>
                 </div>
 
-                <div className="label-option-container">
-                  <label>What's happening to this player?</label>
-                  <Select
-                    value={this.state.sourceAction}
-                    onChange={this.handleSelect}
-                    options={[
-                      { value: 'null', label: 'Blank', name: 'sourceAction' },
-                      { value: 'giveCard', label: 'Give Card', name: 'sourceAction' },
-                      { value: 'addCard', label: 'Add Card', name: 'sourceAction' },
-                      { value: 'has4ofAKind', label: '4 of a Kind', name: 'sourceAction' },
-                      { value: 'incrementScore', label: 'Increment Score', name: 'sourceAction' },
-                    ]}
-                  />
-                </div>
-
-                <div className="label-option-container">
-                  <label>Who/what am I targeting?</label>
-                  <Select
-                    value={this.state.target}
-                    onChange={this.handleSelect}
-                    options={[
-                      { value: 'null', label: 'Blank', name: 'target' },
-                      { value: 'player', label: 'Player', name: 'target' },
-                      { value: 'All Players', label: 'All Players', name: 'target' },
-                      { value: 'deck', label: 'Deck', name: 'target' },
-                    ]}
-                  />
-                </div>
-
-                <div className="label-option-container">
-                  <label>What do I want the target to do?</label>
-                  <Select
-                    value={this.state.targetAction}
-                    onChange={this.handleSelect}
-                    options={[
-                      { value: 'null', label: 'Blank', name: 'targetAction' },
-                      { value: 'giveCard', label: 'Give Card', name: 'targetAction' },
-                      { value: 'addCard', label: 'Add Card', name: 'targetAction' },
-                      { value: 'has4ofAKind', label: '4 of a Kind', name: 'targetAction' },
-                      { value: 'incrementScore', label: 'Increment Score', name: 'targetAction' },
-                    ]}
-                  />
-                </div>
+                {this.state.childFormShow && (
+                  <div className="turn-form-plus">
+                    <i className="fas fa-plus-circle"></i>
+                  </div>
+                )}
 
                 {/* These are the dependent action select options, refactor later */}
 
                 {this.state.childFormShow && (
                   <div className="turn-form-dependent">
-                    <hr />
-                    <div className="turn-form-dependent-title">
-                      <strong>Dependent Form:</strong>
+
+                    <div className="label-option-container">
+                      <label>Source</label>
+                      <Select
+                        clearable={false}
+                        value={this.state.dependentSource}
+                        onChange={this.handleSelect}
+                        options={[
+                          { value: 'null', label: 'Blank', name: 'dependentSource' },
+                          { value: 'self', label: 'Self', name: 'dependentSource' },
+                        ]}
+                      />
                     </div>
 
                     <div className="label-option-container">
-                      <label>Did the above phase happen?</label>
-                      <select onChange={() => this.setState({ dependency: !this.state.dependency })}>
-                        <option>true</option>
-                        <option>false</option>
-                      </select>
+                      <label>Source Action</label>
+                      <Select
+                        clearable={false}
+                        value={this.state.dependentSourceAction}
+                        onChange={this.handleSelect}
+                        options={[
+                          { value: 'null', label: 'Blank', name: 'dependentSourceAction' },
+                          { value: 'giveCard', label: 'Give Card', name: 'dependentSourceAction' },
+                          { value: 'addCard', label: 'Add Card', name: 'dependentSourceAction' },
+                          { value: 'has4ofAKind', label: '4 of a Kind', name: 'dependentSourceAction' },
+                          { value: 'incrementScore', label: 'Increment Score', name: 'dependentSourceAction' },
+                        ]}
+                      />
                     </div>
 
                     <div className="label-option-container">
-                      <label>Who's turn is it?</label>
-                      <select name="dependentSource" onChange={this.handleToggle}>
-                        <option>null</option>
-                        <option>self</option>
-                      </select>
+                      <label>Target</label>
+                      <Select
+                        clearable={false}
+                        value={this.state.dependentTarget}
+                        onChange={this.handleSelect}
+                        options={[
+                          { value: 'null', label: 'Blank', name: 'dependentTarget' },
+                          { value: 'player', label: 'Player', name: 'dependentTarget' },
+                          { value: 'All Players', label: 'All Players', name: 'dependentTarget' },
+                          { value: 'deck', label: 'Deck', name: 'dependentTarget' },
+                        ]}
+                      />
                     </div>
 
                     <div className="label-option-container">
-                      <label>What's happening to this player?</label>
-                      <select name="dependentSourceAction" onChange={this.handleToggle}>
-                        <option>null</option>
-                        <option>giveCard</option>
-                        <option>addCard</option>
-                        <option>has4OfAKind</option>
-                        <option>incrementScore</option>
-                      </select>
+                      <label>Target Action</label>
+                      <Select
+                        clearable={false}
+                        value={this.state.dependentTargetAction}
+                        onChange={this.handleSelect}
+                        options={[
+                          { value: 'null', label: 'Blank', name: 'dependentTargetAction' },
+                          { value: 'giveCard', label: 'Give Card', name: 'dependentTargetAction' },
+                          { value: 'addCard', label: 'Add Card', name: 'dependentTargetAction' },
+                          { value: 'has4ofAKind', label: '4 of a Kind', name: 'dependentTargetAction' },
+                          { value: 'incrementScore', label: 'Increment Score', name: 'dependentTargetAction' },
+                        ]}
+                      />
                     </div>
 
-                    <div className="label-option-container">
-                      <label>Who/what am I targeting?</label>
-                      <select name="dependentTarget" onChange={this.handleToggle}>
-                        <option>null</option>
-                        <option>player</option>
-                        <option>All Players</option>
-                        <option>deck</option>
-                      </select>
-                    </div>
-
-                    <div className="label-option-container">
-                      <label>What do I want the target to do?</label>
-                      <select name="dependentTargetAction" onChange={this.handleToggle}>
-                        <option>null</option>
-                        <option>giveCard</option>
-                        <option>addCard</option>
-                        <option>has4OfAKind</option>
-                        <option>incrementScore</option>
-                      </select>
-                    </div>
+                    <button className="hidden dependent-form-button" type="button" onClick={this.handleSubmitDependentPhase}>
+                      <i class="fas fa-times-circle"></i>
+                    </button>
 
                   </div>
                 )}
 
               </div>
 
-              <button type="button" onClick={this.handleSubmitDependentPhase}>
-                Add Dependent Phase
-              </button>
-              <button type="button" onClick={this.handleSubmitPhase}>
-                Submit Phase
-              </button>
-              
+
             </div>
           </div>
 
           <div className="phase-form-bottom-container bottom-container">
-            {this.state.turn.map((phase, index) => {
-              return (
-                <div key={`${phase}${index + 1}`} className="phase-form-bottom-content">
-                  <button type="button" onClick={this.handleDelete}>
-                    Delete!
-                  </button>
-                  <div className="phase-form-source">{phase.source}</div>
-                  <div className="phase-form-sourceAction">{phase.sourceAction}</div>
-                  <div className="phase-form-target">{phase.target}</div>
-                  <div className="phase-form-targetAction">{phase.targetAction}</div>
-                  <div className="phase-form-dependentSource">{phase.dependantSource}</div>
-                  <div className="phase-form-dependentSourceAction">
-                    {phase.dependentSourceAction}
+            <div className="phase-form-bottom-container-float">
+              {this.state.turn.map((phase, index) => {
+                return (
+                  <div key={`${phase}${index + 1}`} className="phase-form-bottom-content">
+                    <button className="button-close" type="button" onClick={this.handleDelete}>
+                      <i class="fas fa-times-circle"></i>
+                    </button>
+                    <div className="phase-form-bottom-group">
+                      <div className="phase-form-source">{phase.source}</div>
+                      <div className="phase-form-sourceAction">{phase.sourceAction}</div>
+                      <div className="phase-form-target">{phase.target}</div>
+                      <div className="phase-form-targetAction">{phase.targetAction}</div>
+                    </div>
+                    <div className="phase-form-bottom-group">
+                      <div className="phase-form-dependentSource">{phase.dependantSource}</div>
+                      <div className="phase-form-dependentSourceAction">{phase.dependentSourceAction}</div>
+                      <div className="phase-form-dependentTarget">{phase.dependentTarget}</div>
+                      <div className="phase-form-dependentTargetAction">{phase.dependentTargetAction}</div>
+                    </div>
                   </div>
-                  <div className="phase-form-dependentTarget">{phase.dependentTarget}</div>
-                  <div className="phase-form-dependentTargetAction">
-                    {phase.dependentTargetAction}
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+              <button className="button-submit-phase" type="button" onClick={this.handleSubmitPhase}>
+                <i class="far fa-plus-square"></i>
+              </button>
+            </div>
           </div>
+
         </div>
         <div id="next-button" className="starting-button-next">
           <button
