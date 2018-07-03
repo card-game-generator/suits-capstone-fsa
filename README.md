@@ -4,7 +4,9 @@ Below you will find some information on how to navigate through our code.<br>
 
 ## Table of Contents
 
+- [Introduction](#introduction)
 - [Folder Structure](#folder-structure)
+- [Playing the Game](#playing-the-game)
 - [Available Scripts](#available-scripts)
   - [npm start](#npm-start)
   - [npm test](#npm-test)
@@ -27,8 +29,11 @@ Below you will find some information on how to navigate through our code.<br>
   - [Deck.js](#deck.js)
   - [Field.js](#field.js)
   - [Player.js](#player.js)
-- [Playing the Game](#playing-the-game)
 - [Developers](#developers)
+
+## Introduction
+
+Welcome to Suits, a card-game generator geared towards game-makers and card-game fanatics alike.
 
 ## Folder Structure
 
@@ -90,9 +95,17 @@ Launches the test runner in the interactive watch mode.
 
 ## Playing the Game
 
-After running `npm install` and `npm start`, you should be able to begin a game.
+After running `npm install` and `npm start` and opening [http://localhost:3000](http://localhost:3000), you should be able to begin a game.
 
-1.  Select the number of players and number of cards per hand. You can also add a name to your game,
+1.  Select the number of players and number of cards per hand. You can also add a name to your game by clicking on the 'Suits' logo and typing it in. Click on the right green bar to navigate to the next page.
+
+2.  Select the phases you wish a turn to consist of. On the site, clicking on the help modal on the top right corner will provide you with directions on how to complete this section. Click on the right green bar to navigate to the next page.
+
+3.  Select how your game would be won, and when to check for this - at the end of each phase? At the end of each turn? When the deck is empty? The possibilities are _almost_ endless! Click on the right green bar to navigate to the next page.
+
+4.  Review your game rules. If you wish to change anything, click on the hamburger menu on the top left corner to go back to any form you want to edit. Once you feel comfortable with your choices, you have the choice to save your game to be able to come back and play it. Now, let's play some cards!
+
+5.  The board is really straightforward - it is already set up for the game that you want to play and it will only allow the current player to make allowed moves. Play until the game is over, and the winner is announced!
 
 <!--SECTION THREE-->
 
@@ -170,7 +183,7 @@ This is where the deck is created and shuffled. We also have methods 'getSize' a
 
 ### Field.js
 
-Similar to the [Deck](#deck.js) Component, the field consists of face up cards that aren't in a player's hand. It also has methods on it to give a card to a player if needed, or to allow a player to drop a card on it.
+Similar to the [Deck Component](#deck.js), the field consists of face up cards that aren't in a player's hand. It also has methods on it to give a card to a player if needed, or to allow a player to drop a card on it.
 
 ### Player.js
 
