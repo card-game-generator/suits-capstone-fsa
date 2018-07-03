@@ -8,26 +8,28 @@ Below you will find some information on how to navigate through our code.<br>
 - [Available Scripts](#available-scripts)
   - [npm start](#npm-start)
   - [npm test](#npm-test)
-- [Components](#components)
-  - [Board/Board.js](#board/board.js)
-  - [Board/BoardContext.js](#board/boardcontext.js)
-  - [Board/Card.js](#board/card.js)
-  - [Board/Deck.js](#board/deck.js)
-  - [Board/Field.js](#board/field.js)
-  - [Board/Player.js](#board/player.js)
-  - [CreateGame/Documentation.js](#creategame/documentation.js)
-  - [CreateGame/FormContext.js](#creategame/formcontext.js)
-  - [CreateGame/GameImport.js](#creategame/gameimport.js)
-  - [CreateGame/ParentForm.js](#creategame/parentform.js)
-  - [CreateGame/PhaseForm.js](#creategame/phaseform.js)
-  - [CreateGame/StartingRules.js](#creategame/startingrules.js)
-  - [CreateGame/WinConditions.js](#creategame/winconditions.js)
+- [Board Components](#board-components)
+  - [Board.js](#board.js)
+    <!-- - [BoardContext.js](#boardcontext.js) -->
+  - [Card.js](#card.js)
+  - [Deck.js](#deck.js)
+  - [Field.js](#field.js)
+  - [Player.js](#player.js)
+- [CreateGame Components](#creategame-components)
+  - [Documentation.js](#documentation.js)
+    <!-- - [FormContext.js](#formcontext.js) -->
+  - [GameImport.js](#gameimport.js)
+  - [ParentForm.js](#parentform.js)
+  - [PhaseForm.js](#phaseform.js)
+  - [StartingRules.js](#startingrules.js)
+  - [WinConditions.js](#winconditions.js)
 - [Game Logic](#game-logic)
   - [CurrentGame.js](#currentgame.js)
   - [Card.js](#card.js)
   - [Deck.js](#deck.js)
   - [Field.js](#field.js)
   - [Player.js](#player.js)
+- [Playing the Game](#playing-the-game)
 
 ## Folder Structure
 
@@ -69,6 +71,8 @@ suits-capstone-fsa/
   README.md
 ```
 
+<!--SECTION ONE-->
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -83,37 +87,61 @@ The page will reload if you make edits. You will also see any lint errors in the
 
 Launches the test runner in the interactive watch mode.
 
-## Components
+<!--SECTION TWO-->
 
-In `src/components/`, you have the following components:
+## Board Components
+
+In `src/components/Board`, you have the following components:
 
 ### Board.js
 
 Here, you'll be able to see the logic for all of the comopnents on the board. This includes each player, their hand, the deck, the field, win phases, and all the game logic behind building a game.
 
-### Board/BoardContext.js
+<!-- ### BoardContext.js -->
 
-### Board/Card.js
+### Card.js
 
-### Board/Deck.js
+Renders the card components for each player's hand.
 
-### Board/Field.js
+### Deck.js
 
-### Board/Player.js
+Renders the deck that's on the board components, making it clickable for players to select from if their created game includes it.
 
-### CreateGame/Documentation.js
+### Field.js
 
-### CreateGame/FormContext.js
+Renders the field, or the face up deck, that's on the board components, making it clickable for players to select from if their created game includes it. A field is also used as the 'discard' pile.
 
-### CreateGame/GameImport.js
+### Player.js
 
-### CreateGame/ParentForm.js
+This handles the 'request card from another player' aspect of the card game. It also shows and hides the cards as the game allows for currently and inactive players.
 
-### CreateGame/PhaseForm.js
+<!--SECTION THREE-->
 
-### CreateGame/StartingRules.js
+## CreateGame Components
 
-### CreateGame/WinConditions.js
+In `src/components/CreateGame/PhaseForm`, you have the following components:
+
+### Documentation.js
+
+Where we render the create-game instructions in the help module in the upper right hand corner of the screen.
+
+<!-- ### FormContext.js -->
+
+### GameImport.js
+
+Importing a single game upon click of a button, controlled by firebase.
+
+### ParentForm.js
+
+This is the home page.
+
+### PhaseForm.js
+
+### StartingRules.js
+
+### WinConditions.js
+
+<!--SECTION FOUR-->
 
 ## Game Logic
 
@@ -129,4 +157,6 @@ In `utils/`, you will have the following utilities files that hold some our core
 
 ### Player.js
 
-## Phase Form explained
+<!--SECTION FIVE-->
+
+## Playing the Game
