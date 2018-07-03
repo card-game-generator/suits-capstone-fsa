@@ -96,10 +96,9 @@ export default class PhaseForm extends Component {
     buttonsArr.forEach(button => button.classList.toggle('hidden-display'));
   }
 
-  handleDelete(event) {
+  handleDelete() {
     if (window.confirm('Are you sure you want to delete this phase?')) {
       let turnArrayCopy = [...this.state.turn];
-      let index = turnArrayCopy.indexOf(event.target.value);
       turnArrayCopy.splice(turnArrayCopy, 1);
       this.setState({ turn: turnArrayCopy });
     }
