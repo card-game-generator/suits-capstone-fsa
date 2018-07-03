@@ -101,6 +101,8 @@ After running `npm install` and `npm start` and opening [http://localhost:3000](
 
 1.  Select the number of players and number of cards per hand. You can also add a name to your game by clicking on the 'Suits' logo and typing it in. Click on the right green bar to navigate to the next page.
 
+![alt text](./public/photos/suits-homepage.png 'Suits HomePage')
+
 2.  Select the phases you wish a turn to consist of. On the site, clicking on the help modal on the top right corner will provide you with directions on how to complete this section. Click on the right green bar to navigate to the next page.
 
 3.  Select how your game would be won, and when to check for this - at the end of each phase? At the end of each turn? When the deck is empty? The possibilities are _almost_ endless! Click on the right green bar to navigate to the next page.
