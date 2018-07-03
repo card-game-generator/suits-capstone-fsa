@@ -9,19 +9,19 @@ Below you will find some information on how to navigate through our code.<br>
   - [npm start](#npm-start)
   - [npm test](#npm-test)
 - [Components](#components)
-  - [Board.js](#board.js)
-  - [BoardContext.js](#boardcontext.js)
-  - [Card.js](#card.js)
-  - [Deck.js](#deck.js)
-  - [Field.js](#field.js)
-  - [Player.js](#player.js)
-  - [Documentation.js](#documentation.js)
-  - [FormContext.js](#formcontext.js)
-  - [GameImport.js](#gameimport.js)
-  - [ParentForm.js](#parentform.js)
-  - [PhaseForm.js](#phaseform.js)
-  - [StartingRules.js](#startingrules.js)
-  - [WinConditions.js](#winconditions.js)
+  - [Board/Board.js](#board/board.js)
+  - [Board/BoardContext.js](#board/boardcontext.js)
+  - [Board/Card.js](#board/card.js)
+  - [Board/Deck.js](#board/deck.js)
+  - [Board/Field.js](#board/field.js)
+  - [Board/Player.js](#board/player.js)
+  - [CreateGame/Documentation.js](#creategame/documentation.js)
+  - [CreateGame/FormContext.js](#creategame/formcontext.js)
+  - [CreateGame/GameImport.js](#creategame/gameimport.js)
+  - [CreateGame/ParentForm.js](#creategame/parentform.js)
+  - [CreateGame/PhaseForm.js](#creategame/phaseform.js)
+  - [CreateGame/StartingRules.js](#creategame/startingrules.js)
+  - [CreateGame/WinConditions.js](#creategame/winconditions.js)
 - [Game Logic](#game-logic)
   - [CurrentGame.js](#currentgame.js)
   - [Card.js](#card.js)
@@ -91,29 +91,29 @@ In `src/components/`, you have the following components:
 
 Here, you'll be able to see the logic for all of the comopnents on the board. This includes each player, their hand, the deck, the field, win phases, and all the game logic behind building a game.
 
-### BoardContext.js
+### Board/BoardContext.js
 
-### Card.js
+### Board/Card.js
 
-### Deck.js
+### Board/Deck.js
 
-### Field.js
+### Board/Field.js
 
-### Player.js
+### Board/Player.js
 
-### Documentation.js
+### CreateGame/Documentation.js
 
-### FormContext.js
+### CreateGame/FormContext.js
 
-### GameImport.js
+### CreateGame/GameImport.js
 
-### ParentForm.js
+### CreateGame/ParentForm.js
 
-### PhaseForm.js
+### CreateGame/PhaseForm.js
 
-### StartingRules.js
+### CreateGame/StartingRules.js
 
-### WinConditions.js
+### CreateGame/WinConditions.js
 
 ## Game Logic
 
