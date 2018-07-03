@@ -11,7 +11,7 @@ Below you will find some information on how to navigate through our code.<br>
   - [npm start](#npm-start)
   - [npm test](#npm-test)
 - [Board Components](#board-components)
-  - [Board.js](#Board.js)
+  - [Board.js](#board.js)
   - [Card.js](#Card.js)
   - [Deck.js](#Deck.js)
   - [Field.js](#Field.js)
