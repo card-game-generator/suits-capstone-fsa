@@ -116,7 +116,7 @@ export default class PhaseForm extends Component {
             <div className="parent-form-right-title">{name}</div>
             <div className="phase-form-options-container">
               <div className="form-dropdown">
-                <div className="turn-form-independent turn-form-dropdown-container">
+                <div className="turn-form-independent turn-form-dropdown-container dropdown-container-box">
 
 
                   <div className="label-option-container">
@@ -192,7 +192,7 @@ export default class PhaseForm extends Component {
                 {/* These are the dependent action select options, refactor later */}
 
                 {this.state.childFormShow && (
-                  <div className="turn-form-dependent turn-form-dropdown-container">
+                  <div className="turn-form-dependent turn-form-dropdown-container dropdown-container-box">
 
                     <div className="label-option-container">
                       <label>Source</label>
@@ -254,7 +254,7 @@ export default class PhaseForm extends Component {
                       />
                     </div>
 
-                    <button className="dropdown-form-button" type="button" onClick={this.handleSubmitDependentPhase}>
+                    <button className="dropdown-form-button button-close" type="button" onClick={this.handleSubmitDependentPhase}>
                       <i className="fas fa-times-circle"></i>
                     </button>
 
@@ -268,14 +268,14 @@ export default class PhaseForm extends Component {
           </div>
 
           <div className="phase-form-bottom-container bottom-container">
-            <div className="phase-form-bottom-container-float">
+            <div className="phase-form-bottom-container-float bottom-container-float">
               {this.state.turn.map((phase, index) => {
                 return (
-                  <div key={`${phase}${index + 1}`} className="phase-form-bottom-content">
+                  <div key={`${phase}${index + 1}`} className="phase-form-bottom-content bottom-content">
                     <button className="button-close" type="button" onClick={this.handleDelete}>
                       <i className="fas fa-times-circle"></i>
                     </button>
-                    <div className="phase-form-bottom-group">
+                    <div className="phase-form-bottom-group bottom-content-group">
                       <div className="phase-form-source">{phase.source}</div>
                       <div className="phase-form-sourceAction">{phase.sourceAction}</div>
                       <div className="phase-form-target">{phase.target}</div>
@@ -284,12 +284,12 @@ export default class PhaseForm extends Component {
 
                     {phase.dependency && (
                       <div className="turn-form-plus">
-                        <i className="fas fa-plus-circle"></i>
+                        <i className="fas fa-caret-right"></i>
                       </div>
                     )}
 
                     {phase.dependency && (
-                    <div className="phase-form-bottom-group">
+                    <div className="phase-form-bottom-group bottom-content-group">
                       <div className="phase-form-dependentSource">{phase.dependentPhase.source}</div>
                       <div className="phase-form-dependentSourceAction">{phase.dependentPhase.sourceAction}</div>
                       <div className="phase-form-dependentTarget">{phase.dependentPhase.target}</div>

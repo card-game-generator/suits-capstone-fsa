@@ -77,6 +77,7 @@ button:focus {
     right: 0px;
     color: #fff;
     font-size: 20px;
+    transition: .1s ease-in-out;
 }
 
 .button-submit-phase {
@@ -85,6 +86,17 @@ button:focus {
     border: none;
     color: #fff;
     font-size: 50px;
+    transition: .2s ease-in-out;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.button-submit-phase:hover {
+    color: #51cd98;
+}
+
+.button-submit-phase:hover {
+    color: #5ece66;
 }
 
 .dropdown-form-button {
@@ -94,6 +106,16 @@ button:focus {
     border: none;
     background: transparent;
     font-size: 20px;
+    transition: .1s ease-in-out;
+    color: #000;
+}
+
+.dropdown-form-button:hover {
+    color: #51cd98;
+}
+
+.button-close:hover {
+    color: #c76262;
 }
 
 .menu-open {
@@ -115,11 +137,16 @@ input:focus {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    align-items: flex-end;
     height: 20vh;
     background: #1c2227;
-    align-items: flex-end;
     width: 100%;
     border-top: solid 5px #9bce5e;
+    overflow-x: auto;
+}
+
+.starting-rules-bottom-container {
+    overflow-x: initial;
 }
 
 .form-dropdown {
@@ -130,7 +157,7 @@ input:focus {
     align-items: center;
 }
 
-.turn-form-dropdown-container {
+.dropdown-container-box {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -189,10 +216,26 @@ input:focus {
 }
 
 .label-option-container .Select-control {
-    background: #50cd98 !important;
+    background: #50cd98;
     border: none;
     font-size: 14px;
     letter-spacing: .7px;
+    transition: .1s ease-in-out;
+    cursor: pointer;
+}
+
+.label-option-container .Select.is-focused:not(.is-open) > .Select-control,
+.label-option-container .Select.is-focused > .Select-control {
+    background: #50cd98;
+    box-shadow: none;
+}
+
+.label-option-container .Select.is-focused > .Select-control {
+    background: #438c6d;
+}
+
+.label-option-container .Select-control:hover {
+    background: #438c6d;
 }
 
 .label-option-container .Select-value-label {
@@ -222,6 +265,14 @@ input:focus {
 
 .label-option-container .Select-menu-outer > div > div:hover {
     background: #438c6d;
+}
+
+.label-option-container .Select > .Select-control .Select-arrow {
+    transition: .1s ease-in-out;
+}
+
+.label-option-container .Select.is-open > .Select-control .Select-arrow {
+    border-color: transparent transparent #fff;
 }
 
 
@@ -537,14 +588,14 @@ input:focus {
     color: #fff;
     margin-left: auto;
     height: 100%;
-    border-left: 5px solid #2a905f;
+    border-left: 5px solid #438c6d;
     width: 10vw;
     transition: .1s ease-in-out;
 }
 
 .starting-rules-bottom-button:hover {
     font-size: 5em;
-    background: #8dffc8;
+    background: #438c6d;
 }
 
 .starting-button-next {
@@ -574,20 +625,22 @@ input:focus {
     align-items: center;
 }
 
-.phase-form-bottom-container-float {
+.bottom-container-float {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    height: 100px;
+    width: 100%;
 }
 
-.phase-form-bottom-content {
-    background: #5eb11e;
+.bottom-content {
+    background: #5ece67;
     color: #fff;
     padding: 14px;
     position: relative;
     border-radius: 7px 7px 0px 0px;
     padding-right: 50px;
-    margin: 0 20px;
+    margin: 10px 20px 0 20px;
     font-size: 12px;
     letter-spacing: .5px;
     font-weight: 200;
@@ -596,7 +649,7 @@ input:focus {
     align-items: center;
 }
 
-.phase-form-bottom-group {
+.bottom-content-group {
     margin-left: 20px;
 }
 
