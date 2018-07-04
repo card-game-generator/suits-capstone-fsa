@@ -25,9 +25,9 @@ export default class Player extends Component {
     let player = this.props.player;
     return (
       <div className={`player-${player.name}`}>
-        <button type="button" name="player" className="player-name">
+        <div type="button" name="player" className="player-name">
           Name: {player.name}
-        </button>
+        </div>
         <div className="player-hand" name="hand">
           Hand:{' '}
           {player.isCurrentPlayer ? (

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PlayerComp from './Player';
 import DeckComp from './Deck';
+import Card from './Card';
 import FieldComp from './Field';
 import { validator, winCheck } from '../../utils/Game/CurrentGame';
 export default class Board extends Component {
@@ -130,38 +131,61 @@ export default class Board extends Component {
   render() {
     const deck = this.state.deck;
     const field = this.state.field;
+    const activePlayer = this.state.players[this.state.currentPlayerIdx];
     return (
       <div>
         {/* Create game board */}
         <div className="game-board">
-          <div className="player-container">
+
+          <div className="game-board-players-container">
             {/* Map all players */}
             {this.state.players.map(player => {
               return (
                 //Player component
-                <button key={player.name}>
+                <div className="game-board-player-container" key={player.name}>
                   <PlayerComp submitHandler={this.handleClick} player={player} />
-                </button>
+                </div>
               );
             })}
-            <button
-              type="button"
-              onClick={this.continueTurn}
-              disabled={this.state.currPhase.target !== 'null'}
-            >
-              Continue Turn
-            </button>
           </div>
-          <div className={'deck'}>
+
+          <div className="game-board-deck-field-container">
             <DeckComp deck={deck} submitHandler={this.handleClick} />
+            <FieldComp field={field} submitHandler={this.handleClick} />
           </div>
-          <button type="button" onClick={this.checkWinCondition}>
-            Win Condition Check
+
+          <div className="game-board-current-player-container">
+            <div className="game-board-current-player-instructions">
+            </div>
+            <div className="game-board-current-player-drawer">
+              {/* Name, score, hand displayed here */}
+
+              <div className="game-board-current-player-drawer-group">
+                <div className="game-board-current-player-name">{activePlayer.name}</div>
+                <div className="game-board-current-player-score">{activePlayer.score}</div>
+              </div>
+
+              <div className="game-board-current-player-drawer-group">
+                <div className="game-board-current-player-hand">
+                  {activePlayer.hand.map(card => {
+                    return (
+                      //Card component
+                      <Card key={`${card.suit}${card.value}`} player={activePlayer} card={card} />
+                    )
+                  }
+                  )}
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <button type="button" onClick={this.continueTurn} disabled={this.state.currPhase.target !== 'null'}>
+            Continue Turn
           </button>
+
         </div>
-        <div>
-          <FieldComp field={field} submitHandler={this.handleClick} />
-        </div>
+
       </div>
     );
   }
