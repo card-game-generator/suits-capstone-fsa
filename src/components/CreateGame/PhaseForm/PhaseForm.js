@@ -62,6 +62,7 @@ export default class PhaseForm extends Component {
     }
     //If childFormShow is true, then add dependent actions to object keys
     let { source, sourceAction, target, targetAction, dependency } = this.state;
+
     this.setState(prevState => ({
       turn: [
         ...prevState.turn,
@@ -302,14 +303,15 @@ export default class PhaseForm extends Component {
                       <div className="phase-form-targetAction">{phase.targetAction}</div>
                     </div>
 
-                    {phase.dependency && (
+                    {phase.dependentPhase && (
                       <div className="turn-form-plus">
                         <i className="fas fa-caret-right" />
                       </div>
                     )}
 
-                    {phase.dependency && (
+                    {phase.dependentPhase && (
                       <div className="phase-form-bottom-group bottom-content-group">
+                        <div className="phase-form-dependency">{phase.dependency}</div>
                         <div className="phase-form-dependentSource">
                           {phase.dependentPhase.source}
                         </div>
