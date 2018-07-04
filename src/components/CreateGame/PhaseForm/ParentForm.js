@@ -284,11 +284,18 @@ export default class FormContainer extends Component {
               <div className="review-game">
                 <div className="review-game-content">
                   <div className="parent-form-right-title">{this.state.name}</div>
+
                   <div className="review-screen-container">
                     <div className="review-screen-label">Players:</div>
                     <div className="review-screen-item">{this.state.players}</div>
+                  </div>
+
+                  <div className="review-screen-container">
                     <div className="review-screen-label">Cards per player: </div>
                     <div className="review-screen-item">{this.state.cards}</div>
+                  </div>
+
+                  <div className="review-screen-container">
                     <div className="review-screen-label">Phases:</div>
                     {this.state.turn.map(phase => {
                       return (
@@ -297,11 +304,18 @@ export default class FormContainer extends Component {
                         </div>
                       );
                     })}
+                  </div>
+
+                  <div className="review-screen-container">
                     <div className="review-screen-label">How do win?</div>
                     <div className="review-screen-item">{this.state.whatToCheck}</div>
+                  </div>
+
+                  <div className="review-screen-container">
                     <div className="review-screen-label">When do you check?</div>
                     <div className="review-screen-item">{this.state.whenToCheck}</div>
                   </div>
+
                   <button
                     onClick={() => {
                       db.collection('games').add(this.state);
