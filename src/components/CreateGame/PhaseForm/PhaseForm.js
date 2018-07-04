@@ -99,7 +99,7 @@ export default class PhaseForm extends Component {
             <div className="parent-form-right-title">{name}</div>
             <div className="phase-form-options-container">
               <div className="form-dropdown">
-                <div className="turn-form-independent tufrn-form-dropdown-container dropdown-container-box">
+                <div className="turn-form-independent turn-form-dropdown-container dropdown-container-box">
                   <div className="label-option-container">
                     <label>Source</label>
                     <Select
@@ -182,7 +182,7 @@ export default class PhaseForm extends Component {
                 {this.state.childFormShow && (
                   <div className="turn-form-dependent turn-form-dropdown-container dropdown-container-box">
                     <div className="label-option-container">
-                      <label>Dependeny:</label>
+                      <label>Dependency:</label>
                       <Select
                         clearable={false}
                         value={this.state.dependency}
