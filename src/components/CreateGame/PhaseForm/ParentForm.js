@@ -46,10 +46,9 @@ export default class FormContainer extends Component {
 
   handleSelect(selectedOption) {
     if (selectedOption) {
-      this.setState({ [selectedOption.name]: selectedOption.value })
+      this.setState({ [selectedOption.name]: selectedOption.value });
     }
   }
-
 
   //for Modal opening
   onOpenModal = () => {
@@ -285,14 +284,37 @@ export default class FormContainer extends Component {
               <div className="review-game">
                 <div className="review-game-content">
                   <div className="parent-form-right-title">{this.state.name}</div>
-                  {this.state.turn.map(phase => {
-                    return (
-                      <div key={phase}>
-                        just a div showing phase {phase.source} {phase.sourceAction} {phase.target}
-                        {phase.targetAction}
-                      </div>
-                    );
-                  })}
+
+                  <div className="review-screen-container">
+                    <div className="review-screen-label">Players:</div>
+                    <div className="review-screen-item">{this.state.players}</div>
+                  </div>
+
+                  <div className="review-screen-container">
+                    <div className="review-screen-label">Cards per player: </div>
+                    <div className="review-screen-item">{this.state.cards}</div>
+                  </div>
+
+                  <div className="review-screen-container">
+                    <div className="review-screen-label">Phases:</div>
+                    {this.state.turn.map(phase => {
+                      return (
+                        <div className="review-screen-item" key={phase}>
+                          {phase.source} {phase.sourceAction} {phase.target} {phase.targetAction}
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <div className="review-screen-container">
+                    <div className="review-screen-label">How do win?</div>
+                    <div className="review-screen-item">{this.state.whatToCheck}</div>
+                  </div>
+
+                  <div className="review-screen-container">
+                    <div className="review-screen-label">When do you check?</div>
+                    <div className="review-screen-item">{this.state.whenToCheck}</div>
+                  </div>
 
                   <button
                     onClick={() => {
@@ -327,16 +349,12 @@ export default class FormContainer extends Component {
                     value={this.state.importedGame}
                     onChange={this.handleSelect}
                     options={this.state.gameList.map(gameObj => {
-                      return (
-                        {value: gameObj.id, label: gameObj.name, name: 'importedGame' }
-                      );
+                      return { value: gameObj.id, label: gameObj.name, name: 'importedGame' };
                     })}
                   />
 
                   <button type="submit">Import</button>
-
                 </form>
-
               </div>
             </div>
           ) : null}
