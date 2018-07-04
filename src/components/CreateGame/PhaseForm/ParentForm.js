@@ -5,6 +5,8 @@ import WinForm from './WinConditions';
 import db from '../../../firestore';
 import Modal from 'react-responsive-modal';
 import Documentation from './Documentation';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 export default class FormContainer extends Component {
   constructor() {
@@ -21,6 +23,7 @@ export default class FormContainer extends Component {
       importedGame: '',
       modalOpen: false,
     };
+    this.handleSelect = this.handleSelect.bind(this);
     this.handleState = this.handleState.bind(this);
     this.showMenu = this.showMenu.bind(this);
     this.handleImport = this.handleImport.bind(this);
@@ -40,6 +43,13 @@ export default class FormContainer extends Component {
 
     this.setState({ gameList });
   }
+
+  handleSelect(selectedOption) {
+    if (selectedOption) {
+      this.setState({ [selectedOption.name]: selectedOption.value })
+    }
+  }
+
 
   //for Modal opening
   onOpenModal = () => {
@@ -311,23 +321,22 @@ export default class FormContainer extends Component {
               <div className="saved-games-dropdown">
                 <form onSubmit={this.handleImport}>
                   <label>Import Game: </label>
-                  <select onChange={this.handleChange}>
-                    <option>Select a Game!</option>
-                    {this.state.gameList.map(gameObj => {
+
+                  <Select
+                    clearable={false}
+                    value={this.state.importedGame}
+                    onChange={this.handleSelect}
+                    options={this.state.gameList.map(gameObj => {
                       return (
-                        <option key={gameObj.id} value={gameObj.id}>
-                          {gameObj.name}
-                        </option>
+                        {value: gameObj.id, label: gameObj.name, name: 'importedGame' }
                       );
                     })}
-                  </select>
-                  <button
-                    type="submit"
-                    // onClick={event => this.handleImport(event)}
-                  >
-                    Import
-                  </button>
+                  />
+
+                  <button type="submit">Import</button>
+
                 </form>
+
               </div>
             </div>
           ) : null}

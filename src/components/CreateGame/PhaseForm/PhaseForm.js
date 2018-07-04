@@ -29,7 +29,6 @@ export default class PhaseForm extends Component {
     this.handleSubmitDependentPhase = this.handleSubmitDependentPhase.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    this.toggleDropDownButtons = this.toggleDropDownButtons.bind(this);
   }
 
   componentWillUnmount() {
@@ -71,30 +70,13 @@ export default class PhaseForm extends Component {
       childFormShow: false,
       dependency: false,
     }));
-
-    let dropdownButtons = document.getElementsByClassName('dropdown-form-button');
-    let buttonsArr = Array.from(dropdownButtons);
-
-    buttonsArr.forEach((button) => {
-      if (button.classList.contains('hidden-display')) {
-        button.classList.remove('hidden-display');
-      }
-    })
   }
+
   // Toggles the view for the dependent phase
   handleSubmitDependentPhase() {
     this.setState({ childFormShow: !this.state.childFormShow, dependency: !this.state.dependency });
-
-    this.toggleDropDownButtons();
   }
   //TODO we might want to implement a button to remove a phase from the turn Array
-
-  toggleDropDownButtons() {
-    //toggles dependent phase button
-    let dropdownButtons = document.getElementsByClassName('dropdown-form-button');
-    let buttonsArr = Array.from(dropdownButtons);
-    buttonsArr.forEach(button => button.classList.toggle('hidden-display'));
-  }
 
   handleDelete() {
     if (window.confirm('Are you sure you want to delete this phase?')) {
@@ -116,7 +98,7 @@ export default class PhaseForm extends Component {
             <div className="parent-form-right-title">{name}</div>
             <div className="phase-form-options-container">
               <div className="form-dropdown">
-                <div className="turn-form-independent turn-form-dropdown-container">
+                <div className="turn-form-independent turn-form-dropdown-container dropdown-container-box">
 
 
                   <div className="label-option-container">
@@ -178,9 +160,13 @@ export default class PhaseForm extends Component {
                       ]}
                     />
                   </div>
-                  <button className="dropdown-form-button" type="button" onClick={this.handleSubmitDependentPhase}>
-                    <i className="fas fa-plus-circle"></i>
-                  </button>
+
+                  {!this.state.dependency && (
+                    <button className="dropdown-form-button" type="button" onClick={this.handleSubmitDependentPhase}>
+                      <i className="fas fa-plus-circle"></i>
+                    </button>
+                  )}
+
                 </div>
 
                 {this.state.childFormShow && (
@@ -192,7 +178,7 @@ export default class PhaseForm extends Component {
                 {/* These are the dependent action select options, refactor later */}
 
                 {this.state.childFormShow && (
-                  <div className="turn-form-dependent turn-form-dropdown-container">
+                  <div className="turn-form-dependent turn-form-dropdown-container dropdown-container-box">
 
                     <div className="label-option-container">
                       <label>Source</label>
@@ -254,9 +240,11 @@ export default class PhaseForm extends Component {
                       />
                     </div>
 
-                    <button className="dropdown-form-button" type="button" onClick={this.handleSubmitDependentPhase}>
-                      <i className="fas fa-times-circle"></i>
-                    </button>
+                    {this.state.dependency && (
+                      <button className="dropdown-form-button button-close" type="button" onClick={this.handleSubmitDependentPhase}>
+                        <i className="fas fa-times-circle"></i>
+                      </button>
+                    )}
 
                   </div>
                 )}
@@ -268,14 +256,14 @@ export default class PhaseForm extends Component {
           </div>
 
           <div className="phase-form-bottom-container bottom-container">
-            <div className="phase-form-bottom-container-float">
+            <div className="phase-form-bottom-container-float bottom-container-float">
               {this.state.turn.map((phase, index) => {
                 return (
-                  <div key={`${phase}${index + 1}`} className="phase-form-bottom-content">
+                  <div key={`${phase}${index + 1}`} className="phase-form-bottom-content bottom-content">
                     <button className="button-close" type="button" onClick={this.handleDelete}>
                       <i className="fas fa-times-circle"></i>
                     </button>
-                    <div className="phase-form-bottom-group">
+                    <div className="phase-form-bottom-group bottom-content-group">
                       <div className="phase-form-source">{phase.source}</div>
                       <div className="phase-form-sourceAction">{phase.sourceAction}</div>
                       <div className="phase-form-target">{phase.target}</div>
@@ -284,17 +272,17 @@ export default class PhaseForm extends Component {
 
                     {phase.dependency && (
                       <div className="turn-form-plus">
-                        <i className="fas fa-plus-circle"></i>
+                        <i className="fas fa-caret-right"></i>
                       </div>
                     )}
 
                     {phase.dependency && (
-                    <div className="phase-form-bottom-group">
-                      <div className="phase-form-dependentSource">{phase.dependentPhase.source}</div>
-                      <div className="phase-form-dependentSourceAction">{phase.dependentPhase.sourceAction}</div>
-                      <div className="phase-form-dependentTarget">{phase.dependentPhase.target}</div>
-                      <div className="phase-form-dependentTargetAction">{phase.dependentPhase.targetAction}</div>
-                    </div>
+                      <div className="phase-form-bottom-group bottom-content-group">
+                        <div className="phase-form-dependentSource">{phase.dependentPhase.source}</div>
+                        <div className="phase-form-dependentSourceAction">{phase.dependentPhase.sourceAction}</div>
+                        <div className="phase-form-dependentTarget">{phase.dependentPhase.target}</div>
+                        <div className="phase-form-dependentTargetAction">{phase.dependentPhase.targetAction}</div>
+                      </div>
                     )}
 
                   </div>

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 let state = {
   whatToCheck: 'Player with highest score',
@@ -12,11 +14,19 @@ export default class WinConditions extends Component {
 
     //bind all click functions
     this.handleToggle = this.handleToggle.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
   componentWillUnmount() {
     //remember state for next mount
     state = this.state;
+  }
+
+  //sets source, and target
+  handleSelect(selectedOption) {
+    if (selectedOption) {
+      this.setState({ [selectedOption.name]: selectedOption.value })
+    }
   }
 
   //sets the state upon selection of whenToCheck & whatToCheck options
@@ -38,45 +48,59 @@ export default class WinConditions extends Component {
           <div className="win-condition-form">
             <div className="parent-form-right-title">{name}</div>
 
+            <div className="form-dropdown">
 
-            <div>
-              <h4>How do you win?</h4>
-              <p>
-                Below, enter the condition that will lead to winning a game, and when we should be
-                checking for the condition.
-              </p>
+              <div className="win-condition-dropdown-container dropdown-container-box">
+
+                <div className="label-option-container">
+                  <label>How Do You Win?</label>
+                  <Select
+                    clearable={false}
+                    value={this.state.whatToCheck}
+                    onChange={this.handleSelect}
+                    options={[
+                      { value: 'Player with highest score', label: 'High Score', name: 'whatToCheck' },
+                      { value: 'Player with most cards', label: 'Most Cards', name: 'whatToCheck' },
+                      { value: 'Player with least cards', label: 'Least Cards', name: 'whatToCheck' },
+                    ]}
+                  />
+                </div>
+
+                <div className="label-option-container">
+                  <label>When Do You Check?</label>
+                  <Select
+                    clearable={false}
+                    value={this.state.whenToCheck}
+                    onChange={this.handleSelect}
+                    options={[
+                      { value: 'When deck is empty', label: 'Empty Deck', name: 'whenToCheck' },
+                    ]}
+                  />
+                </div>
+
+              </div>
+
             </div>
 
-            <form>
-              <label>
-                How do you win?
-            <select name="whatToCheck" onChange={this.handleToggle}>
-                  <option>Player with highest score</option>
-                  <option>Player with most cards</option>
-                  <option>Player with least cards</option>
-                </select>
-              </label>
 
-              <div>
-                <strong>How:</strong> {this.state.whatToCheck}
-              </div>
-
-              <label>
-                When do you check?
-            <select name="whenToCheck" onChange={this.handleToggle}>
-                  <option>When deck is empty</option>
-                </select>
-              </label>
-
-              <div>
-                <strong>When:</strong> {this.state.whenToCheck}
-              </div>
-            </form>
           </div>
 
           <div className="win-condition-bottom-container bottom-container">
-            <div className="win-condition-what-to-check">{this.state.whatToCheck}</div>
-            <div className="win-condition-when-to-check">{this.state.whenToCheck}</div>
+            <div className="win-condition-bottom-container-float bottom-container-float">
+
+              <div className="bottom-content">
+                <div className="bottom-content-group">
+                  <div className="win-condition-what-to-check">{this.state.whatToCheck}</div>
+                </div>
+              </div>
+
+              <div className="bottom-content">
+                <div className="bottom-content-group">
+                  <div className="win-condition-when-to-check">{this.state.whenToCheck}</div>
+                </div>
+              </div>
+
+            </div>
           </div>
 
         </div>
