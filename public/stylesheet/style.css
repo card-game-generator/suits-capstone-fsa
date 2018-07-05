@@ -476,8 +476,18 @@ input:focus {
     margin-bottom: 30px;
 }
 
+.game-board-main-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.game-board-main-header > div {
+    margin: 0 20px;
+}
+
 .game-board-main-container .parent-form-right-title {
-    font-size: 4em;
+    font-size: 2em;
+    width: initial;
 }
 
 .parent-form-right-title input {
@@ -802,6 +812,14 @@ input:focus {
     height: 100vh;
 }
 
+.game-board-main-overflow {
+    overflow-x: auto;
+    flex: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .game-board-main-container {
     flex: auto;
     display: flex;
@@ -816,6 +834,7 @@ input:focus {
     flex-wrap: wrap;
     background: #f7f7f7;
     padding: 20px;
+    border-top: 5px solid #9bce5e;
 }
 
 .game-board-player-container {
@@ -828,9 +847,7 @@ input:focus {
     background: #2d2d2d;
     color: #fff;
     border-top: solid 5px #9bce5e;
-    flex-wrap: wrap;
-    max-height: 27vh;
-    overflow: auto;
+    height: 30vh;
 }
 
 .game-board-deck-field-container {
@@ -840,6 +857,13 @@ input:focus {
     justify-content: center;
 }
 
+.deck-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 13px;
+}
+
 .game-board-current-player-instructions-group {
     display: flex;
     flex-direction: row;
@@ -847,13 +871,11 @@ input:focus {
 
 .game-board-current-player-drawer {
     flex: auto;
-    display: flex;
-    flex-direction: column;
     padding: 20px;
+    overflow: auto;
 }
 
 .game-board-current-player-drawer-group {
-    flex: auto;
     display: flex;
     flex-direction: column;
 }
@@ -872,17 +894,22 @@ input:focus {
 .game-board-current-player-hand {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 20px;
 }
 
 .game-board-current-player-instructions {
-    padding: 20px;
+    padding: 20px 11px 20px 30px;
     background: #1c2228;
     border-right: 2px solid #464646;
     font-size: 13px;
     letter-spacing: .5px;
     font-weight: 200;
     color: #ababab;
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
 }
 
 .game-board-current-player-instructions-label {

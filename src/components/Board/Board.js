@@ -136,24 +136,30 @@ export default class Board extends Component {
     return (
       <div className="game-board">
         <div className="game-board-main-container">
+          <div className="game-board-main-overflow">
 
-          <div className="parent-form-right-title">SUITS</div>
+            <div className="game-board-main-header">
+              <div className="parent-form-right-title">SUITS</div>
+              <div className="parent-form-right-title">My Game</div>
+            </div>
 
-          <div className="game-board-players-container">
-            {/* Map all players */}
-            {this.state.players.map(player => {
-              return (
-                //Player component
-                <div className="game-board-player-container" key={player.name}>
-                  <PlayerComp submitHandler={this.handleClick} player={player} />
-                </div>
-              );
-            })}
-          </div>
+            <div className="game-board-players-container">
+              {/* Map all players */}
+              {this.state.players.map(player => {
+                return (
+                  //Player component
+                  <div className="game-board-player-container" key={player.name}>
+                    <PlayerComp submitHandler={this.handleClick} player={player} />
+                  </div>
+                );
+              })}
+            </div>
 
-          <div className="game-board-deck-field-container">
-            <DeckComp deck={deck} submitHandler={this.handleClick} />
-            <FieldComp field={field} submitHandler={this.handleClick} />
+            <div className="game-board-deck-field-container">
+              <DeckComp deck={deck} submitHandler={this.handleClick} />
+              {/* <FieldComp field={field} submitHandler={this.handleClick} /> */}
+            </div>
+
           </div>
 
           <div className="game-board-current-player-container">
