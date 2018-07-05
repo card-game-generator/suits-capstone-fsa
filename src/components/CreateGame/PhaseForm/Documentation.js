@@ -29,26 +29,33 @@ export default class Documentation extends Component {
           </div>
 
           <div className="documentation-menu-section">
-            <div className="documentation-title">Turn</div>
+            <div className="documentation-title"><a href="#turn">Turn</a></div>
             <div className="documentation-sub-container">
-              <div className="documentation-subtitle">Phase</div>
+              <div className="documentation-subtitle"><a href="#phase">Phase</a></div>
 
               <div className="documentation-sub-container">
-                <div className="documentation-subtitle">Source</div>
-                <div className="documentation-subtitle">Source Action</div>
-                <div className="documentation-subtitle">Target</div>
-                <div className="documentation-subtitle">Target Action</div>
+                <div className="documentation-subtitle"><a href="#source">Source</a></div>
+                <div className="documentation-subtitle"><a href="#source-action">Source Action</a></div>
+                <div className="documentation-subtitle"><a href="#target">Target</a></div>
+                <div className="documentation-subtitle"><a href="#target-action">Target Action</a></div>
               </div>
 
-              <div className="documentation-subtitle">Dependent Phase</div>
+              <div className="documentation-subtitle"><a href="#dependent-phase">Dependent Phase</a></div>
               <div className="documentation-sub-container">
-                <div className="documentation-subtitle">Dependent Source</div>
-                <div className="documentation-subtitle">Dependent Source Action</div>
-                <div className="documentation-subtitle">Dependent Target</div>
-                <div className="documentation-subtitle">Dependent Target Action</div>
+                <div className="documentation-subtitle"><a href="#dependent-source">Dependent Source</a></div>
+                <div className="documentation-subtitle"><a href="#dependent-source-action">Dependent Source Action</a></div>
+                <div className="documentation-subtitle"><a href="#dependent-target">Dependent Target</a></div>
+                <div className="documentation-subtitle"><a href="#dependent-target-action">Dependent Target Action</a></div>
               </div>
 
-              <div className="documentation-subtitle">Other Questions</div>
+              <div className="documentation-subtitle"><a href="#other-questions">Other</a></div>
+              <div className="documentation-sub-container">
+                <div className="documentation-subtitle"><a href="#phase-reset">Phase Reset</a></div>
+                <div className="documentation-subtitle"><a href="#delete-phase">Delete Phase</a></div>
+                <div className="documentation-subtitle"><a href="#second-phase">Second Phase</a></div>
+                <div className="documentation-subtitle"><a href="#remove-dependent">Remove Dependent</a></div>
+              </div>
+
             </div>
           </div>
 
@@ -59,6 +66,8 @@ export default class Documentation extends Component {
               <div className="documentation-subtitle">Win</div>
             </div>
           </div>
+
+
         </div>
 
         <div className="documentation">
@@ -126,11 +135,8 @@ export default class Documentation extends Component {
               {/* NESTED SUB SECTION BLOCK ENDS HERE */}
             </div>
             {/* SUB SECTION BLOCK ENDS HERE */}
-          </div>
-          {/* SECTION BLOCK ENDS HERE */}
 
-          {/* ----SECTION BLOCK STARTS HERE */}
-          <div id="turn-dependent-phase" className="documentation-section">
+
             {/* ----SUB SECTION BLOCK STARTS HERE */}
             <div id="dependent-phase" className="documentation-sub-section">
               <div className="documentation-sub-section-title">Dependent Phase</div>
@@ -141,116 +147,121 @@ export default class Documentation extends Component {
                 should request a card from the deck - then, the user can finally submit the complete
                 phase.
               </div>
-            </div>
-            {/* SUB SECTION BLOCK ENDS HERE */}
-            {/* ----NESTED SUB SECTION BLOCK STARTS HERE */}
-            <div id="dependent-source" className="documentation-nested-sub-section">
-              <div className="documentation-nested-sub-section-title">
-                What is my dependent source?
-              </div>
-              <div className="documentation-section-content">
-                My dependent source is usually going to mirror the selection for ‘source’ - it’s who
-                the dependent source is going to be led by. For ‘Go Fish’, it’s going to be ‘self’.
-              </div>
-            </div>
-
-            <div id="dependent-source-action" className="documentation-nested-sub-section">
-              <div className="documentation-nested-sub-section-title">
-                What is my dependent source action?
-              </div>
-
-              <div className="documentation-section-content">
-                This is going to be the action that the current dependent source wants to check for.
-                For ‘Go Fish’, it’ll be ’addCard’.
-              </div>
-            </div>
-
-            <div id="dependent-target" className="documentation-nested-sub-section">
-              <div className="documentation-nested-sub-section-title">
-                What is my dependent target?
-              </div>
-
-              <div className="documentation-section-content">
-                The dependent target is going to be who the dependent source action is going to
-                directly target. For ‘Go Fish’, this will be ‘deck’.
-              </div>
-            </div>
-
-            <div id="dependent-target-action" className="documentation-nested-sub-section">
-              <div className="documentation-nested-sub-section-title">
-                What is my dependent target action?
-              </div>
-
-              <div className="documentation-section-content">
-                My dependent target action is what is going to happen to the dependent target - if
-                the dependent target is ‘deck’ then the dependent target action should be ‘give
-                card’.
-              </div>
-            </div>
-            {/* NESTED SUB SECTION BLOCK ENDS HERE */}
-          </div>
-          {/* SECTION BLOCK ENDS HERE */}
-
-          {/* ----SECTION BLOCK STARTS HERE */}
-          <div id="turn-other-questions" className="documentation-section">
-            {/* ----SUB SECTION BLOCK STARTS HERE */}
-            <div id="other-questions" className="documentation-sub-section">
-              <div className="documentation-sub-section-title">Other Questions</div>
 
               {/* ----NESTED SUB SECTION BLOCK STARTS HERE */}
-              <div id="other-questions-add-phase" className="documentation-nested-sub-section">
+              <div id="dependent-source" className="documentation-nested-sub-section">
                 <div className="documentation-nested-sub-section-title">
-                  How do I add more than one phase?
-                </div>
+                  What is my dependent source?
+              </div>
+                <div className="documentation-section-content">
+                  My dependent source is usually going to mirror the selection for ‘source’ - it’s who
+                  the dependent source is going to be led by. For ‘Go Fish’, it’s going to be ‘self’.
+              </div>
+              </div>
+
+              <div id="dependent-source-action" className="documentation-nested-sub-section">
+                <div className="documentation-nested-sub-section-title">
+                  What is my dependent source action?
+              </div>
 
                 <div className="documentation-section-content">
-                  After clicking ‘submit phase’, the form resets and the user can go about adding
-                  new phases.
-                </div>
+                  This is going to be the action that the current dependent source wants to check for.
+                  For ‘Go Fish’, it’ll be ’addCard’.
+              </div>
               </div>
 
-              <div id="other-questions-mistake-phase" className="documentation-nested-sub-section">
+              <div id="dependent-target" className="documentation-nested-sub-section">
                 <div className="documentation-nested-sub-section-title">
-                  I mistakingly added a phase - how do I delete it?!
-                </div>
-
-                <div className="documentation-section-content">Coming soon!</div>
+                  What is my dependent target?
               </div>
-
-              <div id="other-questions-second-phase" className="documentation-nested-sub-section">
-                <div className="documentation-nested-sub-section-title">
-                  What should my second phase be?
-                </div>
 
                 <div className="documentation-section-content">
-                  This is completely optional - the user can go ahead and complete a game with only
-                  one phase. However, for a game like ‘Go Fish’, they might want to have another
-                  phase that’s going to be used to increment the score. The source needs to check if
-                  they have a 4 of a kind and then add a dependent phase to increment the score.
-                </div>
+                  The dependent target is going to be who the dependent source action is going to
+                  directly target. For ‘Go Fish’, this will be ‘deck’.
+              </div>
               </div>
 
-              <div
-                id="other-questions-delete-dep-phase"
-                className="documentation-nested-sub-section"
-              >
+              <div id="dependent-target-action" className="documentation-nested-sub-section">
                 <div className="documentation-nested-sub-section-title">
-                  I accidentally clicked on dependent phase - how do I return to submit only one
-                  phase?
-                </div>
+                  What is my dependent target action?
+              </div>
 
                 <div className="documentation-section-content">
-                  Clicking on ‘add dependent phase’ a second time will have the additional form hide
-                  again.
-                </div>
+                  My dependent target action is what is going to happen to the dependent target - if
+                  the dependent target is ‘deck’ then the dependent target action should be ‘give
+                  card’.
               </div>
-
+              </div>
               {/* NESTED SUB SECTION BLOCK ENDS HERE */}
+
             </div>
             {/* SUB SECTION BLOCK ENDS HERE */}
+
+            {/* ----SUB SECTION BLOCK STARTS HERE */}
+          <div id="other-questions" className="documentation-sub-section">
+            <div className="documentation-sub-section-title">Other Questions</div>
+
+            <div className="documentation-section-content">
+              FAQs on filling out your phase form!
+            </div>
+
+            {/* ----NESTED SUB SECTION BLOCK STARTS HERE */}
+            <div id="phase-reset" className="documentation-nested-sub-section">
+              <div className="documentation-nested-sub-section-title">Phase Reset</div>
+
+              <div className="documentation-section-content">
+                After clicking ‘submit phase’, the form resets and the user can go about adding
+                new phases.
+                </div>
+            </div>
+
+            <div id="delete-phase" className="documentation-nested-sub-section">
+              <div className="documentation-nested-sub-section-title">
+                I mistakingly added a phase - how do I delete it?!
+                </div>
+
+              <div className="documentation-section-content">Coming soon!</div>
+            </div>
+
+            <div id="second-phase" className="documentation-nested-sub-section">
+              <div className="documentation-nested-sub-section-title">
+                What should my second phase be?
+                </div>
+
+              <div className="documentation-section-content">
+                This is completely optional - the user can go ahead and complete a game with only
+                one phase. However, for a game like ‘Go Fish’, they might want to have another
+                phase that’s going to be used to increment the score. The source needs to check if
+                they have a 4 of a kind and then add a dependent phase to increment the score.
+                </div>
+            </div>
+
+            <div
+              id="remove-dependent"
+              className="documentation-nested-sub-section"
+            >
+              <div className="documentation-nested-sub-section-title">
+                I accidentally clicked on dependent phase - how do I return to submit only one
+                phase?
+                </div>
+
+              <div className="documentation-section-content">
+                Clicking on ‘add dependent phase’ a second time will have the additional form hide
+                again.
+                </div>
+            </div>
+
+            {/* NESTED SUB SECTION BLOCK ENDS HERE */}
+
+          </div>
+
+          {/* SUB SECTION BLOCK ENDS HERE */}
+
           </div>
           {/* SECTION BLOCK ENDS HERE */}
+
         </div>
+
       </div>
     );
   }

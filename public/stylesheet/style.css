@@ -796,6 +796,18 @@ input:focus {
     overflow: auto;
 }
 
+.documentation-title > a,
+.documentation-subtitle > a {
+    text-decoration: none;
+    color: #000;
+    transition: .1s ease-in-out;
+}
+
+.documentation-title > a:hover,
+.documentation-subtitle > a:hover {
+    color: #51cd98;
+}
+
 .documentation-section {
     background: #f7f7f7;
     padding: 20px;
