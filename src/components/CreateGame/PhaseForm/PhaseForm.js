@@ -132,7 +132,7 @@ export default class PhaseForm extends Component {
                         { value: 'null', label: 'Blank', name: 'sourceAction' },
                         { value: 'giveCard', label: 'Give Card', name: 'sourceAction' },
                         { value: 'addCard', label: 'Add Card', name: 'sourceAction' },
-                        { value: 'has4ofAKind', label: '4 of a Kind', name: 'sourceAction' },
+                        { value: 'has4OfAKind', label: '4 of a Kind', name: 'sourceAction' },
                         { value: 'incrementScore', label: 'Increment Score', name: 'sourceAction' },
                       ]}
                     />
@@ -163,12 +163,13 @@ export default class PhaseForm extends Component {
                         { value: 'null', label: 'Blank', name: 'targetAction' },
                         { value: 'giveCard', label: 'Give Card', name: 'targetAction' },
                         { value: 'addCard', label: 'Add Card', name: 'targetAction' },
-                        { value: 'has4ofAKind', label: '4 of a Kind', name: 'targetAction' },
+                        { value: 'has4OfAKind', label: '4 of a Kind', name: 'targetAction' },
                         { value: 'incrementScore', label: 'Increment Score', name: 'targetAction' },
                       ]}
                     />
                   </div>
 
+                  //{!this.state.dependency && (
                   {!this.state.childFormShow && (
                     <button
                       className="dropdown-form-button"
@@ -194,7 +195,6 @@ export default class PhaseForm extends Component {
                     <div className="turn-form-dependent-switch-container">
                       <Switch onClick={this.toggleSwitch} on={this.state.dependency}/>
                     </div>
-
                     <div className="label-option-container">
                       <label>Source</label>
                       <Select
@@ -219,7 +219,7 @@ export default class PhaseForm extends Component {
                           { value: 'giveCard', label: 'Give Card', name: 'dependentSourceAction' },
                           { value: 'addCard', label: 'Add Card', name: 'dependentSourceAction' },
                           {
-                            value: 'has4ofAKind',
+                            value: 'has4OfAKind',
                             label: '4 of a Kind',
                             name: 'dependentSourceAction',
                           },
@@ -258,7 +258,7 @@ export default class PhaseForm extends Component {
                           { value: 'giveCard', label: 'Give Card', name: 'dependentTargetAction' },
                           { value: 'addCard', label: 'Add Card', name: 'dependentTargetAction' },
                           {
-                            value: 'has4ofAKind',
+                            value: 'has4OfAKind',
                             label: '4 of a Kind',
                             name: 'dependentTargetAction',
                           },
@@ -271,6 +271,7 @@ export default class PhaseForm extends Component {
                       />
                     </div>
 
+                    //{this.state.dependency && (
                     {this.state.childFormShow && (
                       <button
                         className="dropdown-form-button button-close"
