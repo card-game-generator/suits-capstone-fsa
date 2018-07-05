@@ -72,13 +72,11 @@ export default class FormContainer extends Component {
     this.setState({ importedGame: event.target.value });
   }
 
-  //For Jack to view imports, changes index to 10
   handleNavigate(num) {
     let formIdx = num;
     this.setState({ formIdx });
   }
 
-  //For Jack to handle imports
   async handleImport(event) {
     event.preventDefault();
     const game = await db
@@ -86,7 +84,6 @@ export default class FormContainer extends Component {
       .doc(`${this.state.importedGame}`)
       .get();
     this.setState({ ...game.data() });
-    //Logic here
   }
 
   showMenu() {
@@ -98,7 +95,6 @@ export default class FormContainer extends Component {
     let idx = this.state.formIdx;
     const captureRules = this.props.captureRules;
     const { modalOpen } = this.state;
-
     return (
       <div id="parent-form" className="parent-form">
         <div id="hamburger-menu" className="parent-form-menu hidden">
@@ -286,7 +282,6 @@ export default class FormContainer extends Component {
                   <div className="parent-form-right-title">{this.state.name}</div>
 
                   <div className="review-game-main-container">
-
                     <div className="review-game-text-container">
                       <div className="review-screen-container">
                         <div className="review-screen-label">Players:</div>
@@ -303,7 +298,8 @@ export default class FormContainer extends Component {
                         {this.state.turn.map(phase => {
                           return (
                             <div className="review-screen-item" key={phase}>
-                              {phase.source} {phase.sourceAction} {phase.target} {phase.targetAction}
+                              {phase.source} {phase.sourceAction} {phase.target}{' '}
+                              {phase.targetAction}
                             </div>
                           );
                         })}
@@ -327,9 +323,8 @@ export default class FormContainer extends Component {
                         }}
                       >
                         Save game!
-                    </button>
+                      </button>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -350,7 +345,6 @@ export default class FormContainer extends Component {
               <div className="parent-form-right-title">{this.state.name}</div>
               <div className="saved-games-dropdown">
                 <form onSubmit={this.handleImport}>
-
                   <div className="label-option-container">
                     <label>Import Game:</label>
                     <Select

@@ -24,7 +24,7 @@ export default class PhaseForm extends Component {
     super();
     //Retrieve last state
     this.state = state;
-
+    this.idx = 0;
     //bind all click functions
     this.handleToggle = this.handleToggle.bind(this);
     this.handleSubmitPhase = this.handleSubmitPhase.bind(this);
@@ -75,23 +75,33 @@ export default class PhaseForm extends Component {
     this.setState(prevState => ({
       turn: [
         ...prevState.turn,
-        { source, sourceAction, target, targetAction, dependency, dependentPhase: dependentObj },
+        {
+          source,
+          sourceAction,
+          target,
+          targetAction,
+          dependency,
+          idx: this.idx,
+          dependentPhase: dependentObj,
+        },
       ],
       childFormShow: false,
       dependency: false,
     }));
+    this.idx++;
   }
 
   // Toggles the view for the dependent phase
   handleSubmitDependentPhase() {
     this.setState({ childFormShow: !this.state.childFormShow, dependency: !this.state.dependency });
   }
-  //TODO we might want to implement a button to remove a phase from the turn Array
 
-  handleDelete() {
+  //TODO we might want to implement a button to remove a phase from the turn Array
+  handleDelete(deleteIdx) {
     if (window.confirm('Are you sure you want to delete this phase?')) {
-      let turnArrayCopy = [...this.state.turn];
-      turnArrayCopy.splice(turnArrayCopy, 1);
+      let turnArrayCopy = [...this.state.turn].filter(phase => {
+        return phase.idx !== deleteIdx;
+      });
       this.setState({ turn: turnArrayCopy });
     }
   }
@@ -268,7 +278,6 @@ export default class PhaseForm extends Component {
                         ]}
                       />
                     </div>
-
                     {this.state.childFormShow && (
                       <button
                         className="dropdown-form-button button-close"
@@ -292,7 +301,11 @@ export default class PhaseForm extends Component {
                     key={`${phase}${index + 1}`}
                     className="phase-form-bottom-content bottom-content"
                   >
-                    <button className="button-close" type="button" onClick={this.handleDelete}>
+                    <button
+                      className="button-close"
+                      type="button"
+                      onClick={() => this.handleDelete(phase.idx)}
+                    >
                       <i className="fas fa-times-circle" />
                     </button>
                     <div className="phase-form-bottom-group bottom-content-group">
