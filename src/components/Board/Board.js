@@ -4,6 +4,7 @@ import DeckComp from './Deck';
 import Card from './Card';
 import FieldComp from './Field';
 import { validator, winCheck } from '../../utils/Game/CurrentGame';
+import { toast } from 'react-toastify';
 export default class Board extends Component {
   constructor() {
     super();
@@ -112,6 +113,7 @@ export default class Board extends Component {
 
     // if the validator returns true, then check if theres a dependentPhase and that the condition for the dependentPhase is also true
     if (validatorResult) {
+      toast(`Success`, { autoClose: 1000, position: toast.POSITION.TOP_CENTER });
       if (dependentPhase && dependency) {
         // if it is true, reset the currPhase on the state to the dependentPhase
         this.setState({ currPhase: dependentPhase });

@@ -15,8 +15,8 @@
     "react-responsive-modal": "^3.0.3",
     "react-scripts": "1.1.4",
     "react-select": "^1.2.1",
-    "react-toggle-switch": "^3.0.4",
-    "toastify-js": "^1.2.2"
+    "react-toastify": "^4.1.0",
+    "react-toggle-switch": "^3.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
