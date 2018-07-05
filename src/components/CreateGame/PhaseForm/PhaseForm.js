@@ -35,9 +35,9 @@ export default class PhaseForm extends Component {
   }
 
   toggleSwitch() {
-    this.setState(prevState => { 
-      return {dependency: !prevState.dependency };
-    })
+    this.setState(prevState => {
+      return { dependency: !prevState.dependency };
+    });
   }
 
   componentWillUnmount() {
@@ -169,7 +169,6 @@ export default class PhaseForm extends Component {
                     />
                   </div>
 
-                  //{!this.state.dependency && (
                   {!this.state.childFormShow && (
                     <button
                       className="dropdown-form-button"
@@ -191,9 +190,8 @@ export default class PhaseForm extends Component {
 
                 {this.state.childFormShow && (
                   <div className="turn-form-dependent turn-form-dropdown-container dropdown-container-box">
-
                     <div className="turn-form-dependent-switch-container">
-                      <Switch onClick={this.toggleSwitch} on={this.state.dependency}/>
+                      <Switch onClick={this.toggleSwitch} on={this.state.dependency} />
                     </div>
                     <div className="label-option-container">
                       <label>Source</label>
@@ -271,7 +269,6 @@ export default class PhaseForm extends Component {
                       />
                     </div>
 
-                    //{this.state.dependency && (
                     {this.state.childFormShow && (
                       <button
                         className="dropdown-form-button button-close"
@@ -313,9 +310,7 @@ export default class PhaseForm extends Component {
 
                     {phase.dependentPhase && (
                       <div className="phase-form-bottom-group bottom-content-group">
-                        <div className="phase-form-dependency">
-                          {phase.dependency}
-                        </div>
+                        <div className="phase-form-dependency">{phase.dependency}</div>
                         <div className="phase-form-dependentSource">
                           {phase.dependentPhase.source}
                         </div>
