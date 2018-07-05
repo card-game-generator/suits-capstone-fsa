@@ -19,14 +19,14 @@ export default class Documentation extends Component {
     return (
       <div className="documentation-container">
         <div className="documentation-menu">
-          <div className="documentation-menu-section">
+          {/* <div className="documentation-menu-section">
             <div className="documentation-title">Starting Overview</div>
             <div className="documentation-sub-container">
               <div className="documentation-subtitle">Name</div>
               <div className="documentation-subtitle">Players</div>
               <div className="documentation-subtitle">Cards</div>
             </div>
-          </div>
+          </div> */}
 
           <div className="documentation-menu-section">
             <div className="documentation-title"><a href="#turn">Turn</a></div>
@@ -59,13 +59,13 @@ export default class Documentation extends Component {
             </div>
           </div>
 
-          <div className="documentation-menu-section">
+          {/* <div className="documentation-menu-section">
             <div className="documentation-title">Victory</div>
             <div className="documentation-sub-container">
               <div className="documentation-subtitle">Time</div>
               <div className="documentation-subtitle">Win</div>
             </div>
-          </div>
+          </div> */}
 
 
         </div>
