@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PlayerComp from './Player';
 import DeckComp from './Deck';
+import Card from './Card';
 import FieldComp from './Field';
 import { validator, winCheck } from '../../utils/Game/CurrentGame';
 export default class Board extends Component {
@@ -130,38 +131,108 @@ export default class Board extends Component {
   render() {
     const deck = this.state.deck;
     const field = this.state.field;
+    const activePlayer = this.state.players[this.state.currentPlayerIdx];
+
     return (
-      <div>
-        {/* Create game board */}
-        <div className="game-board">
-          <div className="player-container">
-            {/* Map all players */}
-            {this.state.players.map(player => {
-              return (
-                //Player component
-                <button key={player.name}>
-                  <PlayerComp submitHandler={this.handleClick} player={player} />
-                </button>
-              );
-            })}
-            <button
-              type="button"
-              onClick={this.continueTurn}
-              disabled={this.state.currPhase.target !== 'null'}
-            >
-              Continue Turn
-            </button>
+      <div className="game-board">
+        <div className="game-board-main-container">
+          <div className="game-board-main-overflow">
+
+            <div className="game-board-main-header">
+              <div className="parent-form-right-title">SUITS</div>
+              <div className="parent-form-right-title">My Game</div>
+            </div>
+
+            <div className="game-board-players-container">
+              {/* Map all players */}
+              {this.state.players.map(player => {
+                return (
+                  //Player component
+                  <div className="game-board-player-container" key={player.name}>
+                    <PlayerComp submitHandler={this.handleClick} player={player} />
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="game-board-deck-field-container">
+              <DeckComp deck={deck} submitHandler={this.handleClick} />
+              {/* <FieldComp field={field} submitHandler={this.handleClick} /> */}
+            </div>
+
           </div>
-          <div className={'deck'}>
-            <DeckComp deck={deck} submitHandler={this.handleClick} />
+
+          <div className="game-board-current-player-container">
+            <div className="game-board-current-player-instructions">
+              <div className="game-board-current-player-instructions-group">
+                <div className="game-board-current-player-instructions-label">
+                  <i className="fas fa-caret-right"></i>
+                </div>
+                <div className="game-board-current-player-instructions-text">Choose a player</div>
+              </div>
+              <div className="game-board-current-player-instructions-group">
+                <div className="game-board-current-player-instructions-label">
+                  <i className="fas fa-caret-right"></i>
+                </div>
+                <div className="game-board-current-player-instructions-text">Request a card</div>
+              </div>
+              <div className="game-board-current-player-instructions-group">
+                <div className="game-board-current-player-instructions-label">
+                  <i className="fas fa-caret-right"></i>
+                </div>
+                <div className="game-board-current-player-instructions-text">Draw from deck</div>
+              </div>
+              <div className="game-board-current-player-instructions-group">
+                <div className="game-board-current-player-instructions-label">
+                  <i className="fas fa-caret-right"></i>
+                </div>
+                <div className="game-board-current-player-instructions-text">End your turn</div>
+              </div>
+            </div>
+            <div className="game-board-current-player-drawer">
+              {/* Name, score, hand displayed here */}
+
+              {this.state.players.length !== 0 && activePlayer.isCurrentPlayer && (
+                <div className="game-board-current-player-drawer-group">
+                  <div className="game-board-current-player-drawer-top">
+
+                    <div className="game-board-label-group">
+                      <div className="game-board-current-player-label player-parent-label">Name:</div>
+                      <div className="game-board-current-player-name">{activePlayer.name}</div>
+                    </div>
+
+                    <div className="game-board-label-group">
+                      <div className="game-board-current-player-label player-parent-label">Score:</div>
+                      <div className="game-board-current-player-score">{activePlayer.score}</div>
+                    </div>
+
+                  </div>
+                </div>
+              )}
+
+              {this.state.players.length !== 0 && activePlayer.isCurrentPlayer && (
+                <div className="game-board-current-player-drawer-group">
+                  <div className="game-board-current-player-hand">
+                    {activePlayer.hand.map(card => {
+                      return (
+                        //Card component
+                        <Card key={`${card.suit}${card.value}`} player={activePlayer} card={card} />
+                      )
+                    }
+                    )}
+                  </div>
+                </div>
+              )}
+
+            </div>
           </div>
-          <button type="button" onClick={this.checkWinCondition}>
-            Win Condition Check
-          </button>
+
         </div>
-        <div>
-          <FieldComp field={field} submitHandler={this.handleClick} />
+
+        <div id="next-button" className={`game-board-bottom-button-container starting-button-next ${this.state.currPhase.target !== 'null' ? 'hidden-display' : null}`}>
+          <button className="starting-rules-bottom-button" type="button" onClick={this.continueTurn}>END</button>
         </div>
+
       </div>
     );
   }

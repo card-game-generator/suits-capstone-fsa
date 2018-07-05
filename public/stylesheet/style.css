@@ -34,13 +34,31 @@ button:focus {
     outline: none;
 }
 
+.button-request {
+    background: #50cd98;
+    color: #fff;
+    border: 0;
+    font-size: 15px;
+    letter-spacing: 1px;
+    border-radius: 0 0 7px 7px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: .2s ease-in-out;
+    margin-top: 4px;
+    padding: 10px;
+}
+
+.button-request:hover {
+    background: #438c6d;
+}
+
 .hidden {
     width: 0 !important;
     min-width: 0 !important;
 }
 
 .hidden-display {
-    display: none;
+    display: none !important;
 }
 
 .hamburger-button {
@@ -176,7 +194,11 @@ input:focus {
 .phase-form-bottom-content .turn-form-plus {
     font-size: 20px;
     color: #ffffff;
-    margin-left: 20px;
+    margin: 0 10px;
+}
+
+.turn-form-dependent-switch-container {
+    zoom: .7;
 }
 
 .label-option-container select {
@@ -200,6 +222,16 @@ input:focus {
     margin: 14px 0px;
 }
 
+.game-board .label-option-container {
+    width: inherit;
+    margin: 0;
+}
+
+.game-board .label-options-container {
+    width: initial;
+    margin: 0px;
+}
+
 .label-option-container label {
     padding: 5px 10px;
     font-size: 1em;
@@ -215,6 +247,10 @@ input:focus {
     color: #fff;
 }
 
+.game-board .label-option-container .Select-input input {
+    width: 20px !important;
+}
+
 .label-option-container .Select-control {
     background: #50cd98;
     border: none;
@@ -222,6 +258,14 @@ input:focus {
     letter-spacing: .7px;
     transition: .1s ease-in-out;
     cursor: pointer;
+}
+
+.game-board .label-option-container .Select-control {
+    border-radius: 4px 4px 0 0;
+}
+
+.label-option-container .Select-control .Select-placeholder {
+    color: #fff;
 }
 
 .label-option-container .Select.is-focused:not(.is-open) > .Select-control,
@@ -312,7 +356,7 @@ input:focus {
 }
 
 .parent-form-menu-title {
-    margin-left: 10px;
+    margin: 0 10px;
     padding: 20px 20px 20px 0px;
 }
 
@@ -337,7 +381,7 @@ input:focus {
 }
 
 .parent-form-menu-title {
-    margin-left: 10px;
+    margin: 0 10px;
 }
 
 .parent-form-game-title {
@@ -345,15 +389,7 @@ input:focus {
     color: #51cd98;
     font-weight: 700;
     text-transform: uppercase;
-    margin-left: 18px;
-}
-
-.parent-form-game-title {
-    font-size: 2em;
-    color: #51cd98;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-left: 10px;
+    margin: 0 10px;
 }
 
 .menu-box.bottom-border {
@@ -442,6 +478,20 @@ input:focus {
     width: 100%;
     text-align: center;
     margin-bottom: 30px;
+}
+
+.game-board-main-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.game-board-main-header > div {
+    margin: 0 20px;
+}
+
+.game-board-main-container .parent-form-right-title {
+    font-size: 2em;
+    width: initial;
 }
 
 .parent-form-right-title input {
@@ -556,18 +606,22 @@ input:focus {
 
 .starting-rules-bottom-icons {
     position: relative;
+    margin-bottom: 10px;
 }
 
 .starting-rules-bottom-icons-card {
     display: inline-flex;
     flex-wrap: wrap;
     flex-direction: row;
-    margin-left: 5px;
+    margin: 2.5px;
 }
 
 .starting-rules-bottom-icons-cards {
     max-width: 95px;
     margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 [class^="starting-rules-bottom-icons-player"] {
@@ -595,6 +649,11 @@ input:focus {
 
 .starting-rules-bottom-button:hover {
     font-size: 5em;
+    background: #438c6d;
+}
+
+.game-board-bottom-button-container .starting-rules-bottom-button:hover {
+    font-size: 3em !important;
     background: #438c6d;
 }
 
@@ -650,7 +709,7 @@ input:focus {
 }
 
 .bottom-content-group {
-    margin-left: 20px;
+    margin: 0 10px;
 }
 
 /* ---------- Win Condition ----------- */
@@ -674,6 +733,22 @@ input:focus {
 
 .review-game-content {
     flex: auto;
+}
+
+.review-game-main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.review-screen-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.review-screen-label {
+    margin: 0px 10px;
 }
 
 
@@ -751,10 +826,202 @@ input:focus {
 
 
 /* ---------- Board ------------ */
+.game-board {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.game-board-main-overflow {
+    overflow-x: auto;
+    flex: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-board-main-container {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.game-board-players-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    background: #f7f7f7;
+    padding: 20px;
+    border-top: 5px solid #9bce5e;
+}
+
+.game-board-player-container {
+    margin: 10px 0;
+}
+
+.game-board-current-player-container {
+    display: flex;
+    flex-direction: row;
+    background: #2d2d2d;
+    color: #fff;
+    border-top: solid 5px #9bce5e;
+    height: 30vh;
+}
+
+.game-board-deck-field-container {
+    flex: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deck-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 13px;
+}
+
+.game-board-current-player-instructions-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.game-board-current-player-drawer {
+    flex: auto;
+    padding: 20px;
+    overflow: auto;
+}
+
+.game-board-current-player-drawer-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.game-board-current-player-drawer-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.game-board-label-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.game-board-current-player-hand {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.game-board-current-player-instructions {
+    padding: 20px 11px 20px 30px;
+    background: #1c2228;
+    border-right: 2px solid #464646;
+    font-size: 13px;
+    letter-spacing: .5px;
+    font-weight: 200;
+    color: #ababab;
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-board-current-player-instructions-label {
+    width: 24px;
+    text-align: center;
+    margin-left: -12px;
+    font-weight: 300;
+}
+
+.game-board-current-player-instructions-group {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
 
 /* ---------- Card ------------ */
+.card-component-image {
+    max-width: 84px;
+}
+
 
 /* ---------- Deck ------------ */
+.deck-button {
+    background: transparent;
+    border-radius: 6px;
+    padding: 2px;
+    border: solid 1px #bbbabb;
+}
+
 
 /* ---------- Player ------------ */
+.player-parent-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    padding: 20px 20px 20px 0px;
+    border-bottom: 4px dotted #585858;
+    color: #585858;
+}
+
+.player-parent-left-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 20px;
+}
+
+.player-parent-image {
+    font-size: 15px;
+}
+
+.player-parent-cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 78px;
+    margin-top: 10px;
+}
+
+.player-parent-card {
+    margin: 1.5px;
+}
+
+.player-parent-right-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.player-parent-right-group {
+    display: flex;
+    flex-direction: row;
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: .7px;
+}
+
+.player-parent-right-group-name-label {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.player-parent-right-group.select-options {
+    margin-top: 10px;
+    flex-direction: column;
+    display: flex;
+}
+
+.player-parent-label {
+    margin-right: 10px;
+}
 

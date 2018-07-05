@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import Switch from 'react-toggle-switch';
+import 'react-toggle-switch/dist/css/switch.min.css';
 
 //Set initial state
 let state = {
@@ -29,6 +31,13 @@ export default class PhaseForm extends Component {
     this.handleSubmitDependentPhase = this.handleSubmitDependentPhase.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.toggleSwitch = this.toggleSwitch.bind(this);
+  }
+
+  toggleSwitch() {
+    this.setState(prevState => { 
+      return {dependency: !prevState.dependency };
+    })
   }
 
   componentWillUnmount() {
@@ -160,7 +169,7 @@ export default class PhaseForm extends Component {
                     />
                   </div>
 
-                  {!this.state.dependency && (
+                  {!this.state.childFormShow && (
                     <button
                       className="dropdown-form-button"
                       type="button"
@@ -181,17 +190,9 @@ export default class PhaseForm extends Component {
 
                 {this.state.childFormShow && (
                   <div className="turn-form-dependent turn-form-dropdown-container dropdown-container-box">
-                    <div className="label-option-container">
-                      <label>Dependency:</label>
-                      <Select
-                        clearable={false}
-                        value={this.state.dependency}
-                        onChange={this.handleSelect}
-                        options={[
-                          { value: true, label: 'True', name: 'dependency' },
-                          { value: false, label: 'False', name: 'dependency' },
-                        ]}
-                      />
+
+                    <div className="turn-form-dependent-switch-container">
+                      <Switch onClick={this.toggleSwitch} on={this.state.dependency}/>
                     </div>
 
                     <div className="label-option-container">
@@ -270,7 +271,7 @@ export default class PhaseForm extends Component {
                       />
                     </div>
 
-                    {this.state.dependency && (
+                    {this.state.childFormShow && (
                       <button
                         className="dropdown-form-button button-close"
                         type="button"
@@ -311,7 +312,9 @@ export default class PhaseForm extends Component {
 
                     {phase.dependentPhase && (
                       <div className="phase-form-bottom-group bottom-content-group">
-                        <div className="phase-form-dependency">{phase.dependency}</div>
+                        <div className="phase-form-dependency">
+                          {phase.dependency}
+                        </div>
                         <div className="phase-form-dependentSource">
                           {phase.dependentPhase.source}
                         </div>

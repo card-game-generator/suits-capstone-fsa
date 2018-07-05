@@ -27,7 +27,6 @@ class App extends Component {
         ) : (
           <Board boardSetup={this.state.boardSetup} />
         )}
-        {this.state.boardSetup.whatToCheck}
       </div>
     );
   }
