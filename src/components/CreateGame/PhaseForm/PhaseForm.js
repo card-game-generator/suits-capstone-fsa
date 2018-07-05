@@ -100,7 +100,6 @@ export default class PhaseForm extends Component {
     const turn = this.state.turn;
     const handleSubmit = this.props.handleSubmit;
     const name = this.props.gameName;
-    console.log(this.state);
 
     return (
       <div className="phase-form-container main-window">
