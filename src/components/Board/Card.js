@@ -10,11 +10,11 @@ export default class Card extends Component {
     let player = this.props.card;
     let field = this.props.field || {};
     let card = this.props.card || { suit: '', value: '' };
+    let abbrevCard = card.value.toUpperCase() + card.suit.slice(0, 1).toUpperCase();
+
     return (
-      <div>
-        <p>
-          {card.suit} {card.value}
-        </p>
+      <div className="card-component-container">
+        <img className="card-component-image" src={`/images/cards/${abbrevCard}.png`} />
       </div>
     );
   }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import Switch from 'react-toggle-switch';
+import 'react-toggle-switch/dist/css/switch.min.css';
 
 //Set initial state
 let state = {
@@ -29,6 +31,13 @@ export default class PhaseForm extends Component {
     this.handleSubmitDependentPhase = this.handleSubmitDependentPhase.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.toggleSwitch = this.toggleSwitch.bind(this);
+  }
+
+  toggleSwitch() {
+    this.setState(prevState => { 
+      return {dependency: !prevState.dependency };
+    })
   }
 
   componentWillUnmount() {
@@ -62,6 +71,7 @@ export default class PhaseForm extends Component {
     }
     //If childFormShow is true, then add dependent actions to object keys
     let { source, sourceAction, target, targetAction, dependency } = this.state;
+
     this.setState(prevState => ({
       turn: [
         ...prevState.turn,
@@ -159,7 +169,8 @@ export default class PhaseForm extends Component {
                     />
                   </div>
 
-                  {!this.state.dependency && (
+                  //{!this.state.dependency && (
+                  {!this.state.childFormShow && (
                     <button
                       className="dropdown-form-button"
                       type="button"
@@ -180,6 +191,10 @@ export default class PhaseForm extends Component {
 
                 {this.state.childFormShow && (
                   <div className="turn-form-dependent turn-form-dropdown-container dropdown-container-box">
+
+                    <div className="turn-form-dependent-switch-container">
+                      <Switch onClick={this.toggleSwitch} on={this.state.dependency}/>
+                    </div>
                     <div className="label-option-container">
                       <label>Source</label>
                       <Select
@@ -256,7 +271,8 @@ export default class PhaseForm extends Component {
                       />
                     </div>
 
-                    {this.state.dependency && (
+                    //{this.state.dependency && (
+                    {this.state.childFormShow && (
                       <button
                         className="dropdown-form-button button-close"
                         type="button"
@@ -289,14 +305,17 @@ export default class PhaseForm extends Component {
                       <div className="phase-form-targetAction">{phase.targetAction}</div>
                     </div>
 
-                    {phase.dependency && (
+                    {phase.dependentPhase && (
                       <div className="turn-form-plus">
                         <i className="fas fa-caret-right" />
                       </div>
                     )}
 
-                    {phase.dependency && (
+                    {phase.dependentPhase && (
                       <div className="phase-form-bottom-group bottom-content-group">
+                        <div className="phase-form-dependency">
+                          {phase.dependency}
+                        </div>
                         <div className="phase-form-dependentSource">
                           {phase.dependentPhase.source}
                         </div>

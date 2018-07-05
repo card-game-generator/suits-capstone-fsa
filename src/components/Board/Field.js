@@ -16,7 +16,7 @@ export default class Field extends Component {
     let field = this.props.field;
     return (
       <div className="field-container">
-        Hi I'm the field, I have <p>{field.cards.length} cards</p>
+        <p>{field.cards.length} cards</p>
         <form onSubmit={event => this.props.submitHandler(field, this.state.reqCard, event)}>
           <label>Request Card: </label>
           <select onChange={this.handleChange}>
