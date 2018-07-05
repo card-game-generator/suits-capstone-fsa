@@ -285,44 +285,52 @@ export default class FormContainer extends Component {
                 <div className="review-game-content">
                   <div className="parent-form-right-title">{this.state.name}</div>
 
-                  <div className="review-screen-container">
-                    <div className="review-screen-label">Players:</div>
-                    <div className="review-screen-item">{this.state.players}</div>
-                  </div>
+                  <div className="review-game-main-container">
 
-                  <div className="review-screen-container">
-                    <div className="review-screen-label">Cards per player: </div>
-                    <div className="review-screen-item">{this.state.cards}</div>
-                  </div>
+                    <div className="review-game-text-container">
+                      <div className="review-screen-container">
+                        <div className="review-screen-label">Players:</div>
+                        <div className="review-screen-item">{this.state.players}</div>
+                      </div>
 
-                  <div className="review-screen-container">
-                    <div className="review-screen-label">Phases:</div>
-                    {this.state.turn.map(phase => {
-                      return (
-                        <div className="review-screen-item" key={phase}>
-                          {phase.source} {phase.sourceAction} {phase.target} {phase.targetAction}
-                        </div>
-                      );
-                    })}
-                  </div>
+                      <div className="review-screen-container">
+                        <div className="review-screen-label">Cards: </div>
+                        <div className="review-screen-item">{this.state.cards}</div>
+                      </div>
 
-                  <div className="review-screen-container">
-                    <div className="review-screen-label">How do win?</div>
-                    <div className="review-screen-item">{this.state.whatToCheck}</div>
-                  </div>
+                      <div className="review-screen-container">
+                        <div className="review-screen-label">Phases:</div>
+                        {this.state.turn.map(phase => {
+                          return (
+                            <div className="review-screen-item" key={phase}>
+                              {phase.source} {phase.sourceAction} {phase.target} {phase.targetAction}
+                            </div>
+                          );
+                        })}
+                      </div>
 
-                  <div className="review-screen-container">
-                    <div className="review-screen-label">When do you check?</div>
-                    <div className="review-screen-item">{this.state.whenToCheck}</div>
-                  </div>
+                      <div className="review-screen-container">
+                        <div className="review-screen-label">How do you win?</div>
+                        <div className="review-screen-item">{this.state.whatToCheck}</div>
+                      </div>
 
-                  <button
-                    onClick={() => {
-                      db.collection('games').add(this.state);
-                    }}
-                  >
-                    Save game!
-                  </button>
+                      <div className="review-screen-container">
+                        <div className="review-screen-label">When do you check?</div>
+                        <div className="review-screen-item">{this.state.whenToCheck}</div>
+                      </div>
+                    </div>
+
+                    <div className="review-screen-button-container">
+                      <button
+                        onClick={() => {
+                          db.collection('games').add(this.state);
+                        }}
+                      >
+                        Save game!
+                    </button>
+                    </div>
+
+                  </div>
                 </div>
               </div>
 
@@ -354,7 +362,7 @@ export default class FormContainer extends Component {
                       })}
                     />
                   </div>
-                  
+
                   <button type="submit">Import</button>
                 </form>
               </div>

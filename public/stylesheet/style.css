@@ -731,6 +731,22 @@ input:focus {
     flex: auto;
 }
 
+.review-game-main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.review-screen-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.review-screen-label {
+    margin: 0px 10px;
+}
+
 
 /* ---------- Help Menu --------- */
 .documentation-container {
