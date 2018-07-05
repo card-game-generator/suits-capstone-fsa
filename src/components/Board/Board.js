@@ -132,10 +132,12 @@ export default class Board extends Component {
     const deck = this.state.deck;
     const field = this.state.field;
     const activePlayer = this.state.players[this.state.currentPlayerIdx];
+
     return (
-      <div>
-        {/* Create game board */}
-        <div className="game-board">
+      <div className="game-board">
+        <div className="game-board-main-container">
+
+          <div className="parent-form-right-title">SUITS</div>
 
           <div className="game-board-players-container">
             {/* Map all players */}
@@ -156,34 +158,73 @@ export default class Board extends Component {
 
           <div className="game-board-current-player-container">
             <div className="game-board-current-player-instructions">
+              <div className="game-board-current-player-instructions-group">
+                <div className="game-board-current-player-instructions-label">
+                  <i className="fas fa-caret-right"></i>
+                </div>
+                <div className="game-board-current-player-instructions-text">Choose a player</div>
+              </div>
+              <div className="game-board-current-player-instructions-group">
+                <div className="game-board-current-player-instructions-label">
+                  <i className="fas fa-caret-right"></i>
+                </div>
+                <div className="game-board-current-player-instructions-text">Request a card</div>
+              </div>
+              <div className="game-board-current-player-instructions-group">
+                <div className="game-board-current-player-instructions-label">
+                  <i className="fas fa-caret-right"></i>
+                </div>
+                <div className="game-board-current-player-instructions-text">Draw from deck</div>
+              </div>
+              <div className="game-board-current-player-instructions-group">
+                <div className="game-board-current-player-instructions-label">
+                  <i className="fas fa-caret-right"></i>
+                </div>
+                <div className="game-board-current-player-instructions-text">End your turn</div>
+              </div>
             </div>
             <div className="game-board-current-player-drawer">
               {/* Name, score, hand displayed here */}
 
-              <div className="game-board-current-player-drawer-group">
-                <div className="game-board-current-player-name">{activePlayer.name}</div>
-                <div className="game-board-current-player-score">{activePlayer.score}</div>
-              </div>
+              {this.state.players.length !== 0 && activePlayer.isCurrentPlayer && (
+                <div className="game-board-current-player-drawer-group">
+                  <div className="game-board-current-player-drawer-top">
 
-              <div className="game-board-current-player-drawer-group">
-                <div className="game-board-current-player-hand">
-                  {activePlayer.hand.map(card => {
-                    return (
-                      //Card component
-                      <Card key={`${card.suit}${card.value}`} player={activePlayer} card={card} />
-                    )
-                  }
-                  )}
+                    <div className="game-board-label-group">
+                      <div className="game-board-current-player-label player-parent-label">Name:</div>
+                      <div className="game-board-current-player-name">{activePlayer.name}</div>
+                    </div>
+
+                    <div className="game-board-label-group">
+                      <div className="game-board-current-player-label player-parent-label">Score:</div>
+                      <div className="game-board-current-player-score">{activePlayer.score}</div>
+                    </div>
+
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {this.state.players.length !== 0 && activePlayer.isCurrentPlayer && (
+                <div className="game-board-current-player-drawer-group">
+                  <div className="game-board-current-player-hand">
+                    {activePlayer.hand.map(card => {
+                      return (
+                        //Card component
+                        <Card key={`${card.suit}${card.value}`} player={activePlayer} card={card} />
+                      )
+                    }
+                    )}
+                  </div>
+                </div>
+              )}
 
             </div>
           </div>
 
-          <button type="button" onClick={this.continueTurn} disabled={this.state.currPhase.target !== 'null'}>
-            Continue Turn
-          </button>
+        </div>
 
+        <div id="next-button" className={`game-board-bottom-button-container starting-button-next ${this.state.currPhase.target !== 'null' ? 'hidden-display' : null}`}>
+          <button className="starting-rules-bottom-button" type="button" onClick={this.continueTurn}>END</button>
         </div>
 
       </div>

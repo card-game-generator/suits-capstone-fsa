@@ -342,17 +342,19 @@ export default class FormContainer extends Component {
               <div className="parent-form-right-title">{this.state.name}</div>
               <div className="saved-games-dropdown">
                 <form onSubmit={this.handleImport}>
-                  <label>Import Game: </label>
 
-                  <Select
-                    clearable={false}
-                    value={this.state.importedGame}
-                    onChange={this.handleSelect}
-                    options={this.state.gameList.map(gameObj => {
-                      return { value: gameObj.id, label: gameObj.name, name: 'importedGame' };
-                    })}
-                  />
-
+                  <div className="label-option-container">
+                    <label>Import Game:</label>
+                    <Select
+                      clearable={false}
+                      value={this.state.importedGame}
+                      onChange={this.handleSelect}
+                      options={this.state.gameList.map(gameObj => {
+                        return { value: gameObj.id, label: gameObj.name, name: 'importedGame' };
+                      })}
+                    />
+                  </div>
+                  
                   <button type="submit">Import</button>
                 </form>
               </div>

@@ -16,13 +16,10 @@ export default class Deck extends Component {
     let deck = this.props.deck;
     return (
       <div className="deck-container">
-        Hi I'm the deck, I have <p>{deck.cards.length} cards</p>
-        <button
-          type="submit"
-          onClick={event => this.props.submitHandler(deck, this.state.reqCard, event)}
-        >
-          Draw from Deck
+        <button className="deck-button" type="submit" onClick={event => this.props.submitHandler(deck, this.state.reqCard, event)}>
+          <img className="card-component-image" src={`/images/cards/back.png`} />
         </button>
+        <p>{deck.cards.length} cards</p>
       </div>
     );
   }
