@@ -22,6 +22,7 @@ export default class FormContainer extends Component {
       gameList: [],
       importedGame: '',
       modalOpen: false,
+      importModalOpen: false,
     };
     this.handleSelect = this.handleSelect.bind(this);
     this.handleState = this.handleState.bind(this);
@@ -60,6 +61,16 @@ export default class FormContainer extends Component {
     this.setState({ modalOpen: false });
   };
 
+  //for Modal opening
+  onImportOpenModal = () => {
+    this.setState({ importModalOpen: true });
+  };
+
+  //for Modal closing
+  onImportCloseModal = () => {
+    this.setState({ importModalOpen: false });
+  };
+
   handleState(stateChanges) {
     let formIdx = this.state.formIdx + 1;
     this.setState({ ...stateChanges, formIdx });
@@ -95,6 +106,7 @@ export default class FormContainer extends Component {
     let idx = this.state.formIdx;
     const captureRules = this.props.captureRules;
     const { modalOpen } = this.state;
+    const { importModalOpen } = this.state;
     return (
       <div id="parent-form" className="parent-form">
         <div id="hamburger-menu" className="parent-form-menu hidden">
@@ -248,7 +260,7 @@ export default class FormContainer extends Component {
             <div className="parent-form-menu-icon">
               <i className="fas fa-cog" />
             </div>
-            <div onClick={() => this.handleNavigate(10)} className="parent-form-menu-title">
+            <div onClick={this.onImportOpenModal} className="parent-form-menu-title">
               My Games
             </div>
           </div>
@@ -340,7 +352,7 @@ export default class FormContainer extends Component {
           ) : null}
 
           {/* JL: Hits Firebase for saved Game Objects */}
-          {idx === 10 ? (
+          {/* {idx === 10 ? (
             <div className="saved-games-dropdown-container">
               <div className="parent-form-right-title">{this.state.name}</div>
               <div className="saved-games-dropdown">
@@ -361,7 +373,28 @@ export default class FormContainer extends Component {
                 </form>
               </div>
             </div>
-          ) : null}
+          ) : null} */}
+
+          <Modal open={importModalOpen} onClose={this.onImportCloseModal} center>
+            <div className="saved-games-dropdown">
+              <form onSubmit={this.handleImport}>
+                <div className="label-option-container">
+                  <label>Import Game:</label>
+                  <Select
+                    clearable={false}
+                    value={this.state.importedGame}
+                    onChange={this.handleSelect}
+                    options={this.state.gameList.map(gameObj => {
+                      return { value: gameObj.id, label: gameObj.name, name: 'importedGame' };
+                    })}
+                  />
+                </div>
+
+                <button onClick={this.onImportCloseModal} type="submit">Import</button>
+              </form>
+            </div>
+          </Modal>
+
         </div>
       </div>
     );

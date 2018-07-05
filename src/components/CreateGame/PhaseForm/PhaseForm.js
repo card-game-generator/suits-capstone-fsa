@@ -351,13 +351,15 @@ export default class PhaseForm extends Component {
             </div>
           </div>
         </div>
-        <div id="next-button" className="starting-button-next">
-          <button
-            className="starting-rules-bottom-button fas fa-chevron-right"
-            type="button"
-            onClick={() => handleSubmit({ turn })}
-          />
-        </div>
+        
+          <div id="next-button" className="starting-button-next">
+            <button
+              className="starting-rules-bottom-button fas fa-chevron-right"
+              type="button"
+              onClick={() => handleSubmit({ turn })}
+              disabled={this.state.turn.length !== 0 ? false : true}
+            />
+          </div>
       </div>
     );
   }

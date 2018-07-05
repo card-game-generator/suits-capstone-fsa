@@ -240,6 +240,11 @@ input:focus {
     text-transform: uppercase;
 }
 
+.switch.on {
+    background: #4fcd98 !important;
+    border: none;
+}
+
 
 /* -------- React Select Library (poor choice of class names .From-them...) -------- */
 .label-option-container .Select-input input {
@@ -739,6 +744,8 @@ input:focus {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
+    background: whitesmoke;
 }
 
 .review-screen-container {
@@ -787,6 +794,18 @@ input:focus {
 
 .documentation {
     overflow: auto;
+}
+
+.documentation-title > a,
+.documentation-subtitle > a {
+    text-decoration: none;
+    color: #000;
+    transition: .1s ease-in-out;
+}
+
+.documentation-title > a:hover,
+.documentation-subtitle > a:hover {
+    color: #51cd98;
 }
 
 .documentation-section {
@@ -917,6 +936,10 @@ input:focus {
     justify-content: flex-start;
     flex-wrap: wrap;
     margin-top: 20px;
+}
+
+.card-component-container {
+    margin: 10px;
 }
 
 .game-board-current-player-instructions {
