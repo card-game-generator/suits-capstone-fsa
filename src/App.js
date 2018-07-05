@@ -3,6 +3,9 @@ import Board from './components/Board/Board';
 import { createGame } from './utils/Game/CurrentGame';
 import ParentForm from './components/CreateGame/PhaseForm/ParentForm';
 import './App.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 class App extends Component {
   constructor() {
     super();
@@ -27,6 +30,7 @@ class App extends Component {
         ) : (
           <Board boardSetup={this.state.boardSetup} />
         )}
+        <ToastContainer />
       </div>
     );
   }
