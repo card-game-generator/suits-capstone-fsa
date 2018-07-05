@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 //Set initial state
 let state = {
-      players: 1,
-      cards: 1,
-      name: 'SUITS'
-    }
+  players: 1,
+  cards: 1,
+  name: 'SUITS',
+};
 
 export default class StartRules extends Component {
   constructor() {
@@ -60,18 +60,6 @@ export default class StartRules extends Component {
     this.state.cards > 0 ? this.setState({ cards }) : '';
   }
 
-  //move next button to right side, to keep page responsive
-  // moveNextButton() {
-  //   let main = document.getElementById('parent-form');
-  //   let button = document.getElementById('next-button');
-  //   main.appendChild(button);
-  // }
-
-  // handleSubmit() {
-  //   let { players, cards } = this.state;
-  //   console.log(this.props.handleSubmit, 'hey', this.setState);
-  //   this.props.handleSubmit();
-  // }
   render() {
     const handleSubmit = this.props.handleSubmit;
     let playerArr = new Array(this.state.players).fill('player');
@@ -82,7 +70,7 @@ export default class StartRules extends Component {
         <div className="starting-rules">
           <div className="starting-rules-form">
             <div className="parent-form-right-title">
-              <input onChange={this.handleName} value={this.state.name}/>
+              <input onChange={this.handleName} value={this.state.name} />
             </div>
             <div className="starting-rules-options-container">
               <div className="starting-rules-players">
