@@ -15,8 +15,8 @@ class App extends Component {
   getGameObj(obj) {
     const currentGame = createGame(obj.players, obj.cards);
     const { players, deck, field } = currentGame;
-    const { whatToCheck, whenToCheck, turn } = obj;
-    const boardSetup = { players, deck, field, turn, whatToCheck, whenToCheck };
+    const { whatToCheck, whenToCheck, turn, name } = obj;
+    const boardSetup = { players, deck, field, turn, whatToCheck, whenToCheck, name };
     this.setState({ boardSetup, show: false });
   }
   render() {

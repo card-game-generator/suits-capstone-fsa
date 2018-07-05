@@ -24,7 +24,7 @@ export default class PhaseForm extends Component {
     super();
     //Retrieve last state
     this.state = state;
-
+    this.idx = 0;
     //bind all click functions
     this.handleToggle = this.handleToggle.bind(this);
     this.handleSubmitPhase = this.handleSubmitPhase.bind(this);
@@ -35,9 +35,9 @@ export default class PhaseForm extends Component {
   }
 
   toggleSwitch() {
-    this.setState(prevState => { 
-      return {dependency: !prevState.dependency };
-    })
+    this.setState(prevState => {
+      return { dependency: !prevState.dependency };
+    });
   }
 
   componentWillUnmount() {
@@ -75,23 +75,33 @@ export default class PhaseForm extends Component {
     this.setState(prevState => ({
       turn: [
         ...prevState.turn,
-        { source, sourceAction, target, targetAction, dependency, dependentPhase: dependentObj },
+        {
+          source,
+          sourceAction,
+          target,
+          targetAction,
+          dependency,
+          idx: this.idx,
+          dependentPhase: dependentObj,
+        },
       ],
       childFormShow: false,
       dependency: false,
     }));
+    this.idx++;
   }
 
   // Toggles the view for the dependent phase
   handleSubmitDependentPhase() {
     this.setState({ childFormShow: !this.state.childFormShow, dependency: !this.state.dependency });
   }
-  //TODO we might want to implement a button to remove a phase from the turn Array
 
-  handleDelete() {
+  //TODO we might want to implement a button to remove a phase from the turn Array
+  handleDelete(deleteIdx) {
     if (window.confirm('Are you sure you want to delete this phase?')) {
-      let turnArrayCopy = [...this.state.turn];
-      turnArrayCopy.splice(turnArrayCopy, 1);
+      let turnArrayCopy = [...this.state.turn].filter(phase => {
+        return phase.idx !== deleteIdx;
+      });
       this.setState({ turn: turnArrayCopy });
     }
   }
@@ -132,7 +142,7 @@ export default class PhaseForm extends Component {
                         { value: 'null', label: 'Blank', name: 'sourceAction' },
                         { value: 'giveCard', label: 'Give Card', name: 'sourceAction' },
                         { value: 'addCard', label: 'Add Card', name: 'sourceAction' },
-                        { value: 'has4ofAKind', label: '4 of a Kind', name: 'sourceAction' },
+                        { value: 'has4OfAKind', label: '4 of a Kind', name: 'sourceAction' },
                         { value: 'incrementScore', label: 'Increment Score', name: 'sourceAction' },
                       ]}
                     />
@@ -163,7 +173,7 @@ export default class PhaseForm extends Component {
                         { value: 'null', label: 'Blank', name: 'targetAction' },
                         { value: 'giveCard', label: 'Give Card', name: 'targetAction' },
                         { value: 'addCard', label: 'Add Card', name: 'targetAction' },
-                        { value: 'has4ofAKind', label: '4 of a Kind', name: 'targetAction' },
+                        { value: 'has4OfAKind', label: '4 of a Kind', name: 'targetAction' },
                         { value: 'incrementScore', label: 'Increment Score', name: 'targetAction' },
                       ]}
                     />
@@ -190,11 +200,9 @@ export default class PhaseForm extends Component {
 
                 {this.state.childFormShow && (
                   <div className="turn-form-dependent turn-form-dropdown-container dropdown-container-box">
-
                     <div className="turn-form-dependent-switch-container">
-                      <Switch onClick={this.toggleSwitch} on={this.state.dependency}/>
+                      <Switch onClick={this.toggleSwitch} on={this.state.dependency} />
                     </div>
-
                     <div className="label-option-container">
                       <label>Source</label>
                       <Select
@@ -219,7 +227,7 @@ export default class PhaseForm extends Component {
                           { value: 'giveCard', label: 'Give Card', name: 'dependentSourceAction' },
                           { value: 'addCard', label: 'Add Card', name: 'dependentSourceAction' },
                           {
-                            value: 'has4ofAKind',
+                            value: 'has4OfAKind',
                             label: '4 of a Kind',
                             name: 'dependentSourceAction',
                           },
@@ -258,7 +266,7 @@ export default class PhaseForm extends Component {
                           { value: 'giveCard', label: 'Give Card', name: 'dependentTargetAction' },
                           { value: 'addCard', label: 'Add Card', name: 'dependentTargetAction' },
                           {
-                            value: 'has4ofAKind',
+                            value: 'has4OfAKind',
                             label: '4 of a Kind',
                             name: 'dependentTargetAction',
                           },
@@ -270,7 +278,6 @@ export default class PhaseForm extends Component {
                         ]}
                       />
                     </div>
-
                     {this.state.childFormShow && (
                       <button
                         className="dropdown-form-button button-close"
@@ -294,7 +301,11 @@ export default class PhaseForm extends Component {
                     key={`${phase}${index + 1}`}
                     className="phase-form-bottom-content bottom-content"
                   >
-                    <button className="button-close" type="button" onClick={this.handleDelete}>
+                    <button
+                      className="button-close"
+                      type="button"
+                      onClick={() => this.handleDelete(phase.idx)}
+                    >
                       <i className="fas fa-times-circle" />
                     </button>
                     <div className="phase-form-bottom-group bottom-content-group">
@@ -312,9 +323,7 @@ export default class PhaseForm extends Component {
 
                     {phase.dependentPhase && (
                       <div className="phase-form-bottom-group bottom-content-group">
-                        <div className="phase-form-dependency">
-                          {phase.dependency}
-                        </div>
+                        <div className="phase-form-dependency">{phase.dependency}</div>
                         <div className="phase-form-dependentSource">
                           {phase.dependentPhase.source}
                         </div>
