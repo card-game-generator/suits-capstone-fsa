@@ -28,6 +28,7 @@ div#root {
 
 button {
     cursor: pointer;
+    background-color: transparent;
 }
 
 button:focus {
